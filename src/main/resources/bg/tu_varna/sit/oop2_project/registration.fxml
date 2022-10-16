@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.oop2_project.Registration">
+   <children>
+      <TextField fx:id="username" layoutX="31.0" layoutY="46.0" promptText="Потребител">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </TextField>
+      <Button layoutX="96.0" layoutY="331.0" mnemonicParsing="false" onAction="#registration" text="Регистрация">
+         <font>
+            <Font name="Symbol" size="14.0" />
+         </font>
+      </Button>
+      <PasswordField fx:id="pass" layoutX="31.0" layoutY="123.0" promptText="Парола">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </PasswordField>
+      <MenuBar prefHeight="26.0" prefWidth="500.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <TextField fx:id="email" layoutX="31.0" layoutY="85.0" promptText="email">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="pass2" layoutX="31.0" layoutY="162.0" promptText="Парола">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </PasswordField>
+      <TextField fx:id="firstName" layoutX="31.0" layoutY="201.0" promptText="Име">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="lastName" layoutX="30.0" layoutY="240.0" promptText="Фамилия">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="phone" layoutX="30.0" layoutY="279.0" promptText="Телефон">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </TextField>
+      <Label fx:id="label" layoutX="279.0" layoutY="46.0" prefHeight="153.0" prefWidth="174.0" text="Label" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </Label>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <effect>
+      <Lighting diffuseConstant="1.48" specularConstant="0.96" specularExponent="28.44" surfaceScale="3.89">
+         <bumpInput>
+            <ColorAdjust />
+         </bumpInput>
+         <light>
+            <Light.Distant>
+               <color>
+                  <Color red="0.9312000274658203" green="0.9617344737052917" blue="0.9700000286102295" />
+               </color>
+            </Light.Distant>
+         </light>
+      </Lighting>
+   </effect>
+</AnchorPane>
