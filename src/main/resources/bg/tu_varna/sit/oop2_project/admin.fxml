@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+
+<AnchorPane fx:id="stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.oop2_project.Admin">
+   <children>
+      <MenuBar prefHeight="26.0" prefWidth="500.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Профили">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Премахване на профил" />
+                  <MenuItem mnemonicParsing="false" text="Показване на профили" />
+                  <MenuItem fx:id="createProfile" mnemonicParsing="false" onAction="#createProfile" text="Създаване на профил" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <effect>
+      <Lighting diffuseConstant="1.48" specularConstant="0.96" specularExponent="28.44" surfaceScale="3.89">
+         <bumpInput>
+            <ColorAdjust />
+         </bumpInput>
+         <light>
+            <Light.Distant>
+               <color>
+                  <Color red="0.9312000274658203" green="0.9617344737052917" blue="0.9700000286102295" />
+               </color>
+            </Light.Distant>
+         </light>
+      </Lighting>
+   </effect>
+</AnchorPane>
