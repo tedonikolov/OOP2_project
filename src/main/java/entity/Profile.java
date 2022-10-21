@@ -6,12 +6,13 @@ public class Profile {
     private int id_profile;
     private String username;
     private String password;
-    private int roles_id;
+    private Role role;
 
-    public Profile(String username, String password, int roles_id) {
+    public Profile(int id_profile,String username, String password, Role role) {
+        this.id_profile=id_profile;
         this.username = username;
         this.password = password;
-        this.roles_id = roles_id;
+        this.role = role;
     }
 
     public int getId_profile() {
@@ -38,12 +39,12 @@ public class Profile {
         this.password = password;
     }
 
-    public int getRoles_id() {
-        return roles_id;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles_id(int roles_id) {
-        this.roles_id = roles_id;
+    public void setRoles_id(Role role) {
+        this.role = role;
     }
 
     @Override
@@ -51,12 +52,12 @@ public class Profile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Profile profile = (Profile) o;
-        return id_profile == profile.id_profile && roles_id == profile.roles_id && Objects.equals(username, profile.username) && Objects.equals(password, profile.password);
+        return id_profile == profile.id_profile && role == profile.role && Objects.equals(username, profile.username) && Objects.equals(password, profile.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_profile, username, password, roles_id);
+        return Objects.hash(id_profile, username, password, role);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class Profile {
                 "id_profile=" + id_profile +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", roles_id=" + roles_id +
+                ", roles_id=" + role +
                 '}';
     }
 }

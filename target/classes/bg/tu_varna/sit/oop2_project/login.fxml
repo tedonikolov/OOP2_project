@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -16,22 +17,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.oop2_project.Login">
    <children>
-      <TextField layoutX="126.0" layoutY="99.0" promptText="Потребител">
+      <TextField fx:id="username" layoutX="126.0" layoutY="99.0" promptText="Потребител">
          <font>
             <Font name="Times New Roman Bold Italic" size="20.0" />
          </font>
       </TextField>
-      <Button layoutX="161.0" layoutY="185.0" mnemonicParsing="false" text="Вход">
+      <Button layoutX="221.0" layoutY="186.0" mnemonicParsing="false" onAction="#login" text="Вход">
          <font>
             <Font name="Symbol" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="226.0" layoutY="185.0" mnemonicParsing="false" onAction="#switchToRegistration" text="Регистрация">
-         <font>
-            <Font name="Symbol" size="14.0" />
-         </font>
-      </Button>
-      <PasswordField layoutX="126.0" layoutY="139.0" promptText="Парола">
+      <PasswordField fx:id="password" layoutX="126.0" layoutY="139.0" promptText="Парола">
          <font>
             <Font name="Times New Roman Bold Italic" size="20.0" />
          </font>
@@ -55,6 +51,11 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Label fx:id="label" layoutX="124.0" layoutY="222.0" prefHeight="78.0" prefWidth="244.0" text="Label" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </Label>
    </children>
    <opaqueInsets>
       <Insets />
