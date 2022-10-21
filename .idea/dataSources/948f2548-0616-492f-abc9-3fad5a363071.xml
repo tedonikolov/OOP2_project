@@ -9,11 +9,11 @@
     <schema id="2" parent="1" name="ADMIN">
       <CreatedTimestamp>2022-10-20.22:56:19</CreatedTimestamp>
       <Current>1</Current>
-      <IntrospectionL1Timestamp>2022-10-21.12:42:19</IntrospectionL1Timestamp>
-      <IntrospectionL2Timestamp>2022-10-21.12:42:19</IntrospectionL2Timestamp>
-      <IntrospectionL3Timestamp>2022-10-21.12:42:19</IntrospectionL3Timestamp>
+      <IntrospectionL1Timestamp>2022-10-21.19:54:08</IntrospectionL1Timestamp>
+      <IntrospectionL2Timestamp>2022-10-21.19:54:08</IntrospectionL2Timestamp>
+      <IntrospectionL3Timestamp>2022-10-21.19:54:08</IntrospectionL3Timestamp>
       <IntrospectionVersion>200820</IntrospectionVersion>
-      <ModifiedTimestamp>2022-10-20.23:04:09</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-10-21.19:54:08</ModifiedTimestamp>
       <ObjectId>50</ObjectId>
     </schema>
     <schema id="3" parent="1" name="ANONYMOUS">
@@ -234,70 +234,77 @@
       <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
       <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
-    <table id="48" parent="2" name="CLIENT">
-      <CreatedTimestamp>2022-10-20.22:58:46</CreatedTimestamp>
+    <sequence id="48" parent="2" name="AUTONUMBER">
+      <CreatedTimestamp>2022-10-21.13:08:13</CreatedTimestamp>
       <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.13:08:13</ModifiedTimestamp>
+      <ObjectId>20100</ObjectId>
+      <SequenceIdentity>1(21)..1000</SequenceIdentity>
+    </sequence>
+    <table id="49" parent="2" name="CLIENT">
+      <CreatedTimestamp>2022-10-20.22:58:46</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <ObjectId>20094</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="49" parent="2" name="DISTRIBUTOR">
+    <table id="50" parent="2" name="DISTRIBUTOR">
       <CreatedTimestamp>2022-10-20.22:58:34</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
+      <DetailsLevel>3</DetailsLevel>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <ObjectId>20092</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="50" parent="2" name="EVENT">
+    <table id="51" parent="2" name="EVENT">
       <CreatedTimestamp>2022-10-20.22:59:07</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
+      <DetailsLevel>3</DetailsLevel>
       <ModifiedTimestamp>2022-10-20.23:03:00</ModifiedTimestamp>
       <ObjectId>20096</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="51" parent="2" name="ORGANISER">
+    <table id="52" parent="2" name="ORGANISER">
       <CreatedTimestamp>2022-10-20.22:58:20</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
+      <DetailsLevel>3</DetailsLevel>
       <ModifiedTimestamp>2022-10-20.23:02:22</ModifiedTimestamp>
       <ObjectId>20090</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="52" parent="2" name="PROFILES">
+    <table id="53" parent="2" name="PROFILES">
       <CreatedTimestamp>2022-10-20.22:58:09</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
+      <DetailsLevel>3</DetailsLevel>
       <ModifiedTimestamp>2022-10-21.13:08:47</ModifiedTimestamp>
       <ObjectId>20088</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="53" parent="2" name="ROLES">
+    <table id="54" parent="2" name="ROLES">
       <CreatedTimestamp>2022-10-20.22:57:44</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
-      <ModifiedTimestamp>2022-10-20.22:57:59</ModifiedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.19:54:08</ModifiedTimestamp>
       <ObjectId>20086</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="54" parent="2" name="SEATS">
+    <table id="55" parent="2" name="SEATS">
       <CreatedTimestamp>2022-10-20.22:56:19</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
+      <DetailsLevel>3</DetailsLevel>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <ObjectId>20082</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="55" parent="2" name="SECTORS">
+    <table id="56" parent="2" name="SECTORS">
       <CreatedTimestamp>2022-10-20.22:59:46</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
+      <DetailsLevel>3</DetailsLevel>
       <ModifiedTimestamp>2022-10-20.22:59:48</ModifiedTimestamp>
       <ObjectId>20098</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="56" parent="2" name="TICKETS">
+    <table id="57" parent="2" name="TICKETS">
       <CreatedTimestamp>2022-10-20.22:56:19</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
+      <DetailsLevel>3</DetailsLevel>
       <ModifiedTimestamp>2022-10-20.23:04:09</ModifiedTimestamp>
       <ObjectId>20084</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <data-file id="57" parent="23" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSTEM.DBF">
+    <data-file id="58" parent="23" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSTEM.DBF">
       <AutoExtensible>1</AutoExtensible>
       <AvailabilityStatus>A</AvailabilityStatus>
       <FileId>1</FileId>
@@ -308,7 +315,7 @@
       <Position>1</Position>
       <UserSize>45952</UserSize>
     </data-file>
-    <data-file id="58" parent="24" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSAUX.DBF">
+    <data-file id="59" parent="24" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSAUX.DBF">
       <AutoExtensible>1</AutoExtensible>
       <AvailabilityStatus>A</AvailabilityStatus>
       <FileId>2</FileId>
@@ -319,7 +326,7 @@
       <Position>2</Position>
       <UserSize>84352</UserSize>
     </data-file>
-    <data-file id="59" parent="25" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\UNDOTBS1.DBF">
+    <data-file id="60" parent="25" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\UNDOTBS1.DBF">
       <AutoExtensible>1</AutoExtensible>
       <AvailabilityStatus>A</AvailabilityStatus>
       <FileId>3</FileId>
@@ -330,7 +337,7 @@
       <Position>3</Position>
       <UserSize>48512</UserSize>
     </data-file>
-    <data-file id="60" parent="26" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\TEMP.DBF">
+    <data-file id="61" parent="26" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\TEMP.DBF">
       <AutoExtensible>1</AutoExtensible>
       <FileId>1</FileId>
       <FileSize>2560</FileSize>
@@ -339,7 +346,7 @@
       <Position>1</Position>
       <UserSize>2432</UserSize>
     </data-file>
-    <data-file id="61" parent="27" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\USERS.DBF">
+    <data-file id="62" parent="27" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\USERS.DBF">
       <AutoExtensible>1</AutoExtensible>
       <AvailabilityStatus>A</AvailabilityStatus>
       <FileId>4</FileId>
@@ -350,44 +357,44 @@
       <Position>4</Position>
       <UserSize>12672</UserSize>
     </data-file>
-    <column id="62" parent="48" name="ID_CLIENT">
+    <column id="63" parent="49" name="ID_CLIENT">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="63" parent="48" name="FIRSTNAME">
+    <column id="64" parent="49" name="FIRSTNAME">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="64" parent="48" name="LASTNAME">
+    <column id="65" parent="49" name="LASTNAME">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="65" parent="48" name="EMAIL">
+    <column id="66" parent="49" name="EMAIL">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="66" parent="48" name="PHONE">
+    <column id="67" parent="49" name="PHONE">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="67" parent="48" name="TICKETS_ID_TICKET">
+    <column id="68" parent="49" name="TICKETS_ID_TICKET">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="68" parent="48" name="QUANTITY">
+    <column id="69" parent="49" name="QUANTITY">
       <DataType>NUMBER(*)|0s</DataType>
       <Position>7</Position>
     </column>
-    <foreign-key id="69" parent="48" name="CLIENT_TICKETS_FK">
+    <foreign-key id="70" parent="49" name="CLIENT_TICKETS_FK">
       <ColNames>TICKETS_ID_TICKET</ColNames>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>EVENTS_PK</RefKeyName>
       <RefTableName>TICKETS</RefTableName>
     </foreign-key>
-    <index id="70" parent="48" name="CLIENT_PK">
+    <index id="71" parent="49" name="CLIENT_PK">
       <ColNames>ID_CLIENT</ColNames>
       <CreatedTimestamp>2022-10-20.22:58:48</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:58:48</ModifiedTimestamp>
@@ -395,49 +402,49 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="71" parent="48" name="CLIENT_PK">
+    <key id="72" parent="49" name="CLIENT_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:58:48</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>CLIENT_PK</UnderlyingIndexName>
     </key>
-    <column id="72" parent="49" name="ID_PROFILE">
+    <column id="73" parent="50" name="ID_PROFILE">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="73" parent="49" name="FIRSTNAME">
+    <column id="74" parent="50" name="FIRSTNAME">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="74" parent="49" name="LASTNAME">
+    <column id="75" parent="50" name="LASTNAME">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="75" parent="49" name="EMAIL">
+    <column id="76" parent="50" name="EMAIL">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="76" parent="49" name="PHONE">
+    <column id="77" parent="50" name="PHONE">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="77" parent="49" name="RATE">
+    <column id="78" parent="50" name="RATE">
       <DataType>NUMBER(*)|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="78" parent="49" name="SALARY">
+    <column id="79" parent="50" name="SALARY">
       <DataType>NUMBER(*)|0s</DataType>
       <Position>7</Position>
     </column>
-    <foreign-key id="79" parent="49" name="DISTRIBUTOR_PROFILES_FK">
+    <foreign-key id="80" parent="50" name="DISTRIBUTOR_PROFILES_FK">
       <ColNames>ID_PROFILE</ColNames>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>PROFILES_PK</RefKeyName>
       <RefTableName>PROFILES</RefTableName>
     </foreign-key>
-    <index id="80" parent="49" name="DISTRIBUTOR_PK">
+    <index id="81" parent="50" name="DISTRIBUTOR_PK">
       <ColNames>ID_PROFILE</ColNames>
       <CreatedTimestamp>2022-10-20.22:58:36</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:58:36</ModifiedTimestamp>
@@ -445,46 +452,46 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="81" parent="49" name="DISTRIBUTOR_PK">
+    <key id="82" parent="50" name="DISTRIBUTOR_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:58:36</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>DISTRIBUTOR_PK</UnderlyingIndexName>
     </key>
-    <column id="82" parent="50" name="ID_EVENT">
+    <column id="83" parent="51" name="ID_EVENT">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="83" parent="50" name="NAME">
+    <column id="84" parent="51" name="NAME">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="84" parent="50" name="ADRESS">
+    <column id="85" parent="51" name="ADRESS">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="85" parent="50" name="DATETIME">
+    <column id="86" parent="51" name="DATETIME">
       <DataType>DATE|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="86" parent="50" name="DESCRIPTION">
+    <column id="87" parent="51" name="DESCRIPTION">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="87" parent="50" name="ORGANISER_ID_PROFILE">
+    <column id="88" parent="51" name="ORGANISER_ID_PROFILE">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="88" parent="50" name="EVENTS_ORGANIZER_FK">
+    <foreign-key id="89" parent="51" name="EVENTS_ORGANIZER_FK">
       <ColNames>ORGANISER_ID_PROFILE</ColNames>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>ORGANIZER_PK</RefKeyName>
       <RefTableName>ORGANISER</RefTableName>
     </foreign-key>
-    <index id="89" parent="50" name="EVENTS_PKV2">
+    <index id="90" parent="51" name="EVENTS_PKV2">
       <ColNames>ID_EVENT</ColNames>
       <CreatedTimestamp>2022-10-20.22:59:11</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:59:11</ModifiedTimestamp>
@@ -492,41 +499,41 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="90" parent="50" name="EVENTS_PKV2">
+    <key id="91" parent="51" name="EVENTS_PKV2">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:59:11</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>EVENTS_PKV2</UnderlyingIndexName>
     </key>
-    <column id="91" parent="51" name="ID_PROFILE">
+    <column id="92" parent="52" name="ID_PROFILE">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="92" parent="51" name="FIRSTNAME">
+    <column id="93" parent="52" name="FIRSTNAME">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="93" parent="51" name="LASTNAME">
+    <column id="94" parent="52" name="LASTNAME">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="94" parent="51" name="EMAIL">
+    <column id="95" parent="52" name="EMAIL">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="95" parent="51" name="PHONE">
+    <column id="96" parent="52" name="PHONE">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>5</Position>
     </column>
-    <foreign-key id="96" parent="51" name="ORGANIZER_PROFILES_FK">
+    <foreign-key id="97" parent="52" name="ORGANIZER_PROFILES_FK">
       <ColNames>ID_PROFILE</ColNames>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>PROFILES_PK</RefKeyName>
       <RefTableName>PROFILES</RefTableName>
     </foreign-key>
-    <index id="97" parent="51" name="ORGANIZER_PK">
+    <index id="98" parent="52" name="ORGANIZER_PK">
       <ColNames>ID_PROFILE</ColNames>
       <CreatedTimestamp>2022-10-20.22:58:22</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:58:22</ModifiedTimestamp>
@@ -534,38 +541,38 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="98" parent="51" name="ORGANIZER_PK">
+    <key id="99" parent="52" name="ORGANIZER_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:58:22</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>ORGANIZER_PK</UnderlyingIndexName>
     </key>
-    <column id="99" parent="52" name="ID_PROFILE">
+    <column id="100" parent="53" name="ID_PROFILE">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="100" parent="52" name="USERNAME">
+    <column id="101" parent="53" name="USERNAME">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="101" parent="52" name="PASSWORD">
+    <column id="102" parent="53" name="PASSWORD">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="102" parent="52" name="ROLES_ID_ROLES">
+    <column id="103" parent="53" name="ROLES_ID_ROLES">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <foreign-key id="103" parent="52" name="PROFILES_ROLES_FK">
+    <foreign-key id="104" parent="53" name="PROFILES_ROLES_FK">
       <ColNames>ROLES_ID_ROLES</ColNames>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>ROLES_PK</RefKeyName>
       <RefTableName>ROLES</RefTableName>
     </foreign-key>
-    <index id="104" parent="52" name="PROFILES_PK">
+    <index id="105" parent="53" name="PROFILES_PK">
       <ColNames>ID_PROFILE</ColNames>
       <CreatedTimestamp>2022-10-20.22:58:12</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:58:12</ModifiedTimestamp>
@@ -573,30 +580,31 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="105" parent="52" name="PROFILES_PK">
+    <key id="106" parent="53" name="PROFILES_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:58:12</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>PROFILES_PK</UnderlyingIndexName>
     </key>
-    <trigger id="106" parent="52" name="AUTONUMBER">
+    <trigger id="107" parent="53" name="AUTONUMBER">
       <CreatedTimestamp>2022-10-21.13:08:47</CreatedTimestamp>
+      <DependsOnIds>117,1255,20100</DependsOnIds>
       <Events>I</Events>
       <ModifiedTimestamp>2022-10-21.13:08:47</ModifiedTimestamp>
       <ObjectId>20101</ObjectId>
       <SourceTextLength>173</SourceTextLength>
       <Turn>before-row</Turn>
     </trigger>
-    <column id="107" parent="53" name="ID_ROLE">
+    <column id="108" parent="54" name="ID_ROLE">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="108" parent="53" name="ROLE">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
+    <column id="109" parent="54" name="ROLE">
+      <DataType>VARCHAR2(30 byte)|0s</DataType>
       <Position>2</Position>
     </column>
-    <index id="109" parent="53" name="ROLES_PK">
+    <index id="110" parent="54" name="ROLES_PK">
       <ColNames>ID_ROLE</ColNames>
       <CreatedTimestamp>2022-10-20.22:57:59</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:57:59</ModifiedTimestamp>
@@ -604,54 +612,54 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="110" parent="53" name="ROLES_PK">
+    <key id="111" parent="54" name="ROLES_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:57:59</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>ROLES_PK</UnderlyingIndexName>
     </key>
-    <column id="111" parent="54" name="ID_SEATS">
+    <column id="112" parent="55" name="ID_SEATS">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="112" parent="54" name="AMOUNT">
+    <column id="113" parent="55" name="AMOUNT">
       <DataType>NUMBER(*)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="113" parent="54" name="PRICE">
+    <column id="114" parent="55" name="PRICE">
       <DataType>NUMBER(*)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="114" parent="54" name="TICKETPERCLIENT">
+    <column id="115" parent="55" name="TICKETPERCLIENT">
       <DataType>NUMBER(*)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="115" parent="54" name="SECTORS_ID_SECTOR">
+    <column id="116" parent="55" name="SECTORS_ID_SECTOR">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="116" parent="54" name="EVENT_ID_EVENT">
+    <column id="117" parent="55" name="EVENT_ID_EVENT">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="117" parent="54" name="SEATS_SECTORS_FK">
+    <foreign-key id="118" parent="55" name="SEATS_SECTORS_FK">
       <ColNames>SECTORS_ID_SECTOR</ColNames>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>SECTORS_PK</RefKeyName>
       <RefTableName>SECTORS</RefTableName>
     </foreign-key>
-    <foreign-key id="118" parent="54" name="SEATS_EVENT_FK">
+    <foreign-key id="119" parent="55" name="SEATS_EVENT_FK">
       <ColNames>EVENT_ID_EVENT</ColNames>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>EVENTS_PKV2</RefKeyName>
       <RefTableName>EVENT</RefTableName>
     </foreign-key>
-    <index id="119" parent="54" name="SEATS_PK">
+    <index id="120" parent="55" name="SEATS_PK">
       <ColNames>ID_SEATS</ColNames>
       <CreatedTimestamp>2022-10-20.22:56:19</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:56:19</ModifiedTimestamp>
@@ -659,22 +667,22 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="120" parent="54" name="SEATS_PK">
+    <key id="121" parent="55" name="SEATS_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:56:19</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>SEATS_PK</UnderlyingIndexName>
     </key>
-    <column id="121" parent="55" name="ID_SECTOR">
+    <column id="122" parent="56" name="ID_SECTOR">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="122" parent="55" name="TYPE">
+    <column id="123" parent="56" name="TYPE">
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <Position>2</Position>
     </column>
-    <index id="123" parent="55" name="SECTORS_PK">
+    <index id="124" parent="56" name="SECTORS_PK">
       <ColNames>ID_SECTOR</ColNames>
       <CreatedTimestamp>2022-10-20.22:59:48</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:59:48</ModifiedTimestamp>
@@ -682,46 +690,46 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="124" parent="55" name="SECTORS_PK">
+    <key id="125" parent="56" name="SECTORS_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:59:48</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>SECTORS_PK</UnderlyingIndexName>
     </key>
-    <column id="125" parent="56" name="ID_TICKET">
+    <column id="126" parent="57" name="ID_TICKET">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="126" parent="56" name="SEATS_ID_SEATS">
+    <column id="127" parent="57" name="SEATS_ID_SEATS">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="127" parent="56" name="TICKETSOLD">
+    <column id="128" parent="57" name="TICKETSOLD">
       <DataType>NUMBER(*)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="128" parent="56" name="DISTRIBUTOR_ID_PROFILE">
+    <column id="129" parent="57" name="DISTRIBUTOR_ID_PROFILE">
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <foreign-key id="129" parent="56" name="TICKETS_SEATS_FK">
+    <foreign-key id="130" parent="57" name="TICKETS_SEATS_FK">
       <ColNames>SEATS_ID_SEATS</ColNames>
       <ModifiedTimestamp>2022-10-20.22:56:19</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>SEATS_PK</RefKeyName>
       <RefTableName>SEATS</RefTableName>
     </foreign-key>
-    <foreign-key id="130" parent="56" name="EVENTS_DISTRIBUTOR_FK">
+    <foreign-key id="131" parent="57" name="EVENTS_DISTRIBUTOR_FK">
       <ColNames>DISTRIBUTOR_ID_PROFILE</ColNames>
       <ModifiedTimestamp>2022-10-20.23:00:02</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>DISTRIBUTOR_PK</RefKeyName>
       <RefTableName>DISTRIBUTOR</RefTableName>
     </foreign-key>
-    <index id="131" parent="56" name="EVENTS_PK">
+    <index id="132" parent="57" name="EVENTS_PK">
       <ColNames>ID_TICKET</ColNames>
       <CreatedTimestamp>2022-10-20.22:56:19</CreatedTimestamp>
       <ModifiedTimestamp>2022-10-20.22:56:19</ModifiedTimestamp>
@@ -729,7 +737,7 @@
       <Unique>1</Unique>
       <TablespaceName>SYSTEM</TablespaceName>
     </index>
-    <key id="132" parent="56" name="EVENTS_PK">
+    <key id="133" parent="57" name="EVENTS_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2022-10-20.22:56:19</ModifiedTimestamp>
       <Primary>1</Primary>
