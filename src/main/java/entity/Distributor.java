@@ -1,20 +1,40 @@
 package entity;
 
 public class Distributor {
-    String firstName;
-    String lastName;
-    String email;
-    String phoneNumber;
+    private Profiles profiles;
+    private int idProfile;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
     double rate;
     double salary;
 
-    public Distributor(String firstName, String lastName, String email, String phoneNumber, double rate, double salary) {
+    public Distributor(Profiles profiles, String firstName, String lastName, String email, String phoneNumber, double rate, double salary) {
+        this.profiles = profiles;
+        idProfile= profiles.getIdProfile();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
         this.salary = salary;
+    }
+
+    public Profiles getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(Profiles profiles) {
+        this.profiles = profiles;
+    }
+
+    public int getIdProfile() {
+        return idProfile;
+    }
+
+    public void setIdProfile(int idProfile) {
+        this.idProfile = idProfile;
     }
 
     public String getFirstName() {

@@ -1,12 +1,20 @@
 package entity;
 
 public class Sectors {
-    String sectorType;
-    double sectorPrice;
+    private int idSector;
+    private String sectorType;
 
-    public Sectors(String sectorType, double sectorPrice) {
+    public Sectors(int idSector, String sectorType) {
+        this.idSector = idSector;
         this.sectorType = sectorType;
-        this.sectorPrice = sectorPrice;
+    }
+
+    public int getIdSector() {
+        return idSector;
+    }
+
+    public void setIdSector(int idSector) {
+        this.idSector = idSector;
     }
 
     public String getSectorType() {
@@ -17,11 +25,4 @@ public class Sectors {
         this.sectorType = sectorType;
     }
 
-    public double getSectorPrice() {
-        return sectorPrice;
-    }
-
-    public void setSectorPrice(double sectorPrice) {
-        this.sectorPrice = sectorPrice;
-    }
 }

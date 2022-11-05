@@ -1,16 +1,36 @@
 package entity;
 
 public class Seats {
-    int amount;
-    int ticketPerClient;
-    Sectors sector;
-    Event event;
+    private int idSeats;
+    private int amount;
+    private double price;
+    private int ticketPerClient;
+    private Sectors sector;
+    private Event event;
 
-    public Seats(int amount, int ticketPerClient, Sectors sector, Event event) {
+    public Seats(int idSeats, int amount, double price, int ticketPerClient, Sectors sector, Event event) {
+        this.idSeats = idSeats;
         this.amount = amount;
+        this.price = price;
         this.ticketPerClient = ticketPerClient;
         this.sector = sector;
         this.event = event;
+    }
+
+    public int getIdSeats() {
+        return idSeats;
+    }
+
+    public void setIdSeats(int idSeats) {
+        this.idSeats = idSeats;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getAmount() {

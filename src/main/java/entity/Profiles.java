@@ -1,16 +1,26 @@
 package entity;
 
-import entity.Roles;
+import java.util.Objects;
 
 public class Profiles {
-    String username;
-    String password;
-    Roles role;
+    private int idProfile;
+    private String username;
+    private String password;
+    private Roles roles;
 
-    public Profiles(String username, String password, Roles role) {
+    public Profiles(int idProfile, String username, String password, Roles roles) {
+        this.idProfile = idProfile;
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
+    }
+
+    public int getIdProfile() {
+        return idProfile;
+    }
+
+    public void setIdProfile(int idProfile) {
+        this.idProfile = idProfile;
     }
 
     public String getUsername() {
@@ -30,10 +40,33 @@ public class Profiles {
     }
 
     public Roles getRole() {
-        return role;
+        return roles;
     }
 
-    public void setRole(Roles role) {
-        this.role = role;
+    public void setRoles_id(Roles roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profiles profiles = (Profiles) o;
+        return idProfile == profiles.idProfile && roles == profiles.roles && Objects.equals(username, profiles.username) && Objects.equals(password, profiles.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idProfile, username, password, roles);
+    }
+
+    @Override
+    public String toString() {
+        return "Profiles{" +
+                "id_profile=" + idProfile +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles_id=" + roles +
+                '}';
     }
 }

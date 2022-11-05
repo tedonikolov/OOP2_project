@@ -20,9 +20,9 @@ public class SelectAll {
             {
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM ROLES");
                 ResultSet result = statement.executeQuery();
-                List<Role> roles = new ArrayList<>();
+                List<Roles> roles = new ArrayList<>();
                 while (result.next()) {
-                    Role role = new Role(Integer.parseInt(result.getString(1)), result.getString(2));
+                    Roles role = new Roles(Integer.parseInt(result.getString(1)), result.getString(2));
                     roles.add(role);
                 }
                 list=roles;
@@ -32,9 +32,9 @@ public class SelectAll {
             {
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM PROFILES JOIN ROLES ON ROLES.ID_ROLE=PROFILES.ROLE_ID");
                 ResultSet result = statement.executeQuery();
-                List<Profile> profiles = new ArrayList<>();
+                List<Profiles> profiles = new ArrayList<>();
                 while (result.next()) {
-                    Profile profile= new Profile(Integer.parseInt(result.getString(1)), result.getString(2), result.getString(3),new Role(Integer.parseInt(result.getString(5)), result.getString(6)));
+                    Profiles profile= new Profiles(Integer.parseInt(result.getString(1)), result.getString(2), result.getString(3),new Roles(Integer.parseInt(result.getString(5)), result.getString(6)));
                     profiles.add(profile);
                 }
                 list=profiles;

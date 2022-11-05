@@ -1,20 +1,30 @@
 package entity;
 
-import entity.Organiser;
+import java.util.Date;
 
 public class Event {
-    String name;
-    String address;
-    String date;
-    String description;
-    Organiser profileOrganiser;
+    private int idEvent;
+    private String name;
+    private String address;
+    private Date date;
+    private String description;
+    private Organiser organiser;
 
-    public Event(String name, String address, String date, String description, Organiser profileOrganiser) {
+    public Event(int idEvent, String name, String address, Date date, String description, Organiser organiser) {
+        this.idEvent = idEvent;
         this.name = name;
         this.address = address;
         this.date = date;
         this.description = description;
-        this.profileOrganiser = profileOrganiser;
+        this.organiser = organiser;
+    }
+
+    public int getIdEvent() {
+        return idEvent;
+    }
+
+    public void setIdEvent(int idEvent) {
+        this.idEvent = idEvent;
     }
 
     public String getName() {
@@ -33,11 +43,11 @@ public class Event {
         this.address = address;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -49,11 +59,11 @@ public class Event {
         this.description = description;
     }
 
-    public Organiser getProfileOrganiser() {
-        return profileOrganiser;
+    public Organiser getOrganiser() {
+        return organiser;
     }
 
-    public void setProfileOrganiser(Organiser profileOrganiser) {
-        this.profileOrganiser = profileOrganiser;
+    public void setOrganiser(Organiser organiser) {
+        this.organiser = organiser;
     }
 }

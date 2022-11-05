@@ -1,8 +1,8 @@
 package bg.tu_varna.sit.oop2_project;
 
+import entity.Roles;
 import entity.SelectAll;
-import entity.Profile;
-import entity.Role;
+import entity.Profiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,9 +37,9 @@ public class LoginController implements Initializable {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM PROFILES JOIN ROLES ON ROLES.ID_ROLE=PROFILES.ROLE_ID WHERE USERNAME='" + box.getValue().toString() + "'");
             ResultSet result = statement.executeQuery();
 
-            Profile profile = null;
+            Profiles profiles = null;
             while (result.next()) {
-                profile = new Profile(Integer.parseInt(result.getString(1)), result.getString(2), result.getString(3), new Role(Integer.parseInt(result.getString(5)), result.getString(6)));
+                profiles = new Profiles(Integer.parseInt(result.getString(1)), result.getString(2), result.getString(3), new Roles(Integer.parseInt(result.getString(5)), result.getString(6)));
             }
 
             //hashing the password
@@ -52,8 +52,8 @@ public class LoginController implements Initializable {
             }
             String hash = sb.toString();
 
-            if (Objects.equals(profile.getPassword(), hash)) {
-                if (profile.getRole().getId_role() == ((List<Role>) SelectAll.getAll("ROLES")).get(0).getId_role()) {
+            if (Objects.equals(profiles.getPassword(), hash)) {
+                if (profiles.getRole().getIdRole() == ((List<Roles>) SelectAll.getAll("ROLES")).get(0).getIdRole()) {
                     FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("admin.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(fxmlLoader.load());
@@ -74,8 +74,8 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             List<String> usernames=new ArrayList<>();
-            for(Profile profile: (List<Profile>)SelectAll.getAll("PROFILES")){
-                usernames.add(profile.getUsername());
+            for(Profiles profiles : (List<Profiles>)SelectAll.getAll("PROFILES")){
+                usernames.add(profiles.getUsername());
             }
             box.getItems().addAll(usernames);
         } catch (SQLException e) {

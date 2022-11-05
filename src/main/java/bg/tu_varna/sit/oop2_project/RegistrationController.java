@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.oop2_project;
 
 import entity.SelectAll;
-import entity.Role;
+import entity.Roles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,7 +69,7 @@ public class RegistrationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             List<String> roles=new ArrayList<>();
-            for(Role role: (List<Role>)SelectAll.getAll("ROLES")){
+            for(Roles role: (List<Roles>)SelectAll.getAll("ROLES")){
                 roles.add(role.getRole());
             }
             box.getItems().add(roles.get(1));

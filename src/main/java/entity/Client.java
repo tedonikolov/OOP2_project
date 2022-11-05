@@ -3,20 +3,30 @@ package entity;
 import entity.Tickets;
 
 public class Client {
-    String firstName;
-    String lastName;
-    String email;
-    String phoneNumber;
-    Tickets ticket;
-    int quantity;
+    private int idClient;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private Tickets ticket;
+    private int quantity;
 
-    public Client(String firstName, String lastName, String email, String phoneNumber, Tickets ticket, int quantity) {
+    public Client(int idClient, String firstName, String lastName, String email, String phoneNumber, Tickets ticket, int quantity) {
+        this.idClient = idClient;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.ticket = ticket;
         this.quantity = quantity;
+    }
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
     }
 
     public String getFirstName() {

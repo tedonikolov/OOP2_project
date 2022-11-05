@@ -1,14 +1,24 @@
 package entity;
 
 public class Tickets {
-    Seats seat;
-    int ticketsSold;
-    Distributor distributorProfile;
+    private int idTicket;
+    private Seats seat;
+    private int ticketsSold;
+    private Distributor distributor;
 
-    public Tickets(Seats seat, int ticketsSold, Distributor distributorProfile) {
+    public Tickets(int idTicket, Seats seat, int ticketsSold, Distributor distributor) {
+        this.idTicket = idTicket;
         this.seat = seat;
         this.ticketsSold = ticketsSold;
-        this.distributorProfile = distributorProfile;
+        this.distributor = distributor;
+    }
+
+    public int getIdTicket() {
+        return idTicket;
+    }
+
+    public void setIdTicket(int idTicket) {
+        this.idTicket = idTicket;
     }
 
     public Seats getSeat() {
@@ -27,11 +37,11 @@ public class Tickets {
         this.ticketsSold = ticketsSold;
     }
 
-    public Distributor getDistributorProfile() {
-        return distributorProfile;
+    public Distributor getDistributor() {
+        return distributor;
     }
 
-    public void setDistributorProfile(Distributor distributorProfile) {
-        this.distributorProfile = distributorProfile;
+    public void setDistributor(Distributor distributor) {
+        this.distributor = distributor;
     }
 }
