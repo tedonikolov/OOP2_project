@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.oop2_project;
 
-import entity.GetRoles;
+import entity.SelectAll;
 import entity.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,16 +16,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Registration implements Initializable {
+public class RegistrationController implements Initializable {
     @FXML
     private TextField username;
     @FXML
@@ -72,10 +69,11 @@ public class Registration implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             List<String> roles=new ArrayList<>();
-            for(Role role:GetRoles.getRoles()){
+            for(Role role: (List<Role>)SelectAll.getAll("ROLES")){
                 roles.add(role.getRole());
             }
-            box.getItems().addAll(roles);
+            box.getItems().add(roles.get(1));
+            box.getItems().add(roles.get(2));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

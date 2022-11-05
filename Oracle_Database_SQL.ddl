@@ -1,3 +1,18 @@
+CREATE TABLE roles (
+    id_role INTEGER NOT NULL,
+    role    VARCHAR2(30 BYTE)
+);
+
+ALTER TABLE roles ADD CONSTRAINT roles_pk PRIMARY KEY ( id_role );
+
+CREATE TABLE profiles (
+    id_profile     INTEGER NOT NULL,
+    username       VARCHAR2 (30 BYTE),
+    password       VARCHAR2 (50 BYTE),
+    role_id        INTEGER NOT NULL
+);
+
+ALTER TABLE profiles ADD CONSTRAINT profiles_pk PRIMARY KEY ( id_profile );
 
 CREATE TABLE client (
     id_client         INTEGER NOT NULL,
@@ -5,7 +20,7 @@ CREATE TABLE client (
     lastname          VARCHAR2 (40 BYTE),
     email             VARCHAR2 (40 BYTE),
     phone             VARCHAR2 (20 BYTE),
-    ticket_id INTEGER NOT NULL,
+    ticket_id         INTEGER NOT NULL,
     quantity          INTEGER
 );
 
@@ -29,7 +44,7 @@ CREATE TABLE event (
     adress               VARCHAR2 (50 BYTE),
     datetime             DATE,
     description          VARCHAR2 (60 BYTE),
-    organiser_id INTEGER NOT NULL
+    organiser_id         INTEGER NOT NULL
 );
 
 ALTER TABLE event ADD CONSTRAINT events_pkv2 PRIMARY KEY ( id_event );
@@ -43,22 +58,6 @@ CREATE TABLE organiser (
 );
 
 ALTER TABLE organiser ADD CONSTRAINT organiser_pk PRIMARY KEY ( id_profile );
-
-CREATE TABLE profiles (
-    id_profile     INTEGER NOT NULL,
-    username       VARCHAR2 (30 BYTE),
-    password       VARCHAR2 (30 BYTE),
-    role_id INTEGER NOT NULL
-);
-
-ALTER TABLE profiles ADD CONSTRAINT profiles_pk PRIMARY KEY ( id_profile );
-
-CREATE TABLE roles (
-    id_role INTEGER NOT NULL,
-    role    VARCHAR2(30 BYTE)
-);
-
-ALTER TABLE roles ADD CONSTRAINT roles_pk PRIMARY KEY ( id_role );
 
 CREATE TABLE seats (
     id_seats          INTEGER NOT NULL,
@@ -134,9 +133,9 @@ BEGIN
   FROM dual;
 END;
 
-INSERT INTO ROLES(ROLE) VALUES('админ');
-INSERT INTO ROLES(ROLE) VALUES('организатор');
-INSERT INTO ROLES(ROLE) VALUES('разпространител');
+INSERT INTO ROLES(ROLE) VALUES('пїЅпїЅпїЅпїЅпїЅ');
+INSERT INTO ROLES(ROLE) VALUES('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+INSERT INTO ROLES(ROLE) VALUES('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 CREATE SEQUENCE profiles_sequence;
 
@@ -149,7 +148,7 @@ BEGIN
   FROM dual;
 END;
 
-INSERT INTO PROFILES(USERNAME,PASSWORD,ROLE_ID) VALUES('админ','админ',1);
+INSERT INTO PROFILES(USERNAME,PASSWORD,ROLE_ID) VALUES('admin','f24f62eeb789199b9b2e467df3b1876b',1);
 
 CREATE SEQUENCE client_sequence;
 
