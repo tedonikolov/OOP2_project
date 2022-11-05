@@ -13,4 +13,6 @@ module bg.tu_varna.sit.oop2_project {
 
     opens bg.tu_varna.sit.oop2_project to javafx.fxml;
     exports bg.tu_varna.sit.oop2_project;
+    exports entity;
+    opens entity to javafx.fxml;
 }

@@ -1,4 +1,6 @@
-package bg.tu_varna.sit.oop2_project;
+package entity;
+
+import entity.Roles;
 
 public class Profiles {
     String username;

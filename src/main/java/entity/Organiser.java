@@ -1,20 +1,16 @@
-package bg.tu_varna.sit.oop2_project;
+package entity;
 
-public class Client {
+public class Organiser {
     String firstName;
     String lastName;
     String email;
     String phoneNumber;
-    Tickets ticket;
-    int quantity;
 
-    public Client(String firstName, String lastName, String email, String phoneNumber, Tickets ticket, int quantity) {
+    public Organiser(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.ticket = ticket;
-        this.quantity = quantity;
     }
 
     public String getFirstName() {
@@ -47,21 +43,5 @@ public class Client {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public Tickets getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Tickets ticket) {
-        this.ticket = ticket;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 }

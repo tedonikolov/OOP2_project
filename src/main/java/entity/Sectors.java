@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.oop2_project;
+package entity;
 
 public class Sectors {
     String sectorType;
