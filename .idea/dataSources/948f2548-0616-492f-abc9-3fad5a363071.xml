@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@localhost">
+  <database-model serializer="dbm" dbms="ORACLE" family-id="ORACLE" format-version="4.43">
+    <root id="1">
+      <IntrospectionLevel>3</IntrospectionLevel>
+      <ServerVersion>11.2.0.2.0</ServerVersion>
+      <TablespacesHash>25609417260</TablespacesHash>
+    </root>
+    <schema id="2" parent="1" name="ADMIN">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <Current>1</Current>
+      <IntrospectionL1Timestamp>2022-10-21.20:50:35</IntrospectionL1Timestamp>
+      <IntrospectionL2Timestamp>2022-10-21.20:50:35</IntrospectionL2Timestamp>
+      <IntrospectionL3Timestamp>2022-10-21.20:50:35</IntrospectionL3Timestamp>
+      <IntrospectionVersion>200820</IntrospectionVersion>
+      <ModifiedTimestamp>2022-10-21.20:50:22</ModifiedTimestamp>
+      <ObjectId>50</ObjectId>
+    </schema>
+    <schema id="3" parent="1" name="ANONYMOUS">
+      <ObjectId>35</ObjectId>
+    </schema>
+    <schema id="4" parent="1" name="APEX_040000">
+      <ObjectId>47</ObjectId>
+    </schema>
+    <schema id="5" parent="1" name="APEX_PUBLIC_USER">
+      <ObjectId>45</ObjectId>
+    </schema>
+    <schema id="6" parent="1" name="APPQOSSYS">
+      <ObjectId>30</ObjectId>
+    </schema>
+    <schema id="7" parent="1" name="CTXSYS">
+      <ObjectId>32</ObjectId>
+    </schema>
+    <schema id="8" parent="1" name="DBSNMP">
+      <ObjectId>29</ObjectId>
+    </schema>
+    <schema id="9" parent="1" name="DIP">
+      <ObjectId>14</ObjectId>
+    </schema>
+    <schema id="10" parent="1" name="EventOrganizer">
+      <ObjectId>51</ObjectId>
+    </schema>
+    <schema id="11" parent="1" name="FLOWS_FILES">
+      <ObjectId>44</ObjectId>
+    </schema>
+    <schema id="12" parent="1" name="HR">
+      <ObjectId>43</ObjectId>
+    </schema>
+    <schema id="13" parent="1" name="MDSYS">
+      <ObjectId>42</ObjectId>
+    </schema>
+    <schema id="14" parent="1" name="ORACLE_OCM">
+      <ObjectId>21</ObjectId>
+    </schema>
+    <schema id="15" parent="1" name="OUTLN">
+      <ObjectId>9</ObjectId>
+    </schema>
+    <schema id="16" parent="1" name="PUBLIC">
+      <ObjectId>1</ObjectId>
+    </schema>
+    <schema id="17" parent="1" name="SYS">
+      <ObjectId>0</ObjectId>
+    </schema>
+    <schema id="18" parent="1" name="SYSTEM">
+      <ObjectId>5</ObjectId>
+    </schema>
+    <schema id="19" parent="1" name="TEKAN">
+      <ObjectId>49</ObjectId>
+    </schema>
+    <schema id="20" parent="1" name="Tedo">
+      <ObjectId>48</ObjectId>
+    </schema>
+    <schema id="21" parent="1" name="XDB">
+      <ObjectId>34</ObjectId>
+    </schema>
+    <schema id="22" parent="1" name="XS$NULL">
+      <ObjectId>2147483638</ObjectId>
+    </schema>
+    <tablespace id="23" parent="1" name="SYSTEM">
+      <BlockSize>8192</BlockSize>
+      <ContentCategory>P</ContentCategory>
+      <LocalExtentManagement>1</LocalExtentManagement>
+      <Logging>1</Logging>
+      <Status>E</Status>
+    </tablespace>
+    <tablespace id="24" parent="1" name="SYSAUX">
+      <AutoSegmentManagement>1</AutoSegmentManagement>
+      <BlockSize>8192</BlockSize>
+      <ContentCategory>P</ContentCategory>
+      <LocalExtentManagement>1</LocalExtentManagement>
+      <Logging>1</Logging>
+      <Status>E</Status>
+    </tablespace>
+    <tablespace id="25" parent="1" name="UNDOTBS1">
+      <BlockSize>8192</BlockSize>
+      <ContentCategory>U</ContentCategory>
+      <LocalExtentManagement>1</LocalExtentManagement>
+      <Logging>1</Logging>
+      <Status>E</Status>
+    </tablespace>
+    <tablespace id="26" parent="1" name="TEMP">
+      <BlockSize>8192</BlockSize>
+      <ContentCategory>T</ContentCategory>
+      <LocalExtentManagement>1</LocalExtentManagement>
+      <Logging>0</Logging>
+      <Status>E</Status>
+    </tablespace>
+    <tablespace id="27" parent="1" name="USERS">
+      <AutoSegmentManagement>1</AutoSegmentManagement>
+      <BlockSize>8192</BlockSize>
+      <ContentCategory>P</ContentCategory>
+      <LocalExtentManagement>1</LocalExtentManagement>
+      <Logging>1</Logging>
+      <Status>E</Status>
+    </tablespace>
+    <user id="28" parent="1" name="ADMIN">
+      <ObjectId>50</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="29" parent="1" name="ANONYMOUS">
+      <ObjectId>35</ObjectId>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="30" parent="1" name="APEX_040000">
+      <Locked>1</Locked>
+      <ObjectId>47</ObjectId>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="31" parent="1" name="APEX_PUBLIC_USER">
+      <Locked>1</Locked>
+      <ObjectId>45</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="32" parent="1" name="APPQOSSYS">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>30</ObjectId>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="33" parent="1" name="CTXSYS">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>32</ObjectId>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="34" parent="1" name="DBSNMP">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>29</ObjectId>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="35" parent="1" name="DIP">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>14</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="36" parent="1" name="EventOrganizer">
+      <ObjectId>51</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="37" parent="1" name="FLOWS_FILES">
+      <Locked>1</Locked>
+      <ObjectId>44</ObjectId>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="38" parent="1" name="HR">
+      <ObjectId>43</ObjectId>
+      <DefaultTablespaceName>USERS</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="39" parent="1" name="MDSYS">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>42</ObjectId>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="40" parent="1" name="ORACLE_OCM">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>21</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="41" parent="1" name="OUTLN">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>9</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="42" parent="1" name="SYS">
+      <ObjectId>0</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="43" parent="1" name="SYSTEM">
+      <ObjectId>5</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="44" parent="1" name="TEKAN">
+      <ObjectId>49</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="45" parent="1" name="Tedo">
+      <ObjectId>48</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="46" parent="1" name="XDB">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>34</ObjectId>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <user id="47" parent="1" name="XS$NULL">
+      <Expired>1</Expired>
+      <Locked>1</Locked>
+      <ObjectId>2147483638</ObjectId>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
+    </user>
+    <sequence id="48" parent="2" name="CLIENT_SEQUENCE">
+      <CreatedTimestamp>2022-10-21.20:46:43</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:46:43</ModifiedTimestamp>
+      <ObjectId>20163</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+    </sequence>
+    <sequence id="49" parent="2" name="EVENT_SEQUENCE">
+      <CreatedTimestamp>2022-10-21.20:47:27</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:47:27</ModifiedTimestamp>
+      <ObjectId>20165</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+    </sequence>
+    <sequence id="50" parent="2" name="PROFILES_SEQUENCE">
+      <CreatedTimestamp>2022-10-21.20:44:41</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:44:41</ModifiedTimestamp>
+      <ObjectId>20162</ObjectId>
+      <SequenceIdentity>1(21)</SequenceIdentity>
+    </sequence>
+    <sequence id="51" parent="2" name="ROLES_SEQUENCE">
+      <CreatedTimestamp>2022-10-21.20:44:09</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:44:09</ModifiedTimestamp>
+      <ObjectId>20161</ObjectId>
+      <SequenceIdentity>1(21)</SequenceIdentity>
+    </sequence>
+    <sequence id="52" parent="2" name="SEATS_SEQUENCE">
+      <CreatedTimestamp>2022-10-21.20:48:27</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:48:27</ModifiedTimestamp>
+      <ObjectId>20167</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+    </sequence>
+    <sequence id="53" parent="2" name="SECTORS_SEQUENCE">
+      <CreatedTimestamp>2022-10-21.20:49:20</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:49:20</ModifiedTimestamp>
+      <ObjectId>20169</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+    </sequence>
+    <sequence id="54" parent="2" name="TICKETS_SEQUENCE">
+      <CreatedTimestamp>2022-10-21.20:50:17</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:50:17</ModifiedTimestamp>
+      <ObjectId>20171</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+    </sequence>
+    <table id="55" parent="2" name="CLIENT">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:46:47</ModifiedTimestamp>
+      <ObjectId>20139</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="56" parent="2" name="DISTRIBUTOR">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20141</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="57" parent="2" name="EVENT">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:47:32</ModifiedTimestamp>
+      <ObjectId>20143</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="58" parent="2" name="ORGANISER">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20145</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="59" parent="2" name="PROFILES">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:45:14</ModifiedTimestamp>
+      <ObjectId>20147</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="60" parent="2" name="ROLES">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:44:29</ModifiedTimestamp>
+      <ObjectId>20149</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="61" parent="2" name="SEATS">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:48:32</ModifiedTimestamp>
+      <ObjectId>20151</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="62" parent="2" name="SECTORS">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:49:38</ModifiedTimestamp>
+      <ObjectId>20153</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="63" parent="2" name="TICKETS">
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <DetailsLevel>3</DetailsLevel>
+      <ModifiedTimestamp>2022-10-21.20:50:22</ModifiedTimestamp>
+      <ObjectId>20155</ObjectId>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <data-file id="64" parent="23" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSTEM.DBF">
+      <AutoExtensible>1</AutoExtensible>
+      <AvailabilityStatus>A</AvailabilityStatus>
+      <FileId>1</FileId>
+      <FileSize>46080</FileSize>
+      <IncrementBy>1280</IncrementBy>
+      <MaxSize>76800</MaxSize>
+      <OnlineStatus>S</OnlineStatus>
+      <Position>1</Position>
+      <UserSize>45952</UserSize>
+    </data-file>
+    <data-file id="65" parent="24" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSAUX.DBF">
+      <AutoExtensible>1</AutoExtensible>
+      <AvailabilityStatus>A</AvailabilityStatus>
+      <FileId>2</FileId>
+      <FileSize>84480</FileSize>
+      <IncrementBy>1280</IncrementBy>
+      <MaxSize>4194302</MaxSize>
+      <OnlineStatus>E</OnlineStatus>
+      <Position>2</Position>
+      <UserSize>84352</UserSize>
+    </data-file>
+    <data-file id="66" parent="25" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\UNDOTBS1.DBF">
+      <AutoExtensible>1</AutoExtensible>
+      <AvailabilityStatus>A</AvailabilityStatus>
+      <FileId>3</FileId>
+      <FileSize>48640</FileSize>
+      <IncrementBy>640</IncrementBy>
+      <MaxSize>64000</MaxSize>
+      <OnlineStatus>E</OnlineStatus>
+      <Position>3</Position>
+      <UserSize>48512</UserSize>
+    </data-file>
+    <data-file id="67" parent="26" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\TEMP.DBF">
+      <AutoExtensible>1</AutoExtensible>
+      <FileId>1</FileId>
+      <FileSize>2560</FileSize>
+      <IncrementBy>80</IncrementBy>
+      <MaxSize>4194302</MaxSize>
+      <Position>1</Position>
+      <UserSize>2432</UserSize>
+    </data-file>
+    <data-file id="68" parent="27" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\USERS.DBF">
+      <AutoExtensible>1</AutoExtensible>
+      <AvailabilityStatus>A</AvailabilityStatus>
+      <FileId>4</FileId>
+      <FileSize>12800</FileSize>
+      <IncrementBy>1280</IncrementBy>
+      <MaxSize>1441792</MaxSize>
+      <OnlineStatus>E</OnlineStatus>
+      <Position>4</Position>
+      <UserSize>12672</UserSize>
+    </data-file>
+    <column id="69" parent="55" name="ID_CLIENT">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="70" parent="55" name="FIRSTNAME">
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="71" parent="55" name="LASTNAME">
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="72" parent="55" name="EMAIL">
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="73" parent="55" name="PHONE">
+      <DataType>VARCHAR2(20 byte)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="74" parent="55" name="TICKET_ID">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="75" parent="55" name="QUANTITY">
+      <DataType>NUMBER(*)|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <foreign-key id="76" parent="55" name="CLIENT_TICKETS_FK">
+      <ColNames>TICKET_ID</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>EVENTS_PK</RefKeyName>
+      <RefTableName>TICKETS</RefTableName>
+    </foreign-key>
+    <index id="77" parent="55" name="CLIENT_PK">
+      <ColNames>ID_CLIENT</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20140</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="78" parent="55" name="CLIENT_PK">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>CLIENT_PK</UnderlyingIndexName>
+    </key>
+    <trigger id="79" parent="55" name="CLIENT_ON_INSERT">
+      <CreatedTimestamp>2022-10-21.20:46:47</CreatedTimestamp>
+      <DependsOnIds>117,20163</DependsOnIds>
+      <Events>I</Events>
+      <ModifiedTimestamp>2022-10-21.20:46:47</ModifiedTimestamp>
+      <ObjectId>20164</ObjectId>
+      <SourceTextLength>78</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="80" parent="56" name="ID_PROFILE">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="81" parent="56" name="FIRSTNAME">
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="82" parent="56" name="LASTNAME">
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="83" parent="56" name="EMAIL">
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="84" parent="56" name="PHONE">
+      <DataType>VARCHAR2(20 byte)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="85" parent="56" name="RATE">
+      <DataType>NUMBER(*)|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="86" parent="56" name="SALARY">
+      <DataType>NUMBER(*)|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <foreign-key id="87" parent="56" name="DISTRIBUTOR_PROFILES_FK">
+      <ColNames>ID_PROFILE</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>PROFILES_PK</RefKeyName>
+      <RefTableName>PROFILES</RefTableName>
+    </foreign-key>
+    <index id="88" parent="56" name="DISTRIBUTOR_PK">
+      <ColNames>ID_PROFILE</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20142</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="89" parent="56" name="DISTRIBUTOR_PK">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>DISTRIBUTOR_PK</UnderlyingIndexName>
+    </key>
+    <column id="90" parent="57" name="ID_EVENT">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="91" parent="57" name="NAME">
+      <DataType>VARCHAR2(50 byte)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="92" parent="57" name="ADRESS">
+      <DataType>VARCHAR2(50 byte)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="93" parent="57" name="DATETIME">
+      <DataType>DATE|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="94" parent="57" name="DESCRIPTION">
+      <DataType>VARCHAR2(60 byte)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="95" parent="57" name="ORGANISER_ID">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="96" parent="57" name="EVENTS_ORGANIZER_FK">
+      <ColNames>ORGANISER_ID</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>ORGANISER_PK</RefKeyName>
+      <RefTableName>ORGANISER</RefTableName>
+    </foreign-key>
+    <index id="97" parent="57" name="EVENTS_PKV2">
+      <ColNames>ID_EVENT</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20144</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="98" parent="57" name="EVENTS_PKV2">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>EVENTS_PKV2</UnderlyingIndexName>
+    </key>
+    <trigger id="99" parent="57" name="EVENT_ON_INSERT">
+      <CreatedTimestamp>2022-10-21.20:47:32</CreatedTimestamp>
+      <DependsOnIds>117,20165</DependsOnIds>
+      <Events>I</Events>
+      <ModifiedTimestamp>2022-10-21.20:47:32</ModifiedTimestamp>
+      <ObjectId>20166</ObjectId>
+      <SourceTextLength>76</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="100" parent="58" name="ID_PROFILE">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="101" parent="58" name="FIRSTNAME">
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="102" parent="58" name="LASTNAME">
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="103" parent="58" name="EMAIL">
+      <DataType>VARCHAR2(50 byte)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="104" parent="58" name="PHONE">
+      <DataType>VARCHAR2(20 byte)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <foreign-key id="105" parent="58" name="ORGANISER_PROFILES_FK">
+      <ColNames>ID_PROFILE</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>PROFILES_PK</RefKeyName>
+      <RefTableName>PROFILES</RefTableName>
+    </foreign-key>
+    <index id="106" parent="58" name="ORGANISER_PK">
+      <ColNames>ID_PROFILE</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20146</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="107" parent="58" name="ORGANISER_PK">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>ORGANISER_PK</UnderlyingIndexName>
+    </key>
+    <column id="108" parent="59" name="ID_PROFILE">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="109" parent="59" name="USERNAME">
+      <DataType>VARCHAR2(30 byte)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="110" parent="59" name="PASSWORD">
+      <DataType>VARCHAR2(30 byte)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="111" parent="59" name="ROLE_ID">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="112" parent="59" name="PROFILES_ROLES_FK">
+      <ColNames>ROLE_ID</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:24</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>ROLES_PK</RefKeyName>
+      <RefTableName>ROLES</RefTableName>
+    </foreign-key>
+    <index id="113" parent="59" name="PROFILES_PK">
+      <ColNames>ID_PROFILE</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20148</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="114" parent="59" name="PROFILES_PK">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PROFILES_PK</UnderlyingIndexName>
+    </key>
+    <trigger id="115" parent="59" name="PROFILES_ON_INSERT">
+      <CreatedTimestamp>2022-10-21.20:40:49</CreatedTimestamp>
+      <DependsOnIds>117,20162</DependsOnIds>
+      <Events>I</Events>
+      <ModifiedTimestamp>2022-10-21.20:45:14</ModifiedTimestamp>
+      <ObjectId>20158</ObjectId>
+      <SourceTextLength>81</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="116" parent="60" name="ID_ROLE">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="117" parent="60" name="ROLE">
+      <DataType>VARCHAR2(30 byte)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <index id="118" parent="60" name="ROLES_PK">
+      <ColNames>ID_ROLE</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20150</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="119" parent="60" name="ROLES_PK">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>ROLES_PK</UnderlyingIndexName>
+    </key>
+    <trigger id="120" parent="60" name="ROLES_ON_INSERT">
+      <CreatedTimestamp>2022-10-21.20:39:23</CreatedTimestamp>
+      <DependsOnIds>117,20161</DependsOnIds>
+      <Events>I</Events>
+      <ModifiedTimestamp>2022-10-21.20:44:29</ModifiedTimestamp>
+      <ObjectId>20157</ObjectId>
+      <SourceTextLength>75</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="121" parent="61" name="ID_SEATS">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="122" parent="61" name="AMOUNT">
+      <DataType>NUMBER(*)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="123" parent="61" name="PRICE">
+      <DataType>NUMBER(*)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="124" parent="61" name="TICKETPERCLIENT">
+      <DataType>NUMBER(*)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="125" parent="61" name="SECTOR_ID">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="126" parent="61" name="EVENT_ID">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="127" parent="61" name="SEATS_SECTORS_FK">
+      <ColNames>SECTOR_ID</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:24</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>SECTORS_PK</RefKeyName>
+      <RefTableName>SECTORS</RefTableName>
+    </foreign-key>
+    <foreign-key id="128" parent="61" name="SEATS_EVENT_FK">
+      <ColNames>EVENT_ID</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:24</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>EVENTS_PKV2</RefKeyName>
+      <RefTableName>EVENT</RefTableName>
+    </foreign-key>
+    <index id="129" parent="61" name="SEATS_PK">
+      <ColNames>ID_SEATS</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20152</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="130" parent="61" name="SEATS_PK">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>SEATS_PK</UnderlyingIndexName>
+    </key>
+    <trigger id="131" parent="61" name="SEATS_ON_INSERT">
+      <CreatedTimestamp>2022-10-21.20:48:32</CreatedTimestamp>
+      <DependsOnIds>117,20167</DependsOnIds>
+      <Events>I</Events>
+      <ModifiedTimestamp>2022-10-21.20:48:32</ModifiedTimestamp>
+      <ObjectId>20168</ObjectId>
+      <SourceTextLength>76</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="132" parent="62" name="ID_SECTOR">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="133" parent="62" name="TYPE">
+      <DataType>VARCHAR2(30 byte)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <index id="134" parent="62" name="SECTORS_PK">
+      <ColNames>ID_SECTOR</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20154</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="135" parent="62" name="SECTORS_PK">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>SECTORS_PK</UnderlyingIndexName>
+    </key>
+    <trigger id="136" parent="62" name="SECTORS_ON_INSERT">
+      <CreatedTimestamp>2022-10-21.20:49:23</CreatedTimestamp>
+      <DependsOnIds>117,20169</DependsOnIds>
+      <Events>I</Events>
+      <ModifiedTimestamp>2022-10-21.20:49:38</ModifiedTimestamp>
+      <ObjectId>20170</ObjectId>
+      <SourceTextLength>79</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="137" parent="63" name="ID_TICKET">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="138" parent="63" name="SEATS_ID">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="139" parent="63" name="TICKETSOLD">
+      <DataType>NUMBER(*)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="140" parent="63" name="DISTRIBUTOR_ID">
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="141" parent="63" name="TICKETS_SEATS_FK">
+      <ColNames>SEATS_ID</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:24</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>SEATS_PK</RefKeyName>
+      <RefTableName>SEATS</RefTableName>
+    </foreign-key>
+    <foreign-key id="142" parent="63" name="EVENTS_DISTRIBUTOR_FK">
+      <ColNames>DISTRIBUTOR_ID</ColNames>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <OnDelete>restrict</OnDelete>
+      <RefKeyName>DISTRIBUTOR_PK</RefKeyName>
+      <RefTableName>DISTRIBUTOR</RefTableName>
+    </foreign-key>
+    <index id="143" parent="63" name="EVENTS_PK">
+      <ColNames>ID_TICKET</ColNames>
+      <CreatedTimestamp>2022-10-21.20:38:23</CreatedTimestamp>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <ObjectId>20156</ObjectId>
+      <Unique>1</Unique>
+      <TablespaceName>SYSTEM</TablespaceName>
+    </index>
+    <key id="144" parent="63" name="EVENTS_PK">
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ModifiedTimestamp>2022-10-21.20:38:23</ModifiedTimestamp>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>EVENTS_PK</UnderlyingIndexName>
+    </key>
+    <trigger id="145" parent="63" name="TICKETS_ON_INSERT">
+      <CreatedTimestamp>2022-10-21.20:50:22</CreatedTimestamp>
+      <DependsOnIds>117,20171</DependsOnIds>
+      <Events>I</Events>
+      <ModifiedTimestamp>2022-10-21.20:50:22</ModifiedTimestamp>
+      <ObjectId>20172</ObjectId>
+      <SourceTextLength>79</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+  </database-model>
+</dataSource>
