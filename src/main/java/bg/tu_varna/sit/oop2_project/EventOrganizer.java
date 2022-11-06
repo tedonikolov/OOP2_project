@@ -7,8 +7,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class EventOrganizer extends Application {
     @Override
@@ -23,9 +21,7 @@ public class EventOrganizer extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws SQLException {
-        Connection connection= Database.connection();
+    public static void main(String[] args) {
         launch();
-        connection.close();
     }
 }

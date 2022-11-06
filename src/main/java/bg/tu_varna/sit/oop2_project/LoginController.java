@@ -41,18 +41,11 @@ public class LoginController implements Initializable {
             while (result.next()) {
                 profiles = new Profiles(Integer.parseInt(result.getString(1)), result.getString(2), result.getString(3), new Roles(Integer.parseInt(result.getString(5)), result.getString(6)));
             }
+            Database.close();
 
-            //hashing the password
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getText().getBytes());
-            byte[] bytes = md.digest();
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            String hash = sb.toString();
+            String hashedPassword=PasswordHash.hashing(password.getText());
 
-            if (Objects.equals(profiles.getPassword(), hash)) {
+            if (Objects.equals(profiles.getPassword(), hashedPassword)) {
                 if (profiles.getRole().getIdRole() == ((List<Roles>) SelectAll.getAll("ROLES")).get(0).getIdRole()) {
                     FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("admin.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
