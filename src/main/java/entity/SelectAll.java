@@ -41,6 +41,7 @@ public class SelectAll {
                 break;
             }
         }
+        Database.close();
         return list;
     }
 }

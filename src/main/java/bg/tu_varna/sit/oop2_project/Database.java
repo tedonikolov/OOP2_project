@@ -21,4 +21,9 @@ public class Database {
         }
         return connection;
     }
+
+    public static void close() throws SQLException {
+        connection.close();
+        connection=null;
+    }
 }
