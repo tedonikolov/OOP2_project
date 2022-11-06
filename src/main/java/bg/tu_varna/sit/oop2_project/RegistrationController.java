@@ -1,7 +1,6 @@
 package bg.tu_varna.sit.oop2_project;
 
-import entity.SelectAll;
-import entity.Roles;
+import entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,15 +42,46 @@ public class RegistrationController implements Initializable {
     private ChoiceBox box;
     @FXML
     private Label label;
+    public void registration () throws SQLException, NoSuchAlgorithmException {
 
-    public void registration () throws SQLException {
-
-        if(!Objects.equals(username.getText(), "") && !Objects.equals(firstName.getText(), "") && !Objects.equals(lastName.getText(), "") && !Objects.equals(email.getText(), "") && !Objects.equals(phone.getText(), "") && !Objects.equals(pass.getText(), "") && !Objects.equals(pass2.getText(), "")) {
+        if(!Objects.equals(username.getText(), "") && !Objects.equals(firstName.getText(), "") && !Objects.equals(lastName.getText(), "") && !Objects.equals(email.getText(), "") && !Objects.equals(phone.getText(), "") && !Objects.equals(pass.getText(), "") && !Objects.equals(pass2.getText(), "")&&box.getValue()!=null) {
             if (!Objects.equals(pass.getText(), pass2.getText())) {
                 label.setText("*Паролите не съвпадат");
             }
             else {
-                label.setText("*Профилът е създаден успешно");
+
+                String hashedPassword=PasswordHash.hashing(pass2.getText());
+
+                for(Roles roles : (List<Roles>)SelectAll.getAll("ROLES")){
+                    if(Objects.equals(box.getValue().toString(), roles.getRole())){
+                        Connection connection=Database.connection();
+                        Statement statement=connection.createStatement();
+
+                        String getId = "SELECT PROFILES_SEQUENCE.nextVal from DUAL";
+                        ResultSet rs = statement.executeQuery(getId);
+                        int id=0;
+                        if(rs.next())
+                            id = rs.getInt(1)+1;
+
+                        Profiles profiles=new Profiles(id,username.getText(),hashedPassword,roles);
+                        String sql="INSERT INTO PROFILES(USERNAME,PASSWORD,ROLE_ID) VALUES ('"+profiles.getUsername()+"','"+profiles.getPassword()+"',"+profiles.getRole().getIdRole()+")";
+                        statement.executeQuery(sql);
+
+                        if(Objects.equals(roles.getRole(), "организатор")){
+                            Organiser organiser=new Organiser(profiles,firstName.getText(),lastName.getText(),email.getText(),phone.getText());
+                            sql="INSERT INTO ORGANISER(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE) VALUES ("+organiser.getIdProfile()+",'"+organiser.getFirstName()+"','"+organiser.getLastName()+"','"+organiser.getEmail()+"','"+organiser.getPhoneNumber()+"')";
+                            statement.executeQuery(sql);
+                        }
+                        else{
+                            Distributor distributor=new Distributor(profiles,firstName.getText(),lastName.getText(),email.getText(),phone.getText(),0,0);
+                            sql="INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATE,SALARY) VALUES ("+distributor.getIdProfile()+",'"+distributor.getFirstName()+"','"+distributor.getLastName()+"','"+distributor.getEmail()+"','"+distributor.getPhoneNumber()+"',"+distributor.getRate()+","+distributor.getSalary()+")";
+                            statement.executeQuery(sql);
+                        }
+
+                        label.setText("*Профилът е създаден успешно");
+                    }
+                }
+                Database.close();
             }
         }
         else{

@@ -7,8 +7,8 @@ public class Distributor {
     private String lastName;
     private String email;
     private String phoneNumber;
-    double rate;
-    double salary;
+    private double rate;
+    private double salary;
 
     public Distributor(Profiles profiles, String firstName, String lastName, String email, String phoneNumber, double rate, double salary) {
         this.profiles = profiles;
