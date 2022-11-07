@@ -64,7 +64,7 @@ public class RegistrationController implements Initializable {
                             id = rs.getInt(1)+1;
 
                         Profiles profiles=new Profiles(id,username.getText(),hashedPassword,roles);
-                        String sql="INSERT INTO PROFILES(USERNAME,PASSWORD,ROLE_ID) VALUES ('"+profiles.getUsername()+"','"+profiles.getPassword()+"',"+profiles.getRole().getIdRole()+")";
+                        String sql="INSERT INTO PROFILES(USERNAME,PASSWORD,ROLE_ID) VALUES ('"+profiles.getUsername()+"','"+profiles.getPassword()+"',"+profiles.getRoles().getIdRole()+")";
                         statement.executeQuery(sql);
 
                         if(Objects.equals(roles.getRole(), "организатор")){

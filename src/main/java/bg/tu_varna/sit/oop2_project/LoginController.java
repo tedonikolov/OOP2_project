@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
             String hashedPassword=PasswordHash.hashing(password.getText());
 
             if (Objects.equals(profiles.getPassword(), hashedPassword)) {
-                if (profiles.getRole().getIdRole() == ((List<Roles>) SelectAll.getAll("ROLES")).get(0).getIdRole()) {
+                if (profiles.getRoles().getIdRole() == ((List<Roles>) SelectAll.getAll("ROLES")).get(0).getIdRole()) {
                     FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("admin.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(fxmlLoader.load());

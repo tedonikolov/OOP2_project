@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.oop2_project.AdminController">
    <children>
@@ -16,8 +23,8 @@
          <menus>
             <Menu mnemonicParsing="false" text="Профили">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Премахване на профил" />
-                  <MenuItem mnemonicParsing="false" text="Показване на профили" />
+                  <MenuItem mnemonicParsing="false" onAction="#profilesControl" text="Поддръжка на профили" />
+                  <MenuItem mnemonicParsing="false" onAction="#showProfiles" text="Показване на профили" />
                   <MenuItem fx:id="createProfile" mnemonicParsing="false" onAction="#createProfile" text="Създаване на профил" />
                </items>
             </Menu>
@@ -28,6 +35,40 @@
             </Menu>
          </menus>
       </MenuBar>
+      <TableView fx:id="table" layoutX="4.0" layoutY="33.0" prefHeight="362.0" prefWidth="492.0" visible="false" />
+      <TextField fx:id="id" layoutX="180.0" layoutY="85.0" onAction="#removeProfile" />
+      <Button fx:id="button" layoutX="226.0" layoutY="123.0" mnemonicParsing="false" onAction="#removeProfile" text="Изтрий" />
+      <Label fx:id="label" layoutX="197.0" layoutY="61.0" text="Номер на потребител" />
+      <Label fx:id="exception" layoutX="106.0" layoutY="161.0" text="Label" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="button1" layoutX="224.0" layoutY="335.0" mnemonicParsing="false" onAction="#password" text="Промяна" />
+      <Label fx:id="label1" layoutX="56.0" layoutY="262.0" text="Стара парола" />
+      <Label fx:id="error" layoutX="103.0" layoutY="370.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="oldPass" layoutX="19.0" layoutY="290.0" />
+      <Label fx:id="label2" layoutX="219.0" layoutY="262.0" text="Нова парола" />
+      <PasswordField fx:id="newPass" layoutX="180.0" layoutY="290.0" />
+      <Label fx:id="label3" layoutX="354.0" layoutY="262.0" text="Повторете паролата" />
+      <PasswordField fx:id="newPass2" layoutX="336.0" layoutY="290.0" />
+      <Separator fx:id="line" layoutX="-25.0" layoutY="182.0" prefHeight="26.0" prefWidth="530.0" />
+      <Label fx:id="label5" layoutX="28.0" layoutY="33.0" text="Изтриване на профил">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="label4" layoutX="28.0" layoutY="205.0" text="Промяна на парола">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="id1" layoutX="335.0" layoutY="212.0" onAction="#removeProfile" />
+      <Label fx:id="label6" layoutX="197.0" layoutY="216.0" text="Номер на потребител" />
    </children>
    <opaqueInsets>
       <Insets />

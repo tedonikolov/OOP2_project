@@ -39,12 +39,16 @@ public class Profiles {
         this.password = password;
     }
 
-    public Roles getRole() {
+    public Roles getRoles() {
         return roles;
     }
 
     public void setRoles_id(Roles roles) {
         this.roles = roles;
+    }
+
+    public String getRole(){
+        return roles.getRole();
     }
 
     @Override

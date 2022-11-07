@@ -40,6 +40,30 @@ public class SelectAll {
                 list=profiles;
                 break;
             }
+            case "DISTRIBUTOR":
+            {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM DISTRIBUTOR JOIN PROFILES ON PROFILES.ID_PROFILE=DISTRIBUTOR.ID_PROFILE JOIN ROLES ON ROLES.ID_ROLE=PROFILES.ROLE_ID");
+                ResultSet result = statement.executeQuery();
+                List<Distributor> distributors = new ArrayList<>();
+                while (result.next()) {
+                    Distributor distributor= new Distributor(new Profiles(Integer.parseInt(result.getString(8)), result.getString(9), result.getString(10),new Roles(Integer.parseInt(result.getString(11)), result.getString(13))),result.getString(2),result.getString(3),result.getString(4),result.getString(5),Double.parseDouble(result.getString(6)),Double.parseDouble(result.getString(7)));
+                    distributors.add(distributor);
+                }
+                list=distributors;
+                break;
+            }
+            case "ORGANIZER":
+            {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM ORGANISER JOIN PROFILES ON PROFILES.ID_PROFILE=DISTRIBUTOR.ID_PROFILE JOIN ROLES ON ROLES.ID_ROLE=PROFILES.ROLE_ID");
+                ResultSet result = statement.executeQuery();
+                List<Organiser> organisers = new ArrayList<>();
+                while (result.next()) {
+                    Organiser organiser= new Organiser(new Profiles(Integer.parseInt(result.getString(8)), result.getString(9), result.getString(10),new Roles(Integer.parseInt(result.getString(11)), result.getString(13))),result.getString(2),result.getString(3),result.getString(4),result.getString(5));
+                    organisers.add(organiser);
+                }
+                list=organisers;
+                break;
+            }
         }
         Database.close();
         return list;
