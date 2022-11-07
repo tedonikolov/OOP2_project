@@ -1,5 +1,8 @@
-package bg.tu_varna.sit.oop2_project;
+package Controllers;
 
+import bg.tu_varna.sit.oop2_project.Database;
+import bg.tu_varna.sit.oop2_project.EventOrganizer;
+import bg.tu_varna.sit.oop2_project.PasswordHash;
 import entity.Roles;
 import entity.SelectAll;
 import entity.Profiles;
@@ -43,7 +46,7 @@ public class LoginController implements Initializable {
             }
             Database.close();
 
-            String hashedPassword=PasswordHash.hashing(password.getText());
+            String hashedPassword= PasswordHash.hashing(password.getText());
 
             if (Objects.equals(profiles.getPassword(), hashedPassword)) {
                 if (profiles.getRoles().getIdRole() == ((List<Roles>) SelectAll.getAll("ROLES")).get(0).getIdRole()) {

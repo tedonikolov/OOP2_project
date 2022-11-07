@@ -1,5 +1,8 @@
-package bg.tu_varna.sit.oop2_project;
+package Controllers;
 
+import bg.tu_varna.sit.oop2_project.Database;
+import bg.tu_varna.sit.oop2_project.EventOrganizer;
+import bg.tu_varna.sit.oop2_project.PasswordHash;
 import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -145,7 +148,7 @@ public class AdminController {
 
             for(Organiser organiser:(List<Organiser>)SelectAll.getAll("ORGANISER")){
                 if(organiser.getIdProfile()==Integer.parseInt(id.getText())){
-                    Connection connection=Database.connection();
+                    Connection connection= Database.connection();
                     PreparedStatement statement = connection.prepareStatement("DELETE FROM ORGANISER WHERE ID_PROFILE="+Integer.parseInt(id.getText()));
                     ResultSet result = statement.executeQuery();
                     flag=true;
@@ -190,7 +193,7 @@ public class AdminController {
 
         for(Profiles profiles: (List<Profiles>)SelectAll.getAll("PROFILES")){
             if(Integer.parseInt(id1.getText())==profiles.getIdProfile()){
-                String old=PasswordHash.hashing(oldPass.getText());
+                String old= PasswordHash.hashing(oldPass.getText());
                 if(old.equals(profiles.getPassword())){
                     if (!Objects.equals(newPass.getText(), newPass2.getText())) {
                         error.setText("*Паролите не съвпадат");

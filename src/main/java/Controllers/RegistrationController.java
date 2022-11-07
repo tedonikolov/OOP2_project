@@ -1,5 +1,8 @@
-package bg.tu_varna.sit.oop2_project;
+package Controllers;
 
+import bg.tu_varna.sit.oop2_project.Database;
+import bg.tu_varna.sit.oop2_project.EventOrganizer;
+import bg.tu_varna.sit.oop2_project.PasswordHash;
 import entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,11 +53,11 @@ public class RegistrationController implements Initializable {
             }
             else {
 
-                String hashedPassword=PasswordHash.hashing(pass2.getText());
+                String hashedPassword= PasswordHash.hashing(pass2.getText());
 
                 for(Roles roles : (List<Roles>)SelectAll.getAll("ROLES")){
                     if(Objects.equals(box.getValue().toString(), roles.getRole())){
-                        Connection connection=Database.connection();
+                        Connection connection= Database.connection();
                         Statement statement=connection.createStatement();
 
                         String getId = "SELECT PROFILES_SEQUENCE.nextVal from DUAL";
