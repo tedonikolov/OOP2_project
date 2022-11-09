@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import collections.GetRoles;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,7 +55,7 @@ public class RegistrationController implements Initializable {
 
                 String hashedPassword= PasswordHash.hashing(pass2.getText());
 
-                for(Roles roles : (List<Roles>)SelectAll.getAll("ROLES")){
+                for(Roles roles : GetRoles.get()){
                     if(Objects.equals(box.getValue().toString(), roles.getRole())){
                         Connection connection= Database.connection();
                         Statement statement=connection.createStatement();
@@ -103,7 +104,7 @@ public class RegistrationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             List<String> roles=new ArrayList<>();
-            for(Roles role: (List<Roles>)SelectAll.getAll("ROLES")){
+            for(Roles role: GetRoles.get()){
                 roles.add(role.getRole());
             }
             box.getItems().add(roles.get(1));

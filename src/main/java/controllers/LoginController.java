@@ -4,7 +4,6 @@ import bg.tu_varna.sit.oop2_project.Database;
 import bg.tu_varna.sit.oop2_project.EventOrganizer;
 import bg.tu_varna.sit.oop2_project.PasswordHash;
 import entities.Roles;
-import entities.SelectAll;
 import entities.Profiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +15,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
+import collections.GetProfiles;
+import collections.GetRoles;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +49,7 @@ public class LoginController implements Initializable {
             String hashedPassword= PasswordHash.hashing(password.getText());
 
             if (Objects.equals(profiles.getPassword(), hashedPassword)) {
-                if (profiles.getRoles().getIdRole() == ((List<Roles>) SelectAll.getAll("ROLES")).get(0).getIdRole()) {
+                if (profiles.getRoles().getIdRole() == GetRoles.get().get(0).getIdRole()) {
                     FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("admin.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(fxmlLoader.load());
@@ -69,7 +70,7 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             List<String> usernames=new ArrayList<>();
-            for(Profiles profiles : (List<Profiles>)SelectAll.getAll("PROFILES")){
+            for(Profiles profiles : GetProfiles.get()){
                 usernames.add(profiles.getUsername());
             }
             box.getItems().addAll(usernames);

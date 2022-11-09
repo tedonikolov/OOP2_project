@@ -11,6 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import collections.GetDistributors;
+import collections.GetOrganisers;
+import collections.GetProfiles;
 
 
 import java.io.IOException;
@@ -112,7 +115,7 @@ public class AdminController {
 
         table.getColumns().setAll(idProfile,username,role);
 
-        for(Profiles profiles:(List<Profiles>)SelectAll.getAll("PROFILES")){
+        for(Profiles profiles: GetProfiles.get()){
             table.getItems().add(profiles);
         }
 
@@ -143,7 +146,7 @@ public class AdminController {
         try {
             boolean flag=false;
 
-            for(Organiser organiser:(List<Organiser>)SelectAll.getAll("ORGANISER")){
+            for(Organiser organiser: GetOrganisers.get()){
                 if(organiser.getIdProfile()==Integer.parseInt(id.getText())){
                     Connection connection= Database.connection();
                     PreparedStatement statement = connection.prepareStatement("DELETE FROM ORGANISER WHERE ID_PROFILE="+Integer.parseInt(id.getText()));
@@ -155,27 +158,24 @@ public class AdminController {
             }
 
             if(!flag){
-                for(Distributor distributor:(List<Distributor>)SelectAll.getAll("DISTRIBUTOR")){
+                for(Distributor distributor: GetDistributors.get()){
                     if(distributor.getIdProfile()==Integer.parseInt(id.getText())){
                         Connection connection=Database.connection();
                         PreparedStatement statement = connection.prepareStatement("DELETE FROM DISTRIBUTOR WHERE ID_PROFILE="+Integer.parseInt(id.getText()));
                         ResultSet result = statement.executeQuery();
-                        flag=true;
                         Database.close();
                         break;
                     }
                 }
             }
 
-            if(flag) {
-                Connection connection=Database.connection();
-                PreparedStatement statement = connection.prepareStatement("DELETE FROM PROFILES WHERE ID_PROFILE=" + Integer.parseInt(id.getText()));
-                ResultSet result = statement.executeQuery();
-                Database.close();
-                exception.setTextFill(GREEN);
-                exception.setText("Потребителят е изтрит успешно");
-                exception.setVisible(true);
-            }
+            Connection connection=Database.connection();
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM PROFILES WHERE ID_PROFILE=" + Integer.parseInt(id.getText()));
+            ResultSet result = statement.executeQuery();
+            Database.close();
+            exception.setTextFill(GREEN);
+            exception.setText("Потребителят е изтрит успешно");
+            exception.setVisible(true);
         }
         catch (SQLException e) {
             exception.setTextFill(RED);
@@ -188,7 +188,7 @@ public class AdminController {
     public void password() throws SQLException, NoSuchAlgorithmException {
         boolean flag=false;
 
-        for(Profiles profiles: (List<Profiles>)SelectAll.getAll("PROFILES")){
+        for(Profiles profiles: GetProfiles.get()){
             if(Integer.parseInt(id1.getText())==profiles.getIdProfile()){
                 String old= PasswordHash.hashing(oldPass.getText());
                 if(old.equals(profiles.getPassword())){
