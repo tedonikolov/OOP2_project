@@ -1,4 +1,4 @@
-package entity;
+package entities;
 
 public class Organiser {
     private Profiles profiles;

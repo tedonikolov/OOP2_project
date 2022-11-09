@@ -1,6 +1,4 @@
-package entity;
-
-import entity.Tickets;
+package entities;
 
 public class Client {
     private int idClient;

@@ -1,16 +1,18 @@
-package entity;
+package entities;
 
 public class Tickets {
     private int idTicket;
-    private Seats seat;
+    private Event event;
     private int ticketsSold;
     private Distributor distributor;
+    private int rate;
 
-    public Tickets(int idTicket, Seats seat, int ticketsSold, Distributor distributor) {
+    public Tickets(int idTicket, Event event, int ticketsSold, Distributor distributor, int rate) {
         this.idTicket = idTicket;
-        this.seat = seat;
+        this.event = event;
         this.ticketsSold = ticketsSold;
         this.distributor = distributor;
+        this.rate = rate;
     }
 
     public int getIdTicket() {
@@ -21,12 +23,12 @@ public class Tickets {
         this.idTicket = idTicket;
     }
 
-    public Seats getSeat() {
-        return seat;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setSeat(Seats seat) {
-        this.seat = seat;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     public int getTicketsSold() {
@@ -43,5 +45,13 @@ public class Tickets {
 
     public void setDistributor(Distributor distributor) {
         this.distributor = distributor;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 }

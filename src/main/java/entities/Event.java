@@ -1,22 +1,24 @@
-package entity;
+package entities;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Event {
     private int idEvent;
     private String name;
     private String address;
-    private Date date;
+    private LocalDateTime dateTime;
     private String description;
     private Organiser organiser;
+    private Seats seats;
 
-    public Event(int idEvent, String name, String address, Date date, String description, Organiser organiser) {
+    public Event(int idEvent, String name, String address, LocalDateTime dateTime, String description, Organiser organiser,Seats seats) {
         this.idEvent = idEvent;
         this.name = name;
         this.address = address;
-        this.date = date;
+        this.dateTime = dateTime;
         this.description = description;
         this.organiser = organiser;
+        this.seats=seats;
     }
 
     public int getIdEvent() {
@@ -43,12 +45,12 @@ public class Event {
         this.address = address;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getDescription() {
@@ -65,5 +67,13 @@ public class Event {
 
     public void setOrganiser(Organiser organiser) {
         this.organiser = organiser;
+    }
+
+    public Seats getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Seats seats) {
+        this.seats = seats;
     }
 }

@@ -1,9 +1,9 @@
-package Controllers;
+package controllers;
 
 import bg.tu_varna.sit.oop2_project.Database;
 import bg.tu_varna.sit.oop2_project.EventOrganizer;
 import bg.tu_varna.sit.oop2_project.PasswordHash;
-import entity.*;
+import entities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -77,7 +76,7 @@ public class RegistrationController implements Initializable {
                         }
                         else{
                             Distributor distributor=new Distributor(profiles,firstName.getText(),lastName.getText(),email.getText(),phone.getText(),0,0);
-                            sql="INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATE,SALARY) VALUES ("+distributor.getIdProfile()+",'"+distributor.getFirstName()+"','"+distributor.getLastName()+"','"+distributor.getEmail()+"','"+distributor.getPhoneNumber()+"',"+distributor.getRate()+","+distributor.getSalary()+")";
+                            sql="INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATE,SALARY) VALUES ("+distributor.getIdProfile()+",'"+distributor.getFirstName()+"','"+distributor.getLastName()+"','"+distributor.getEmail()+"','"+distributor.getPhoneNumber()+"',"+distributor.getRating()+","+distributor.getSalary()+")";
                             statement.executeQuery(sql);
                         }
 

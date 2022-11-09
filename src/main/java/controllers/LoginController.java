@@ -1,11 +1,11 @@
-package Controllers;
+package controllers;
 
 import bg.tu_varna.sit.oop2_project.Database;
 import bg.tu_varna.sit.oop2_project.EventOrganizer;
 import bg.tu_varna.sit.oop2_project.PasswordHash;
-import entity.Roles;
-import entity.SelectAll;
-import entity.Profiles;
+import entities.Roles;
+import entities.SelectAll;
+import entities.Profiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.*;

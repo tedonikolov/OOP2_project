@@ -1,20 +1,18 @@
-package entity;
+package entities;
 
 public class Seats {
     private int idSeats;
+    private String type;
     private int amount;
     private double price;
     private int ticketPerClient;
-    private Sectors sector;
-    private Event event;
 
-    public Seats(int idSeats, int amount, double price, int ticketPerClient, Sectors sector, Event event) {
+    public Seats(int idSeats, String type, int amount, double price, int ticketPerClient) {
         this.idSeats = idSeats;
+        this.type=type;
         this.amount = amount;
         this.price = price;
         this.ticketPerClient = ticketPerClient;
-        this.sector = sector;
-        this.event = event;
     }
 
     public int getIdSeats() {
@@ -23,6 +21,14 @@ public class Seats {
 
     public void setIdSeats(int idSeats) {
         this.idSeats = idSeats;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getPrice() {
@@ -47,21 +53,5 @@ public class Seats {
 
     public void setTicketPerClient(int ticketPerClient) {
         this.ticketPerClient = ticketPerClient;
-    }
-
-    public Sectors getSector() {
-        return sector;
-    }
-
-    public void setSector(Sectors sector) {
-        this.sector = sector;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
     }
 }

@@ -1,4 +1,4 @@
-package entity;
+package entities;
 
 public class Distributor {
     private Profiles profiles;
@@ -7,17 +7,17 @@ public class Distributor {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private double rate;
+    private double rating;
     private double salary;
 
-    public Distributor(Profiles profiles, String firstName, String lastName, String email, String phoneNumber, double rate, double salary) {
+    public Distributor(Profiles profiles, String firstName, String lastName, String email, String phoneNumber, double rating, double salary) {
         this.profiles = profiles;
         idProfile= profiles.getIdProfile();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.rate = rate;
+        this.rating = rating;
         this.salary = salary;
     }
 
@@ -69,12 +69,12 @@ public class Distributor {
         this.phoneNumber = phoneNumber;
     }
 
-    public double getRate() {
-        return rate;
+    public double getRating() {
+        return rating;
     }
 
-    public void setRate(double rate) {
-        this.rate = rate;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public double getSalary() {
