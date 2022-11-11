@@ -77,7 +77,7 @@ public class RegistrationController implements Initializable {
                         }
                         else{
                             Distributor distributor=new Distributor(profiles,firstName.getText(),lastName.getText(),email.getText(),phone.getText(),0,0);
-                            sql="INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATE,SALARY) VALUES ("+distributor.getIdProfile()+",'"+distributor.getFirstName()+"','"+distributor.getLastName()+"','"+distributor.getEmail()+"','"+distributor.getPhoneNumber()+"',"+distributor.getRating()+","+distributor.getSalary()+")";
+                            sql="INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATING,SALARY) VALUES ("+distributor.getIdProfile()+",'"+distributor.getFirstName()+"','"+distributor.getLastName()+"','"+distributor.getEmail()+"','"+distributor.getPhoneNumber()+"',"+distributor.getRating()+","+distributor.getSalary()+")";
                             statement.executeQuery(sql);
                         }
 
