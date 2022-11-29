@@ -17,21 +17,17 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
+<AnchorPane fx:id="stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.oop2_project.controllers.AdminController">
    <children>
       <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="500.0">
          <menus>
-            <Menu mnemonicParsing="false" text="Профили">
+            <Menu mnemonicParsing="false" text="Профил">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#profilesControl" text="Поддръжка на профили" />
                   <MenuItem mnemonicParsing="false" onAction="#showProfiles" text="Показване на профили" />
                   <MenuItem fx:id="createProfile" mnemonicParsing="false" onAction="#createProfile" text="Създаване на профил" />
+                  <MenuItem mnemonicParsing="false" onAction="#loginScene" text="Изход" />
                </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Профил">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#loginScene" text="Изход" />
-              </items>
             </Menu>
          </menus>
       </MenuBar>
