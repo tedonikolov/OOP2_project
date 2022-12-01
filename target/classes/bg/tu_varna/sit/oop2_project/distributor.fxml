@@ -2,35 +2,66 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.oop2_project.controllers.DistributorController">
    <children>
-      <Button layoutX="63.0" layoutY="64.0" mnemonicParsing="false" onAction="#login" text="Профил">
+      <Button layoutX="63.0" layoutY="64.0" mnemonicParsing="false" onAction="#profile" text="Профил">
          <font>
             <Font name="Symbol" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="63.0" layoutY="112.0" mnemonicParsing="false" onAction="#login" text="Продаване на билети">
+      <Button layoutX="63.0" layoutY="112.0" mnemonicParsing="false" onAction="#purchase" text="Продаване на билети">
          <font>
             <Font name="Symbol" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="62.0" layoutY="159.0" mnemonicParsing="false" onAction="#login" text="Справки">
+      <Button layoutX="62.0" layoutY="159.0" mnemonicParsing="false" onAction="#queries" text="Справки">
          <font>
             <Font name="Symbol" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="63.0" layoutY="339.0" mnemonicParsing="false" onAction="#login" text="Изход">
+      <Button layoutX="63.0" layoutY="319.0" mnemonicParsing="false" onAction="#login" text="Изход">
          <font>
             <Font name="Symbol" size="14.0" />
          </font>
       </Button>
+      <HBox fx:id="notify" alignment="BOTTOM_LEFT" layoutX="299.0" layoutY="-111.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: lightblue;">
+         <children>
+            <Label prefHeight="18.0" prefWidth="143.0" text="Имате ново известие:" />
+            <Button mnemonicParsing="false" onAction="#notification" prefHeight="26.0" prefWidth="75.0" text="Преглед" />
+         </children>
+      </HBox>
+      <Button fx:id="close1" layoutX="214.0" layoutY="365.0" mnemonicParsing="false" onAction="#close" text="Затвори" visible="false">
+         <font>
+            <Font name="Symbol" size="14.0" />
+         </font>
+      </Button>
+      <GridPane fx:id="grid" layoutX="-1.0" layoutY="8.0" prefHeight="350.0" prefWidth="500.0" style="-fx-background-color: white;" visible="false">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="176.79996337890623" minWidth="10.0" prefWidth="176.79996337890623" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="81.60003662109375" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints fillHeight="false" maxHeight="50.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Ново събитие:" GridPane.halignment="CENTER" />
+         </children>
+         <padding>
+            <Insets left="130.0" top="10.0" />
+         </padding>
+      </GridPane>
    </children>
    <opaqueInsets>
       <Insets />
