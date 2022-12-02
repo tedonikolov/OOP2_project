@@ -50,16 +50,15 @@
       <GridPane fx:id="grid" layoutX="-1.0" layoutY="8.0" prefHeight="350.0" prefWidth="500.0" style="-fx-background-color: white;" visible="false">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="176.79996337890623" minWidth="10.0" prefWidth="176.79996337890623" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="81.60003662109375" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints fillHeight="false" maxHeight="50.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label text="Ново събитие:" GridPane.halignment="CENTER" />
          </children>
          <padding>
-            <Insets left="130.0" top="10.0" />
+            <Insets left="150.0" top="10.0" />
          </padding>
       </GridPane>
    </children>

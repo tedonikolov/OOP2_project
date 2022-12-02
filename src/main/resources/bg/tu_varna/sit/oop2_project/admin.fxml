@@ -26,7 +26,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#profilesControl" text="Поддръжка на профили" />
                   <MenuItem mnemonicParsing="false" onAction="#showProfiles" text="Показване на профили" />
                   <MenuItem fx:id="createProfile" mnemonicParsing="false" onAction="#createProfile" text="Създаване на профил" />
-                  <MenuItem mnemonicParsing="false" onAction="#loginScene" text="Изход" />
+                <MenuItem mnemonicParsing="false" onAction="#loginScene" text="Изход" />
                </items>
             </Menu>
          </menus>

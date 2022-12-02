@@ -20,7 +20,7 @@
       </Button>
       <Label layoutX="49.0" layoutY="39.0" text="Събите" />
       <Label layoutX="49.0" layoutY="78.0" text="Разпространител" />
-      <Button layoutX="201.0" layoutY="186.0" mnemonicParsing="false" onAction="#addDistributor" text="Изпрати запитване">
+      <Button layoutX="236.0" layoutY="186.0" mnemonicParsing="false" onAction="#addDistributor" text="Назначи">
          <font>
             <Font name="Symbol" size="14.0" />
          </font>
@@ -47,7 +47,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="complete" layoutX="153.0" layoutY="256.0" text="Успешно изпратена заявка" visible="false">
+      <Label fx:id="complete" layoutX="153.0" layoutY="256.0" text="Успешно назначихте разпространителя" visible="false">
          <font>
             <Font size="13.0" />
          </font>

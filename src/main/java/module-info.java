@@ -10,11 +10,17 @@ module bg.tu_varna.sit.oop2_project {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.core;
 
     opens bg.tu_varna.sit.oop2_project to javafx.fxml;
     exports bg.tu_varna.sit.oop2_project;
-    exports entities;
-    opens entities to javafx.fxml;
-    exports controllers;
-    opens controllers to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.entities;
+    opens bg.tu_varna.sit.oop2_project.entities to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.controllers;
+    opens bg.tu_varna.sit.oop2_project.controllers to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.backend.DTO;
+    opens bg.tu_varna.sit.oop2_project.backend.DTO to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.backend;
+    opens bg.tu_varna.sit.oop2_project.backend to javafx.fxml;
 }
