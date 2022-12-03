@@ -13,7 +13,6 @@ import bg.tu_varna.sit.oop2_project.backend.collections.GetEvents;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetSectors;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,13 +27,11 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -117,15 +114,11 @@ public class DistributorController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            events= GetEvents.get();
-            sectorsList= GetSectors.get();
-            for (Distributor distributor: GetDistributors.get()){
-                if(distributor.getIdProfile()==Profile.getProfiles().getIdProfile())
-                    this.distributor=distributor;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        events= GetEvents.get();
+        sectorsList= GetSectors.get();
+        for (Distributor distributor: GetDistributors.get()){
+            if(distributor.getIdProfile()==Profile.getProfiles().getIdProfile())
+                this.distributor=distributor;
         }
 
         File f =new File("distributor_id_"+ Profile.getProfiles().getIdProfile()+".log");
@@ -189,7 +182,11 @@ public class DistributorController implements Initializable{
                 LogManager.shutdown();
                 f2.delete();
             }
-        } catch (IOException | SQLException e) {
+        } catch (IOException e) {
+            LogManager.shutdown();
+            System.setProperty("logFilename", "fatal.log");
+            Logger logger = LogManager.getLogger();
+            logger.fatal(e);
             throw new RuntimeException(e);
         }
     }

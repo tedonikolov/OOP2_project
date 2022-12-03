@@ -103,6 +103,10 @@ public class LoginController implements Initializable {
             box.getItems().addAll(usernames);
             Database.close();
         } catch (SQLException e) {
+            LogManager.shutdown();
+            System.setProperty("logFilename", "fatal.log");
+            logger = LogManager.getLogger();
+            logger.fatal(e);
             throw new RuntimeException(e);
         }
     }

@@ -100,18 +100,14 @@ public class ProfileOrganiserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            for (Organiser organiser: GetOrganisers.get()){
-                if(organiser.getIdProfile()== Profile.getProfiles().getIdProfile()){
-                    this.organiser=organiser;
-                    firstName.promptTextProperty().setValue(organiser.getFirstName());
-                    lastName.promptTextProperty().setValue(organiser.getLastName());
-                    email.promptTextProperty().setValue(organiser.getEmail());
-                    phone.promptTextProperty().setValue(organiser.getPhoneNumber());
-                }
+        for (Organiser organiser: GetOrganisers.get()){
+            if(organiser.getIdProfile()== Profile.getProfiles().getIdProfile()){
+                this.organiser=organiser;
+                firstName.promptTextProperty().setValue(organiser.getFirstName());
+                lastName.promptTextProperty().setValue(organiser.getLastName());
+                email.promptTextProperty().setValue(organiser.getEmail());
+                phone.promptTextProperty().setValue(organiser.getPhoneNumber());
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 }

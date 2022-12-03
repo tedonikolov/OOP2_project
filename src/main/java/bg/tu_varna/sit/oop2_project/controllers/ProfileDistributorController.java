@@ -119,20 +119,16 @@ public class ProfileDistributorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            for (Distributor distributor: GetDistributors.get()){
-                if(distributor.getIdProfile()== Profile.getProfiles().getIdProfile()){
-                    this.distributor =distributor;
-                    firstName.promptTextProperty().setValue(distributor.getFirstName());
-                    lastName.promptTextProperty().setValue(distributor.getLastName());
-                    email.promptTextProperty().setValue(distributor.getEmail());
-                    phone.promptTextProperty().setValue(distributor.getPhoneNumber());
-                    rating.textProperty().setValue(String.valueOf(distributor.getRating()));
-                    salary.promptTextProperty().setValue(String.valueOf(distributor.getSalary()));
-                }
+        for (Distributor distributor: GetDistributors.get()){
+            if(distributor.getIdProfile()== Profile.getProfiles().getIdProfile()){
+                this.distributor =distributor;
+                firstName.promptTextProperty().setValue(distributor.getFirstName());
+                lastName.promptTextProperty().setValue(distributor.getLastName());
+                email.promptTextProperty().setValue(distributor.getEmail());
+                phone.promptTextProperty().setValue(distributor.getPhoneNumber());
+                rating.textProperty().setValue(String.valueOf(distributor.getRating()));
+                salary.promptTextProperty().setValue(String.valueOf(distributor.getSalary()));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 }

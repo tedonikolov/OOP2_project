@@ -19,6 +19,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.URL;
@@ -189,7 +190,11 @@ public class OrganiserController implements Initializable {
                 LogManager.shutdown();
                 f2.delete();
             }
-        } catch (IOException | SQLException e) {
+        } catch (IOException e) {
+            LogManager.shutdown();
+            System.setProperty("logFilename", "fatal.log");
+            Logger logger = LogManager.getLogger();
+            logger.fatal(e);
             throw new RuntimeException(e);
         }
 
