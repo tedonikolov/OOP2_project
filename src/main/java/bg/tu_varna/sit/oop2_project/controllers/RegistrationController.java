@@ -21,6 +21,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetRoles;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -93,6 +95,10 @@ public class RegistrationController implements Initializable {
                                 statement.executeQuery(sql);
                             }
 
+                            LogManager.shutdown();
+                            System.setProperty("logFilename", "info.log");
+                            Logger logger = LogManager.getLogger();
+                            logger.info("Profile crated successful: "+profiles.getIdProfile()+","+profiles.getUsername()+","+profiles.getRoles().getRole());
                             label.setText("*Профилът е създаден успешно");
                         }
                     }

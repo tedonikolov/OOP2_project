@@ -76,6 +76,10 @@ public class LoginController implements Initializable {
                     stage.setScene(scene);
                     stage.show();
                 }
+                LogManager.shutdown();
+                System.setProperty("logFilename", "info.log");
+                Logger logger = LogManager.getLogger();
+                logger.info(profiles.getUsername()+" logged in! Role:"+profiles.getRoles().getRole());
             } else {
                 label.setText("*Грешна парола!");
             }
@@ -91,24 +95,17 @@ public class LoginController implements Initializable {
         LogManager.shutdown();
         File file=new File("date.log");
         file.delete();
+        file=new File("info.log");
+        file.delete();
         System.setProperty("logFilename", "date.log");
         Logger logger = LogManager.getLogger();
         logger.info("");
-        try {
-            Database.connection();
-            List<String> usernames=new ArrayList<>();
-            for(Profiles profiles : GetProfiles.get()){
-                usernames.add(profiles.getUsername());
-            }
-            box.getItems().addAll(usernames);
-            Database.close();
-        } catch (SQLException e) {
-            LogManager.shutdown();
-            System.setProperty("logFilename", "fatal.log");
-            logger = LogManager.getLogger();
-            logger.fatal(e);
-            throw new RuntimeException(e);
+
+        List<String> usernames=new ArrayList<>();
+        for(Profiles profiles : GetProfiles.get()){
+            usernames.add(profiles.getUsername());
         }
+        box.getItems().addAll(usernames);
     }
 
 }

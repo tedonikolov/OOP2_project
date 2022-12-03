@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.oop2_project.controllers;
 
+import bg.tu_varna.sit.oop2_project.backend.DTO.ProfilesDTO;
 import bg.tu_varna.sit.oop2_project.backend.Database;
 import bg.tu_varna.sit.oop2_project.EventOrganizer;
 import bg.tu_varna.sit.oop2_project.backend.PasswordHash;
@@ -16,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import java.io.IOException;
@@ -34,7 +37,7 @@ public class AdminController {
     @FXML
     private AnchorPane stage;
     @FXML
-    private TableView<Profiles> table;
+    private TableView<ProfilesDTO> table;
     @FXML
     private Button button;
     @FXML
@@ -109,12 +112,12 @@ public class AdminController {
         exception.setVisible(false);
 
         TableColumn idProfile = new TableColumn<List<String>,String>("№");
-        idProfile.setCellValueFactory(new PropertyValueFactory<Profiles, Integer>("idProfile"));
+        idProfile.setCellValueFactory(new PropertyValueFactory<ProfilesDTO, Integer>("idProfile"));
 
-        TableColumn username = new TableColumn<Profiles, String>("Потребител");
+        TableColumn username = new TableColumn<ProfilesDTO, String>("Потребител");
         username.setCellValueFactory(new PropertyValueFactory<Profiles, String >("username"));
 
-        TableColumn role = new TableColumn<Profiles, String>("Роля");
+        TableColumn role = new TableColumn<ProfilesDTO, String>("Роля");
         role.setCellValueFactory(new PropertyValueFactory<Profiles, String>("role"));
 
         table.getColumns().setAll(idProfile,username,role);
@@ -122,10 +125,8 @@ public class AdminController {
         for(Profiles profile: GetProfiles.get()){
             if(profile.getIdProfile()==1)
                 continue;
-            table.getItems().add(profile);
+            table.getItems().add(new ProfilesDTO(profile.getIdProfile(), profile.getUsername(), profile.getRoles().getRole()));
         }
-
-
         table.setVisible(true);
     }
 
@@ -182,12 +183,21 @@ public class AdminController {
             exception.setTextFill(GREEN);
             exception.setText("Потребителят е изтрит успешно");
             exception.setVisible(true);
+
+            LogManager.shutdown();
+            System.setProperty("logFilename", "info.log");
+            Logger logger = LogManager.getLogger();
+            logger.info("User deleted successful! profile ID:"+id.getText());
         }
         catch (SQLException e) {
             exception.setTextFill(RED);
             exception.setText("Не можете да изтриете потребителя!");
             exception.setVisible(true);
-            System.out.println(e);
+            LogManager.shutdown();
+            System.setProperty("logFilename", "fatal.log");
+            Logger logger = LogManager.getLogger("Can't delete profile");
+            logger.fatal(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -210,6 +220,11 @@ public class AdminController {
                         Database.close();
                         error.setTextFill(GREEN);
                         error.setText("Успешно променихте паролата");
+
+                        LogManager.shutdown();
+                        System.setProperty("logFilename", "info.log");
+                        Logger logger = LogManager.getLogger();
+                        logger.info("Password changed successful! profile ID:"+profiles.getIdProfile());
                     }
                 }
                 else {

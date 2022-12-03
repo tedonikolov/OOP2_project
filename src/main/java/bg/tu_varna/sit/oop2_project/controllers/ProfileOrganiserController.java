@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,6 +65,10 @@ public class ProfileOrganiserController implements Initializable {
         firstName.promptTextProperty().setValue(organiser.getFirstName());
         firstName.setText("");
         changeFirstName.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("First name changed successful! distributor ID:"+organiser.getIdProfile());
     }
 
     public void changeLastName() throws SQLException {
@@ -74,6 +80,10 @@ public class ProfileOrganiserController implements Initializable {
         lastName.promptTextProperty().setValue(organiser.getLastName());
         lastName.setText("");
         changeLastName.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("Last name changed successful! distributor ID:"+organiser.getIdProfile());
     }
 
     public void changeEmail() throws SQLException {
@@ -85,6 +95,10 @@ public class ProfileOrganiserController implements Initializable {
         email.promptTextProperty().setValue(organiser.getEmail());
         email.setText("");
         changeEmail.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("Email changed successful! distributor ID:"+organiser.getIdProfile());
     }
 
     public void changePhone() throws SQLException {
@@ -96,6 +110,10 @@ public class ProfileOrganiserController implements Initializable {
         phone.promptTextProperty().setValue(organiser.getPhoneNumber());
         phone.setText("");
         changePhone.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("Phone changed successful! distributor ID:"+organiser.getIdProfile());
     }
 
     @Override

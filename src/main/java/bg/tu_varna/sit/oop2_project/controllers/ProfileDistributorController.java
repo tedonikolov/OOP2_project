@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -71,6 +73,10 @@ public class ProfileDistributorController implements Initializable {
         firstName.promptTextProperty().setValue(distributor.getFirstName());
         firstName.setText("");
         changeFirstName.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("First name changed successful! distributor ID:"+distributor.getIdProfile());
     }
 
     public void changeLastName() throws SQLException {
@@ -82,6 +88,10 @@ public class ProfileDistributorController implements Initializable {
         lastName.promptTextProperty().setValue(distributor.getLastName());
         lastName.setText("");
         changeLastName.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("Last name changed successful! distributor ID:"+distributor.getIdProfile());
     }
 
     public void changeEmail() throws SQLException {
@@ -93,6 +103,10 @@ public class ProfileDistributorController implements Initializable {
         email.promptTextProperty().setValue(distributor.getEmail());
         email.setText("");
         changeEmail.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("Email changed successful! distributor ID:"+distributor.getIdProfile());
     }
 
     public void changePhone() throws SQLException {
@@ -104,6 +118,10 @@ public class ProfileDistributorController implements Initializable {
         phone.promptTextProperty().setValue(distributor.getPhoneNumber());
         phone.setText("");
         changePhone.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("Phone changed successful! distributor ID:"+distributor.getIdProfile());
     }
 
     public void changeSalary() throws SQLException {
@@ -115,6 +133,10 @@ public class ProfileDistributorController implements Initializable {
         salary.promptTextProperty().setValue(String.valueOf(distributor.getSalary()));
         salary.setText("");
         changeSalary.requestFocus();
+        LogManager.shutdown();
+        System.setProperty("logFilename", "info.log");
+        Logger logger = LogManager.getLogger();
+        logger.info("Salary changed successful! distributor ID:"+distributor.getIdProfile());
     }
 
     @Override

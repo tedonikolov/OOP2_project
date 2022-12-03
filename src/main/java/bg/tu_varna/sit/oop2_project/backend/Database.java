@@ -1,5 +1,8 @@
 package bg.tu_varna.sit.oop2_project.backend;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,16 +17,31 @@ public class Database {
             String password = "exit";
             try {
                 connection = DriverManager.getConnection(url, username, password);
+                LogManager.shutdown();
+                System.setProperty("logFilename", "info.log");
+                Logger logger = LogManager.getLogger();
+                logger.info("Connected to database");
             } catch (SQLException e) {
-                System.out.println("can't connect to the database");
+                LogManager.shutdown();
+                System.setProperty("logFilename", "fatal.log");
+                Logger logger = LogManager.getLogger();
+                logger.fatal("Can't connect to the database");
                 e.printStackTrace();
             }
         }
         return connection;
     }
 
-    public static void close() throws SQLException {
-        connection.close();
-        connection=null;
+    public static void close(){
+        try {
+            connection.close();
+            connection=null;
+        } catch (SQLException e) {
+            LogManager.shutdown();
+            System.setProperty("logFilename", "fatal.log");
+            Logger logger = LogManager.getLogger();
+            logger.fatal("Database is close");
+            e.printStackTrace();
+        }
     }
 }

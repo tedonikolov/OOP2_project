@@ -47,10 +47,6 @@ public class Profiles {
         this.roles = roles;
     }
 
-    public String getRole(){
-        return roles.getRole();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
