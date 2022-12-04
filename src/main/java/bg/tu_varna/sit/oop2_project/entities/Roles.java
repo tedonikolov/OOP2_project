@@ -26,25 +26,4 @@ public class Roles {
     public void setRole(String role) {
         this.role = role;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Roles roles1 = (Roles) o;
-        return idRole == roles1.idRole && Objects.equals(role, roles1.role);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idRole, role);
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id_role=" + idRole +
-                ", role='" + role + '\'' +
-                '}';
-    }
 }
