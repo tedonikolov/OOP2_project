@@ -2,9 +2,9 @@ package bg.tu_varna.sit.oop2_project.controllers;
 
 import bg.tu_varna.sit.oop2_project.backend.Database;
 import bg.tu_varna.sit.oop2_project.EventOrganizer;
+import bg.tu_varna.sit.oop2_project.backend.EmailValidator;
 import bg.tu_varna.sit.oop2_project.backend.PasswordHash;
-import bg.tu_varna.sit.oop2_project.backend.PhoneValidate;
-import bg.tu_varna.sit.oop2_project.backend.Profile;
+import bg.tu_varna.sit.oop2_project.backend.PhoneValidator;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetProfiles;
 import bg.tu_varna.sit.oop2_project.entities.Distributor;
 import bg.tu_varna.sit.oop2_project.entities.Organiser;
@@ -60,58 +60,63 @@ public class RegistrationController implements Initializable {
     public void registration () throws SQLException, NoSuchAlgorithmException {
 
         if(!Objects.equals(username.getText(), "") && !Objects.equals(firstName.getText(), "") && !Objects.equals(lastName.getText(), "") && !Objects.equals(email.getText(), "") && !Objects.equals(phone.getText(), "") && !Objects.equals(pass.getText(), "") && !Objects.equals(pass2.getText(), "")&&box.getValue()!=null) {
-            if (PhoneValidate.phone(phone.getText())) {
-                if (!Objects.equals(pass.getText(), pass2.getText())) {
-                    label.setText("*Паролите не съвпадат");
-                    label.setTextFill(RED);
-                } else {
-                    boolean flag = true;
-                    for (Profiles profiles : this.profiles) {
-                        if (Objects.equals(profiles.getUsername(), username.getText())) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    String hashedPassword = PasswordHash.hashing(pass2.getText());
-                    if (flag) {
-                        for (Roles roles : GetRoles.get()) {
-                            if (Objects.equals(box.getValue().toString(), roles.getRole())) {
-                                Connection connection = Database.connection();
-                                Statement statement = connection.createStatement();
-
-                                String getId = "SELECT PROFILES_SEQUENCE.nextVal from DUAL";
-                                ResultSet rs = statement.executeQuery(getId);
-                                int id = 0;
-                                if (rs.next())
-                                    id = rs.getInt(1);
-
-                                Profiles profiles = new Profiles(id, username.getText(), hashedPassword, roles);
-                                String sql = "INSERT INTO PROFILES(ID_PROFILE,USERNAME,PASSWORD,ROLE_ID) VALUES (" + profiles.getIdProfile() + ",'" + profiles.getUsername() + "','" + profiles.getPassword() + "'," + profiles.getRoles().getIdRole() + ")";
-                                statement.executeQuery(sql);
-
-                                if (Objects.equals(roles.getRole(), "организатор")) {
-                                    Organiser organiser = new Organiser(profiles, firstName.getText(), lastName.getText(), email.getText(), phone.getText());
-                                    sql = "INSERT INTO ORGANISER(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE) VALUES (" + organiser.getIdProfile() + ",'" + organiser.getFirstName() + "','" + organiser.getLastName() + "','" + organiser.getEmail() + "','" + organiser.getPhoneNumber() + "')";
-                                    statement.executeQuery(sql);
-                                } else {
-                                    Distributor distributor = new Distributor(profiles, firstName.getText(), lastName.getText(), email.getText(), phone.getText(), 0, 0);
-                                    sql = "INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATING,SALARY) VALUES (" + distributor.getIdProfile() + ",'" + distributor.getFirstName() + "','" + distributor.getLastName() + "','" + distributor.getEmail() + "','" + distributor.getPhoneNumber() + "'," + distributor.getRating() + "," + distributor.getSalary() + ")";
-                                    statement.executeQuery(sql);
-                                }
-
-                                LogManager.shutdown();
-                                System.setProperty("logFilename", "info.log");
-                                Logger logger = LogManager.getLogger();
-                                logger.info("Profile crated successful: " + profiles.getIdProfile() + "," + profiles.getUsername() + "," + profiles.getRoles().getRole());
-                                label.setText("*Профилът е създаден успешно");
-                                label.setTextFill(GREEN);
+            if (PhoneValidator.validate(phone.getText())) {
+                if(EmailValidator.validate(email.getText())) {
+                    if (!Objects.equals(pass.getText(), pass2.getText())) {
+                        label.setText("*Паролите не съвпадат");
+                        label.setTextFill(RED);
+                    } else {
+                        boolean flag = true;
+                        for (Profiles profiles : this.profiles) {
+                            if (Objects.equals(profiles.getUsername(), username.getText())) {
+                                flag = false;
+                                break;
                             }
                         }
-                        Database.close();
-                    } else {
-                        label.setText("*Съществува такъв профил");
-                        label.setTextFill(RED);
+                        String hashedPassword = PasswordHash.hashing(pass2.getText());
+                        if (flag) {
+                            for (Roles roles : GetRoles.get()) {
+                                if (Objects.equals(box.getValue().toString(), roles.getRole())) {
+                                    Connection connection = Database.connection();
+                                    Statement statement = connection.createStatement();
+
+                                    String getId = "SELECT PROFILES_SEQUENCE.nextVal from DUAL";
+                                    ResultSet rs = statement.executeQuery(getId);
+                                    int id = 0;
+                                    if (rs.next())
+                                        id = rs.getInt(1);
+
+                                    Profiles profiles = new Profiles(id, username.getText(), hashedPassword, roles);
+                                    String sql = "INSERT INTO PROFILES(ID_PROFILE,USERNAME,PASSWORD,ROLE_ID) VALUES (" + profiles.getIdProfile() + ",'" + profiles.getUsername() + "','" + profiles.getPassword() + "'," + profiles.getRoles().getIdRole() + ")";
+                                    statement.executeQuery(sql);
+
+                                    if (Objects.equals(roles.getRole(), "организатор")) {
+                                        Organiser organiser = new Organiser(profiles, firstName.getText(), lastName.getText(), email.getText(), phone.getText());
+                                        sql = "INSERT INTO ORGANISER(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE) VALUES (" + organiser.getIdProfile() + ",'" + organiser.getFirstName() + "','" + organiser.getLastName() + "','" + organiser.getEmail() + "','" + organiser.getPhoneNumber() + "')";
+                                        statement.executeQuery(sql);
+                                    } else {
+                                        Distributor distributor = new Distributor(profiles, firstName.getText(), lastName.getText(), email.getText(), phone.getText(), 0, 0);
+                                        sql = "INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATING,SALARY) VALUES (" + distributor.getIdProfile() + ",'" + distributor.getFirstName() + "','" + distributor.getLastName() + "','" + distributor.getEmail() + "','" + distributor.getPhoneNumber() + "'," + distributor.getRating() + "," + distributor.getSalary() + ")";
+                                        statement.executeQuery(sql);
+                                    }
+
+                                    LogManager.shutdown();
+                                    System.setProperty("logFilename", "info.log");
+                                    Logger logger = LogManager.getLogger();
+                                    logger.info("Profile crated successful: " + profiles.getIdProfile() + "," + profiles.getUsername() + "," + profiles.getRoles().getRole());
+                                    label.setText("*Профилът е създаден успешно");
+                                    label.setTextFill(GREEN);
+                                }
+                            }
+                            Database.close();
+                        } else {
+                            label.setText("*Съществува такъв профил");
+                            label.setTextFill(RED);
+                        }
                     }
+                }else {
+                    label.setText("*Невалиден имейл");
+                    label.setTextFill(RED);
                 }
             }else {
                 label.setText("*Невалиден телефонен номер");
