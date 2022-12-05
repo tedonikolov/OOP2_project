@@ -12,13 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetSectors {
-
-
+    private static List<Event> events = GetEvents.get();
+    private static List<Seats> seats = GetSeats.get();
     public static List<Sectors> get(){
         List<Sectors> sectors = new ArrayList<>();
         try {
-            List<Event> events = GetEvents.get();
-            List<Seats> seats = GetSeats.get();
 
             ResultSet result = SelectAll.selectAll("SECTORS");
             while (result.next()) {

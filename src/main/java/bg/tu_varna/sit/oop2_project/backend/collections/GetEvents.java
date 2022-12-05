@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetEvents {
+    private static List<Organiser> organisers = GetOrganisers.get();
     public static List<Event> get(){
         List<Event> events = new ArrayList<>();
         try {
-            List<Organiser> organisers = GetOrganisers.get();
             ResultSet result = SelectAll.selectAll("EVENT");
             while (result.next()) {
                 for (Organiser organiser : organisers) {

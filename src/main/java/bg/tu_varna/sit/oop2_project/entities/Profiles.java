@@ -46,27 +46,4 @@ public class Profiles {
     public void setRoles_id(Roles roles) {
         this.roles = roles;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Profiles profiles = (Profiles) o;
-        return idProfile == profiles.idProfile && roles == profiles.roles && Objects.equals(username, profiles.username) && Objects.equals(password, profiles.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idProfile, username, password, roles);
-    }
-
-    @Override
-    public String toString() {
-        return "Profiles{" +
-                "id_profile=" + idProfile +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", roles_id=" + roles +
-                '}';
-    }
 }

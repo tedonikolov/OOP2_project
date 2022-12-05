@@ -11,11 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetDistributors {
-
+    private static List<Profiles> profiles = GetProfiles.get();
     public static List<Distributor> get(){
         List<Distributor> distributors = new ArrayList<>();
         try {
-            List<Profiles> profiles = GetProfiles.get();
             ResultSet result = SelectAll.selectAll("DISTRIBUTOR");
             while (result.next()) {
                 for (Profiles profile : profiles) {

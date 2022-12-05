@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetClients {
+    private static List<Tickets> tickets = GetTickets.get();
     public static List<Client> get(){
         List<Client> clients = new ArrayList<>();
         try {
-            List<Tickets> tickets = GetTickets.get();
             ResultSet result = SelectAll.selectAll("CLIENT");
             while (result.next()) {
                 for (Tickets ticket : tickets) {

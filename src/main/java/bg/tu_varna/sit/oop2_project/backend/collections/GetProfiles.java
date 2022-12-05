@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetProfiles {
+    private static List<Roles> roles = GetRoles.get();
 
     public static List<Profiles> get(){
         List<Profiles> profiles = new ArrayList<>();
         try {
             ResultSet result = SelectAll.selectAll("PROFILES");
-            List<Roles> roles = GetRoles.get();
             while (result.next()) {
                 for (Roles role : roles) {
                     if (role.getIdRole() == Integer.parseInt(result.getString(4))) {
