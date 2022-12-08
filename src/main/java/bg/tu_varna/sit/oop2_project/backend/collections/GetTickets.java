@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetTickets {
-    private static List<Distributor> distributors = GetDistributors.get();
-    private static List<Sectors> sectors = GetSectors.get();
     public static List<Tickets> get(){
+        List<Distributor> distributors = GetDistributors.get();
+        List<Sectors> sectors = GetSectors.get();
         List<Tickets> tickets = new ArrayList<>();
         try {
             ResultSet result = SelectAll.selectAll("TICKETS");

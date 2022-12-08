@@ -12,8 +12,8 @@ import java.util.List;
 
 public class GetOrganisers {
 
-    private static List<Profiles> profiles = GetProfiles.get();
     public static List<Organiser> get(){
+        List<Profiles> profiles = GetProfiles.get();
         List<Organiser> organisers = new ArrayList<>();
         try {
             ResultSet result = SelectAll.selectAll("ORGANISER");

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetDistributors {
-    private static List<Profiles> profiles = GetProfiles.get();
     public static List<Distributor> get(){
+        List<Profiles> profiles = GetProfiles.get();
         List<Distributor> distributors = new ArrayList<>();
         try {
             ResultSet result = SelectAll.selectAll("DISTRIBUTOR");

@@ -6,7 +6,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EventTable {
-    private static TableView<EventDTO> event;
     public static void table(TableView<EventDTO> event) {
         TableColumn name = new TableColumn<EventDTO, String>("Събитие");
         name.setCellValueFactory(new PropertyValueFactory<EventDTO, String>("name"));

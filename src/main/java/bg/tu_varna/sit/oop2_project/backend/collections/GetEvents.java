@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetEvents {
-    private static List<Organiser> organisers = GetOrganisers.get();
     public static List<Event> get(){
         List<Event> events = new ArrayList<>();
+        List<Organiser> organisers = GetOrganisers.get();
         try {
             ResultSet result = SelectAll.selectAll("EVENT");
             while (result.next()) {

@@ -165,7 +165,7 @@ public class PurchaseController implements Initializable {
 
         if(!Objects.equals(name1.getText(), "") && !Objects.equals(lastname1.getText(), "") && !Objects.equals(email1.getText(), "") && !Objects.equals(phone1.getText(), "") && !Objects.equals(amount1.getText(), "")) {
             if(PhoneValidator.validate(phone1.getText())) {
-                if(EmailValidator.validate(email.getText())) {
+                if(EmailValidator.validate(email1.getText())) {
                     Database.connection();
                     List<Client> clients = GetClients.get();
                     boolean flag = true;
