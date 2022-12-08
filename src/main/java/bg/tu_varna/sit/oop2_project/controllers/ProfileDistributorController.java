@@ -2,6 +2,8 @@ package bg.tu_varna.sit.oop2_project.controllers;
 
 import bg.tu_varna.sit.oop2_project.backend.Database;
 import bg.tu_varna.sit.oop2_project.EventOrganizer;
+import bg.tu_varna.sit.oop2_project.backend.EmailValidator;
+import bg.tu_varna.sit.oop2_project.backend.PhoneValidator;
 import bg.tu_varna.sit.oop2_project.backend.Profile;
 import bg.tu_varna.sit.oop2_project.entities.Distributor;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetDistributors;
@@ -95,33 +97,37 @@ public class ProfileDistributorController implements Initializable {
     }
 
     public void changeEmail() throws SQLException {
-        distributor.setEmail(email.getText());
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET EMAIL='"+ distributor.getEmail() +"' WHERE ID_PROFILE=" + distributor.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        Database.close();
-        email.promptTextProperty().setValue(distributor.getEmail());
-        email.setText("");
-        changeEmail.requestFocus();
-        LogManager.shutdown();
-        System.setProperty("logFilename", "info.log");
-        Logger logger = LogManager.getLogger();
-        logger.info("Email changed successful! distributor ID:"+distributor.getIdProfile());
+        if(EmailValidator.validate(email.getText())) {
+            distributor.setEmail(email.getText());
+            Connection connection = Database.connection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET EMAIL='" + distributor.getEmail() + "' WHERE ID_PROFILE=" + distributor.getIdProfile());
+            ResultSet result = statement.executeQuery();
+            Database.close();
+            email.promptTextProperty().setValue(distributor.getEmail());
+            email.setText("");
+            changeEmail.requestFocus();
+            LogManager.shutdown();
+            System.setProperty("logFilename", "info.log");
+            Logger logger = LogManager.getLogger();
+            logger.info("Email changed successful! distributor ID:" + distributor.getIdProfile());
+        }
     }
 
     public void changePhone() throws SQLException {
-        distributor.setPhoneNumber(phone.getText());
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET PHONE='"+ distributor.getPhoneNumber() +"' WHERE ID_PROFILE=" + distributor.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        Database.close();
-        phone.promptTextProperty().setValue(distributor.getPhoneNumber());
-        phone.setText("");
-        changePhone.requestFocus();
-        LogManager.shutdown();
-        System.setProperty("logFilename", "info.log");
-        Logger logger = LogManager.getLogger();
-        logger.info("Phone changed successful! distributor ID:"+distributor.getIdProfile());
+        if(PhoneValidator.validate(phone.getText())) {
+            distributor.setPhoneNumber(phone.getText());
+            Connection connection = Database.connection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET PHONE='" + distributor.getPhoneNumber() + "' WHERE ID_PROFILE=" + distributor.getIdProfile());
+            ResultSet result = statement.executeQuery();
+            Database.close();
+            phone.promptTextProperty().setValue(distributor.getPhoneNumber());
+            phone.setText("");
+            changePhone.requestFocus();
+            LogManager.shutdown();
+            System.setProperty("logFilename", "info.log");
+            Logger logger = LogManager.getLogger();
+            logger.info("Phone changed successful! distributor ID:" + distributor.getIdProfile());
+        }
     }
 
     public void changeSalary() throws SQLException {

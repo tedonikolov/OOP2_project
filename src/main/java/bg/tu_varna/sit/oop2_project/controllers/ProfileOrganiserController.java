@@ -2,6 +2,8 @@ package bg.tu_varna.sit.oop2_project.controllers;
 
 import bg.tu_varna.sit.oop2_project.backend.Database;
 import bg.tu_varna.sit.oop2_project.EventOrganizer;
+import bg.tu_varna.sit.oop2_project.backend.EmailValidator;
+import bg.tu_varna.sit.oop2_project.backend.PhoneValidator;
 import bg.tu_varna.sit.oop2_project.backend.Profile;
 import bg.tu_varna.sit.oop2_project.entities.Organiser;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetOrganisers;
@@ -87,33 +89,37 @@ public class ProfileOrganiserController implements Initializable {
     }
 
     public void changeEmail() throws SQLException {
-        organiser.setEmail(email.getText());
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET EMAIL='"+ organiser.getEmail() +"' WHERE ID_PROFILE=" + organiser.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        Database.close();
-        email.promptTextProperty().setValue(organiser.getEmail());
-        email.setText("");
-        changeEmail.requestFocus();
-        LogManager.shutdown();
-        System.setProperty("logFilename", "info.log");
-        Logger logger = LogManager.getLogger();
-        logger.info("Email changed successful! distributor ID:"+organiser.getIdProfile());
+        if (EmailValidator.validate(email.getText())) {
+            organiser.setEmail(email.getText());
+            Connection connection = Database.connection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET EMAIL='" + organiser.getEmail() + "' WHERE ID_PROFILE=" + organiser.getIdProfile());
+            ResultSet result = statement.executeQuery();
+            Database.close();
+            email.promptTextProperty().setValue(organiser.getEmail());
+            email.setText("");
+            changeEmail.requestFocus();
+            LogManager.shutdown();
+            System.setProperty("logFilename", "info.log");
+            Logger logger = LogManager.getLogger();
+            logger.info("Email changed successful! distributor ID:" + organiser.getIdProfile());
+        }
     }
 
     public void changePhone() throws SQLException {
-        organiser.setPhoneNumber(phone.getText());
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET PHONE='"+ organiser.getPhoneNumber() +"' WHERE ID_PROFILE=" + organiser.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        Database.close();
-        phone.promptTextProperty().setValue(organiser.getPhoneNumber());
-        phone.setText("");
-        changePhone.requestFocus();
-        LogManager.shutdown();
-        System.setProperty("logFilename", "info.log");
-        Logger logger = LogManager.getLogger();
-        logger.info("Phone changed successful! distributor ID:"+organiser.getIdProfile());
+        if(PhoneValidator.validate(phone.getText())) {
+            organiser.setPhoneNumber(phone.getText());
+            Connection connection = Database.connection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET PHONE='" + organiser.getPhoneNumber() + "' WHERE ID_PROFILE=" + organiser.getIdProfile());
+            ResultSet result = statement.executeQuery();
+            Database.close();
+            phone.promptTextProperty().setValue(organiser.getPhoneNumber());
+            phone.setText("");
+            changePhone.requestFocus();
+            LogManager.shutdown();
+            System.setProperty("logFilename", "info.log");
+            Logger logger = LogManager.getLogger();
+            logger.info("Phone changed successful! distributor ID:" + organiser.getIdProfile());
+        }
     }
 
     @Override
