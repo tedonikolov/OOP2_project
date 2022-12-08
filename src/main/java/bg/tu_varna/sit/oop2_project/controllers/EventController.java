@@ -1,25 +1,20 @@
 package bg.tu_varna.sit.oop2_project.controllers;
 
 import bg.tu_varna.sit.oop2_project.backend.Database;
-import bg.tu_varna.sit.oop2_project.EventOrganizer;
 import bg.tu_varna.sit.oop2_project.backend.Profile;
+import bg.tu_varna.sit.oop2_project.backend.SceneChanger;
 import bg.tu_varna.sit.oop2_project.entities.Event;
 import bg.tu_varna.sit.oop2_project.entities.Organiser;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetOrganisers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -27,8 +22,6 @@ import java.util.Objects;
 import static eu.hansolo.tilesfx.Tile.GREEN;
 
 public class EventController {
-    private Stage stage;
-    private Scene scene;
     private Organiser organiser;
     @FXML
     private TextField name;
@@ -94,12 +87,8 @@ public class EventController {
     }
 
 
-    public void back(ActionEvent event) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("organiser.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void back(ActionEvent event) {
+        SceneChanger.change(event,"organiser.fxml");
         if(Database.connection()!=null)
             Database.close();
     }

@@ -81,7 +81,7 @@ public class AdminController {
         stage1.show();
     }
 
-    public void loginScene() throws IOException, SQLException {
+    public void loginScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("login.fxml"));
         Stage stage1 = (Stage) stage.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
@@ -91,7 +91,7 @@ public class AdminController {
             Database.close();
     }
 
-    public void showProfiles() throws SQLException {
+    public void showProfiles(){
         table.getItems().clear();
         label.setVisible(false);
         label1.setVisible(false);
@@ -149,7 +149,7 @@ public class AdminController {
         id1.setVisible(true);
     }
 
-    public void removeProfile() throws SQLException {
+    public void removeProfile(){
         try {
             boolean flag=false;
 

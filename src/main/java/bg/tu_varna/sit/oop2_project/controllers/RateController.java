@@ -1,8 +1,8 @@
 package bg.tu_varna.sit.oop2_project.controllers;
 
 import bg.tu_varna.sit.oop2_project.backend.Database;
-import bg.tu_varna.sit.oop2_project.EventOrganizer;
 import bg.tu_varna.sit.oop2_project.backend.Profile;
+import bg.tu_varna.sit.oop2_project.backend.SceneChanger;
 import bg.tu_varna.sit.oop2_project.entities.Distributor;
 import bg.tu_varna.sit.oop2_project.entities.Event;
 import bg.tu_varna.sit.oop2_project.entities.Tickets;
@@ -11,17 +11,12 @@ import bg.tu_varna.sit.oop2_project.backend.collections.GetEvents;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetTickets;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,8 +30,6 @@ import static eu.hansolo.tilesfx.Tile.RED;
 import static javafx.scene.paint.Color.BLACK;
 
 public class RateController implements Initializable{
-    private Stage stage;
-    private Scene scene;
     private List<Tickets> tickets;
     private List<Distributor> distributors;
     @FXML
@@ -116,12 +109,8 @@ public class RateController implements Initializable{
         }
     }
 
-    public void back(ActionEvent event) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("organiser.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void back(ActionEvent event){
+        SceneChanger.change(event,"organiser.fxml");
         if(Database.connection()!=null)
             Database.close();
     }

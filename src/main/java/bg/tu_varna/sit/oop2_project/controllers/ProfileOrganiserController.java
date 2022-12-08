@@ -1,25 +1,16 @@
 package bg.tu_varna.sit.oop2_project.controllers;
 
-import bg.tu_varna.sit.oop2_project.backend.Database;
-import bg.tu_varna.sit.oop2_project.EventOrganizer;
-import bg.tu_varna.sit.oop2_project.backend.EmailValidator;
-import bg.tu_varna.sit.oop2_project.backend.PhoneValidator;
-import bg.tu_varna.sit.oop2_project.backend.Profile;
+import bg.tu_varna.sit.oop2_project.backend.*;
 import bg.tu_varna.sit.oop2_project.entities.Organiser;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetOrganisers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,8 +19,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ProfileOrganiserController implements Initializable {
-    private Stage stage;
-    private Scene scene;
     private Organiser organiser;
     @FXML
     private TextField firstName;
@@ -48,12 +37,8 @@ public class ProfileOrganiserController implements Initializable {
     @FXML
     private Button changePhone;
 
-    public void back(ActionEvent event) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("organiser.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void back(ActionEvent event){
+        SceneChanger.change(event,"organiser.fxml");
         if(Database.connection()!=null)
             Database.close();
     }

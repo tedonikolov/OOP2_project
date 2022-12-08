@@ -1,10 +1,6 @@
 package bg.tu_varna.sit.oop2_project.controllers;
 
-import bg.tu_varna.sit.oop2_project.backend.EmailValidator;
-import bg.tu_varna.sit.oop2_project.backend.PhoneValidator;
-import bg.tu_varna.sit.oop2_project.backend.Database;
-import bg.tu_varna.sit.oop2_project.EventOrganizer;
-import bg.tu_varna.sit.oop2_project.backend.Profile;
+import bg.tu_varna.sit.oop2_project.backend.*;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetClients;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetEvents;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetSectors;
@@ -12,15 +8,11 @@ import bg.tu_varna.sit.oop2_project.backend.collections.GetTickets;
 import bg.tu_varna.sit.oop2_project.entities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,8 +25,6 @@ import java.sql.Statement;
 import java.util.*;
 
 public class PurchaseController implements Initializable {
-    private Stage stage;
-    private Scene scene;
     private List<Tickets> ticketsList;
     private List<Sectors> sectorsList;
     private Tickets tickets;
@@ -78,11 +68,7 @@ public class PurchaseController implements Initializable {
     private Label left;
 
     public void back(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("distributor.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+        SceneChanger.change(event,"distributor.fxml");
         if(Database.connection()!=null)
             Database.close();
     }

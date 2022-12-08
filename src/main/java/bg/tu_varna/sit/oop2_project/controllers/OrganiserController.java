@@ -1,8 +1,8 @@
 package bg.tu_varna.sit.oop2_project.controllers;
 
 import bg.tu_varna.sit.oop2_project.backend.Database;
-import bg.tu_varna.sit.oop2_project.EventOrganizer;
 import bg.tu_varna.sit.oop2_project.backend.Profile;
+import bg.tu_varna.sit.oop2_project.backend.SceneChanger;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetTickets;
 import bg.tu_varna.sit.oop2_project.entities.Event;
 import bg.tu_varna.sit.oop2_project.entities.Sectors;
@@ -10,20 +10,15 @@ import bg.tu_varna.sit.oop2_project.entities.Tickets;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,8 +27,6 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 public class OrganiserController implements Initializable {
-    private Stage stage;
-    private Scene scene;
     @FXML
     private HBox notify;
     @FXML
@@ -41,60 +34,32 @@ public class OrganiserController implements Initializable {
     @FXML
     private Button close1;
 
-    public void profile(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("profileOrganiser.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void profile(ActionEvent event){
+        SceneChanger.change(event,"profileOrganiser.fxml");
     }
 
-    public void event(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("event.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void event(ActionEvent event){
+        SceneChanger.change(event,"event.fxml");
     }
 
-    public void seats(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("seats.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void seats(ActionEvent event){
+        SceneChanger.change(event,"seats.fxml");
     }
 
-    public void ticket(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("ticket.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void ticket(ActionEvent event){
+        SceneChanger.change(event,"ticket.fxml");
     }
 
-    public void rate(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("rate.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void rate(ActionEvent event){
+        SceneChanger.change(event,"rate.fxml");
     }
 
-    public void queries(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("queriesOrganiser.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void queries(ActionEvent event){
+        SceneChanger.change(event,"queriesOrganiser.fxml");
     }
 
-    public void login(ActionEvent event) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("login.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void login(ActionEvent event){
+        SceneChanger.change(event,"login.fxml");
         if(Database.connection()!=null)
             Database.close();
     }

@@ -1,8 +1,8 @@
 package bg.tu_varna.sit.oop2_project.controllers;
 
 import bg.tu_varna.sit.oop2_project.backend.Database;
-import bg.tu_varna.sit.oop2_project.EventOrganizer;
 import bg.tu_varna.sit.oop2_project.backend.Profile;
+import bg.tu_varna.sit.oop2_project.backend.SceneChanger;
 import bg.tu_varna.sit.oop2_project.backend.collections.GetTickets;
 import bg.tu_varna.sit.oop2_project.entities.Distributor;
 import bg.tu_varna.sit.oop2_project.entities.Event;
@@ -14,32 +14,25 @@ import bg.tu_varna.sit.oop2_project.backend.collections.GetSectors;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DistributorController implements Initializable{
-    private Stage stage;
-    private Scene scene;
     private List<Sectors> sectorsList;
     private Distributor distributor;
     private List<Event> events;
@@ -50,41 +43,25 @@ public class DistributorController implements Initializable{
     @FXML
     private Button close1;
 
-    public void profile(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("profileDistributor.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void profile(ActionEvent event){
+        SceneChanger.change(event,"profileDistributor.fxml");
     }
 
-    public void purchase(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("purchase.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void purchase(ActionEvent event){
+        SceneChanger.change(event,"purchase.fxml");
     }
 
-    public void queries(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("queriesDistributor.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void queries(ActionEvent event){
+        SceneChanger.change(event,"queriesDistributor.fxml");
     }
 
-    public void login(ActionEvent event) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventOrganizer.class.getResource("login.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void login(ActionEvent event){
+        SceneChanger.change(event,"login.fxml");
         if(Database.connection()!=null)
             Database.close();
     }
 
-    public void notification() throws IOException, SQLException {
+    public void notification() throws IOException{
         File file=new File("distributor_id_" + Profile.getProfiles().getIdProfile() + ".log");
         FileInputStream fstream = new FileInputStream(file);
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
