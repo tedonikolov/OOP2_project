@@ -33,9 +33,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DistributorController implements Initializable{
-    private List<Sectors> sectorsList;
-    private Distributor distributor;
-    private List<Event> events;
     @FXML
     private HBox notify;
     @FXML
@@ -91,12 +88,6 @@ public class DistributorController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        events= GetEvents.get();
-        sectorsList= GetSectors.get();
-        for (Distributor distributor: GetDistributors.get()){
-            if(distributor.getIdProfile()==Profile.getProfiles().getIdProfile())
-                this.distributor=distributor;
-        }
 
         File f =new File("distributor_id_"+ Profile.getProfiles().getIdProfile()+".log");
         if(f.exists()&&f.length()!=0) {
