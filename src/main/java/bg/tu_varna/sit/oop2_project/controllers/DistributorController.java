@@ -64,10 +64,16 @@ public class DistributorController implements Initializable{
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
         String strLine;
 
-        int i=1;
+        Set<String> events=new HashSet<>();
+
         while ((strLine = br.readLine()) != null) {
             String[] string = strLine.split(" - ");
-            Label label = new Label(string[1]);
+            events.add(string[1]);
+        }
+
+        int i=1;
+        for(String event:events){
+            Label label = new Label(event);
             grid.add(label, 0, i);
             i++;
         }

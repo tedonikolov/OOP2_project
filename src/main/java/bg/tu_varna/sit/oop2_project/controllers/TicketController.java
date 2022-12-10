@@ -58,11 +58,6 @@ public class TicketController implements Initializable{
         if (event.getValue() != null && distributor.getValue()!=null) {
             Connection connection = Database.connection();
             Statement statement = connection.createStatement();
-            String getId = "SELECT TICKETS_SEQUENCE.nextVal from DUAL";
-            ResultSet rs = statement.executeQuery(getId);
-            int id = 0;
-            if (rs.next())
-                id = rs.getInt(1);
 
             List<Sectors> sectorsList = GetSectors.get();
 
@@ -72,6 +67,12 @@ public class TicketController implements Initializable{
                 if (Objects.equals(distributor.getFirstName(), name[0]) && Objects.equals(distributor.getFirstName(), name[0])) {
                     for (Sectors sectors : sectorsList) {
                         if (Objects.equals(sectors.getEvent().getName(), this.event.getValue().toString())) {
+                            String getId = "SELECT TICKETS_SEQUENCE.nextVal from DUAL";
+                            ResultSet rs = statement.executeQuery(getId);
+                            int id = 0;
+                            if (rs.next())
+                                id = rs.getInt(1);
+
                             Tickets ticket = new Tickets(id, sectors, 0, distributor, 0);
                             String sql = "INSERT INTO TICKETS(ID_TICKET, SECTORS_ID, TICKETSOLD, DISTRIBUTOR_ID, RATE) VALUES (" + ticket.getIdTicket() + "," + ticket.getSectors().getIdSectors() + "," + ticket.getTicketsSold() + "," + ticket.getDistributor().getIdProfile() + "," + ticket.getRate() + ")";
                             statement.executeQuery(sql);
@@ -84,7 +85,6 @@ public class TicketController implements Initializable{
                             System.setProperty("logFilename", "distributor_id_" + distributor.getIdProfile() + ".log");
                             logger = LogManager.getLogger();
                             logger.info(sectors.getEvent().getName());
-                            break;
                         }
                     }
                 }
