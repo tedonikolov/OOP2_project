@@ -1,0 +1,16 @@
+2022-12-11 19:15:06,696 INFO Database - Connected to database
+2022-12-11 19:15:11,477 INFO PasswordHash - Password hashed correctly
+2022-12-11 19:15:12,460 INFO LoginController - Nikola logged in! Role:организатор
+2022-12-11 19:15:14,969 INFO Database - Connected to database
+2022-12-11 19:15:21,105 INFO PasswordHash - Password hashed correctly
+2022-12-11 19:15:21,277 INFO LoginController - Admin logged in! Role:админ
+2022-12-11 19:15:32,066 INFO Database - Connected to database
+2022-12-11 19:15:32,078 INFO PasswordHash - Password hashed correctly
+2022-12-11 19:15:32,222 INFO LoginController - Admin logged in! Role:админ
+2022-12-11 19:15:46,609 INFO PasswordHash - Password hashed correctly
+2022-12-11 19:15:46,654 INFO RegistrationController - Profile crated successful: 101,1,разпространител
+2022-12-11 19:15:51,581 INFO Database - Connected to database
+2022-12-11 19:15:52,951 INFO Database - Connected to database
+2022-12-11 19:16:04,242 INFO Database - Connected to database
+2022-12-11 19:16:04,289 INFO AdminController - User deleted successful! profile ID:101
+2022-12-11 19:16:08,124 INFO Database - Connected to database
