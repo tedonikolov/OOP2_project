@@ -15,12 +15,14 @@ module bg.tu_varna.sit.oop2_project {
 
     opens bg.tu_varna.sit.oop2_project to javafx.fxml;
     exports bg.tu_varna.sit.oop2_project;
-    exports bg.tu_varna.sit.oop2_project.entities;
-    opens bg.tu_varna.sit.oop2_project.entities to javafx.fxml;
-    exports bg.tu_varna.sit.oop2_project.controllers;
-    opens bg.tu_varna.sit.oop2_project.controllers to javafx.fxml;
-    exports bg.tu_varna.sit.oop2_project.backend.DTO;
-    opens bg.tu_varna.sit.oop2_project.backend.DTO to javafx.fxml;
-    exports bg.tu_varna.sit.oop2_project.backend;
-    opens bg.tu_varna.sit.oop2_project.backend to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.dataLayer.entities;
+    opens bg.tu_varna.sit.oop2_project.dataLayer.entities to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
+    opens bg.tu_varna.sit.oop2_project.presentationLayer.controllers to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.dataLayer.DTO;
+    opens bg.tu_varna.sit.oop2_project.dataLayer.DTO to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.busnessLayer;
+    opens bg.tu_varna.sit.oop2_project.busnessLayer to javafx.fxml;
+    exports bg.tu_varna.sit.oop2_project.dataLayer;
+    opens bg.tu_varna.sit.oop2_project.dataLayer to javafx.fxml;
 }

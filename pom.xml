@@ -111,6 +111,12 @@
             <artifactId>plexus-container-default</artifactId>
             <version>1.0-alpha-30</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11 -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+            <version>21.8.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -164,6 +170,9 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>bg.tu_varna.sit.oop2_project.Main</mainClass>
+                                    <manifestEntries>
+                                        <Multi-Release>true</Multi-Release>
+                                    </manifestEntries>
                                 </transformer>
                             </transformers>
                         </configuration>
