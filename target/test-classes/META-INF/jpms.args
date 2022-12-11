@@ -1,0 +1,4 @@
+--patch-module
+bg.tu_varna.sit.oop2_project=_
+--add-reads
+bg.tu_varna.sit.oop2_project=ALL-UNNAMED
