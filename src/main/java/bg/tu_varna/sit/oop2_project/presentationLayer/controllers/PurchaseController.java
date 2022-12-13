@@ -168,13 +168,13 @@ public class PurchaseController implements Initializable {
                                 Statement statement = connection.createStatement();
                                 String sql = " UPDATE CLIENT SET QUANTITY=" + (client.getQuantity() + Integer.parseInt(amount1.getText())) + " WHERE EMAIL='" + client.getEmail() + "'";
                                 statement.executeQuery(sql);
-                                seats.setAmount(seats.getAmount() - client.getQuantity());
+                                seats.setAmount(seats.getAmount() - Integer.parseInt(amount1.getText()));
                                 sql = "UPDATE SEATS SET amount = " + seats.getAmount() + " WHERE id_seats=" + seats.getIdSeats();
                                 statement.executeQuery(sql);
-                                seats.setSold(seats.getSold() + client.getQuantity());
+                                seats.setSold(seats.getSold() + Integer.parseInt(amount1.getText()));
                                 sql = "UPDATE SEATS SET SOLD = " + seats.getSold() + " WHERE id_seats=" + seats.getIdSeats();
                                 statement.executeQuery(sql);
-                                tickets.setTicketsSold(tickets.getTicketsSold() + client.getQuantity());
+                                tickets.setTicketsSold(tickets.getTicketsSold() + Integer.parseInt(amount1.getText()));
                                 sql = "UPDATE TICKETS SET TICKETSOLD = " + tickets.getTicketsSold() + " WHERE ID_TICKET=" + tickets.getIdTicket();
                                 statement.executeQuery(sql);
                                 left.setText("Покупката е успешна");
@@ -186,9 +186,10 @@ public class PurchaseController implements Initializable {
                                 Logger logger = LogManager.getLogger();
                                 logger.info("Client added successful! client ID:" + client.getIdClient());
 
+                                LogManager.shutdown();
                                 System.setProperty("logFilename", "organiser_id_" + tickets.getSectors().getEvent().getOrganiser().getIdProfile() + ".log");
                                 logger = LogManager.getLogger();
-                                logger.info(sectors.getEvent().getName() + "," + seats.getType() + "," + client.getQuantity());
+                                logger.info(sectors.getEvent().getName() + "," + seats.getType() + "," + Integer.parseInt(amount1.getText()));
                             }
                             flag = false;
                             break;

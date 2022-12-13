@@ -119,7 +119,7 @@ public class OrganiserController implements Initializable {
         notify.setVisible(false);
         close1.setVisible(true);
         LogManager.shutdown();
-        file.delete();
+        //file.delete();
     }
 
     public void close(){
