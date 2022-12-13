@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: bg.tu_varna.sit.oop2_project.EventOrganizer
-Multi-Release:true
-
