@@ -2,9 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
@@ -29,12 +29,16 @@
             <Font name="Times New Roman Bold Italic" size="20.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="box" layoutX="126.0" layoutY="84.0" prefHeight="36.0" prefWidth="238.0" />
       <Button layoutX="216.0" layoutY="232.0" mnemonicParsing="false" onAction="#exit" text="Изход">
          <font>
             <Font name="Symbol" size="14.0" />
          </font>
       </Button>
+      <TextField fx:id="username" layoutX="126.0" layoutY="70.0" prefHeight="36.0" prefWidth="238.0" promptText="Потребител">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+      </TextField>
    </children>
    <opaqueInsets>
       <Insets />

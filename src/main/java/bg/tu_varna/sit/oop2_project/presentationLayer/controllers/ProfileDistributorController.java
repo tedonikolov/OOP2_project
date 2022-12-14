@@ -47,8 +47,6 @@ public class ProfileDistributorController implements Initializable {
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"distributor.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     public void changeFirstName() throws SQLException {
@@ -56,7 +54,8 @@ public class ProfileDistributorController implements Initializable {
         Connection connection = Database.connection();
         PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET FIRSTNAME='"+ distributor.getFirstName() +"' WHERE ID_PROFILE=" + distributor.getIdProfile());
         ResultSet result = statement.executeQuery();
-        Database.close();
+        result.getStatement().close();
+        result.close();
         firstName.promptTextProperty().setValue(distributor.getFirstName());
         firstName.setText("");
         changeFirstName.requestFocus();
@@ -71,7 +70,8 @@ public class ProfileDistributorController implements Initializable {
         Connection connection = Database.connection();
         PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET LASTNAME='"+ distributor.getLastName() +"' WHERE ID_PROFILE=" + distributor.getIdProfile());
         ResultSet result = statement.executeQuery();
-        Database.close();
+        result.getStatement().close();
+        result.close();
         lastName.promptTextProperty().setValue(distributor.getLastName());
         lastName.setText("");
         changeLastName.requestFocus();
@@ -87,7 +87,8 @@ public class ProfileDistributorController implements Initializable {
             Connection connection = Database.connection();
             PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET EMAIL='" + distributor.getEmail() + "' WHERE ID_PROFILE=" + distributor.getIdProfile());
             ResultSet result = statement.executeQuery();
-            Database.close();
+            result.getStatement().close();
+            result.close();
             email.promptTextProperty().setValue(distributor.getEmail());
             email.setText("");
             changeEmail.requestFocus();
@@ -104,7 +105,8 @@ public class ProfileDistributorController implements Initializable {
             Connection connection = Database.connection();
             PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET PHONE='" + distributor.getPhoneNumber() + "' WHERE ID_PROFILE=" + distributor.getIdProfile());
             ResultSet result = statement.executeQuery();
-            Database.close();
+            result.getStatement().close();
+            result.close();
             phone.promptTextProperty().setValue(distributor.getPhoneNumber());
             phone.setText("");
             changePhone.requestFocus();
@@ -120,7 +122,8 @@ public class ProfileDistributorController implements Initializable {
         Connection connection = Database.connection();
         PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET SALARY="+ distributor.getSalary() +" WHERE ID_PROFILE=" + distributor.getIdProfile());
         ResultSet result = statement.executeQuery();
-        Database.close();
+        result.getStatement().close();
+        result.close();
         salary.promptTextProperty().setValue(String.valueOf(distributor.getSalary()));
         salary.setText("");
         changeSalary.requestFocus();

@@ -70,8 +70,6 @@ public class PurchaseController implements Initializable {
 
     public void back(ActionEvent event) throws IOException {
         SceneChanger.change(event,"distributor.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     public void next(){
@@ -106,7 +104,6 @@ public class PurchaseController implements Initializable {
             buy.setVisible(false);
             left.setVisible(false);
             error.setVisible(false);
-            Database.close();
         }
     }
 
@@ -153,7 +150,6 @@ public class PurchaseController implements Initializable {
         if(!Objects.equals(name1.getText(), "") && !Objects.equals(lastname1.getText(), "") && !Objects.equals(email1.getText(), "") && !Objects.equals(phone1.getText(), "") && !Objects.equals(amount1.getText(), "")) {
             if(PhoneValidator.validate(phone1.getText())) {
                 if(EmailValidator.validate(email1.getText())) {
-                    Database.connection();
                     List<Client> clients = GetClients.get();
                     boolean flag = true;
                     for (Client client : clients) {
@@ -180,7 +176,7 @@ public class PurchaseController implements Initializable {
                                 left.setText("Покупката е успешна");
                                 left.setVisible(true);
                                 error.setVisible(false);
-
+                                statement.close();
                                 LogManager.shutdown();
                                 System.setProperty("logFilename", "info.log");
                                 Logger logger = LogManager.getLogger();
@@ -204,7 +200,6 @@ public class PurchaseController implements Initializable {
                         } else
                             insert();
                     }
-                    Database.close();
                 }else {
                     error.setVisible(true);
                     error.setText("Невалиден имейл!");
@@ -244,6 +239,8 @@ public class PurchaseController implements Initializable {
         left.setText("Покупката е успешна");
         left.setVisible(true);
         error.setVisible(false);
+        rs.getStatement().close();
+        rs.close();
 
         LogManager.shutdown();
         System.setProperty("logFilename", "info.log");

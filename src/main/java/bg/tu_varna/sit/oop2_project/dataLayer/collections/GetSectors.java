@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.oop2_project.dataLayer.collections;
 
+import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Seats;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Sectors;
@@ -33,6 +34,7 @@ public class GetSectors {
                     }
                 }
             }
+            result.getStatement().close();
         }catch (SQLException e){
             LogManager.shutdown();
             System.setProperty("logFilename", "fatal.log");

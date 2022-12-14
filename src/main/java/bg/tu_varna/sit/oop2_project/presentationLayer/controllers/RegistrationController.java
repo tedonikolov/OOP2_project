@@ -91,7 +91,8 @@ public class RegistrationController implements Initializable {
                                         sql = "INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATING,SALARY) VALUES (" + distributor.getIdProfile() + ",'" + distributor.getFirstName() + "','" + distributor.getLastName() + "','" + distributor.getEmail() + "','" + distributor.getPhoneNumber() + "'," + distributor.getRating() + "," + distributor.getSalary() + ")";
                                         statement.executeQuery(sql);
                                     }
-
+                                    rs.getStatement().close();
+                                    rs.close();
                                     LogManager.shutdown();
                                     System.setProperty("logFilename", "info.log");
                                     Logger logger = LogManager.getLogger();
@@ -100,7 +101,6 @@ public class RegistrationController implements Initializable {
                                     label.setTextFill(GREEN);
                                 }
                             }
-                            Database.close();
                         } else {
                             label.setText("*Съществува такъв профил");
                             label.setTextFill(RED);
@@ -123,8 +123,6 @@ public class RegistrationController implements Initializable {
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"admin.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     @Override

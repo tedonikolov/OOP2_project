@@ -56,6 +56,7 @@ public class RateController implements Initializable{
                     }
                 }
             }
+            statement.close();
 
             String string = this.distributor.getValue().toString();
             String[] name = string.split(" ");
@@ -84,6 +85,7 @@ public class RateController implements Initializable{
                                 label.setText("Успешно оценихте " + tickets.getDistributor().getFirstName());
                                 label.setVisible(true);
 
+                                statement.close();
                                 LogManager.shutdown();
                                 System.setProperty("logFilename", "info.log");
                                 Logger logger = LogManager.getLogger();
@@ -101,7 +103,6 @@ public class RateController implements Initializable{
                     break;
                 }
             }
-            Database.close();
         }else {
             error.setText("Изберете разпространител и оценка!");
             error.setVisible(true);
@@ -111,8 +112,6 @@ public class RateController implements Initializable{
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"organiser.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     @Override

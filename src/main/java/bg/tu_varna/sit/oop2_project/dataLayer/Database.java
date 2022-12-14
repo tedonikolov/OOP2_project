@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Database {
@@ -30,18 +31,5 @@ public class Database {
             }
         }
         return connection;
-    }
-
-    public static void close(){
-        try {
-            connection.close();
-            connection=null;
-        } catch (SQLException e) {
-            LogManager.shutdown();
-            System.setProperty("logFilename", "fatal.log");
-            Logger logger = LogManager.getLogger();
-            logger.fatal("Database is close");
-            e.printStackTrace();
-        }
     }
 }

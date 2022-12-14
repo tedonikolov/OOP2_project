@@ -87,8 +87,6 @@ public class AdminController {
         Scene scene = new Scene(fxmlLoader.load());
         stage1.setScene(scene);
         stage1.show();
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     public void showProfiles(){
@@ -158,8 +156,9 @@ public class AdminController {
                     Connection connection= Database.connection();
                     PreparedStatement statement = connection.prepareStatement("DELETE FROM ORGANISER WHERE ID_PROFILE="+Integer.parseInt(id.getText()));
                     ResultSet result = statement.executeQuery();
+                    result.getStatement().close();
+                    result.close();
                     flag=true;
-                    Database.close();
                     break;
                 }
             }
@@ -170,7 +169,8 @@ public class AdminController {
                         Connection connection=Database.connection();
                         PreparedStatement statement = connection.prepareStatement("DELETE FROM DISTRIBUTOR WHERE ID_PROFILE="+Integer.parseInt(id.getText()));
                         ResultSet result = statement.executeQuery();
-                        Database.close();
+                        result.getStatement().close();
+                        result.close();
                         break;
                     }
                 }
@@ -179,7 +179,8 @@ public class AdminController {
             Connection connection=Database.connection();
             PreparedStatement statement = connection.prepareStatement("DELETE FROM PROFILES WHERE ID_PROFILE=" + Integer.parseInt(id.getText()));
             ResultSet result = statement.executeQuery();
-            Database.close();
+            result.getStatement().close();
+            result.close();
             exception.setTextFill(GREEN);
             exception.setText("Потребителят е изтрит успешно");
             exception.setVisible(true);
@@ -217,7 +218,8 @@ public class AdminController {
                         Connection connection = Database.connection();
                         PreparedStatement statement = connection.prepareStatement("UPDATE PROFILES SET PASSWORD='"+pass+"' WHERE ID_PROFILE=" + Integer.parseInt(id1.getText()));
                         ResultSet result = statement.executeQuery();
-                        Database.close();
+                        result.getStatement().close();
+                        result.close();
                         error.setTextFill(GREEN);
                         error.setText("Успешно променихте паролата");
 

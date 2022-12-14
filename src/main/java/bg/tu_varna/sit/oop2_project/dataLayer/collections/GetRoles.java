@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.oop2_project.dataLayer.collections;
 
+import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Roles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +22,7 @@ public class GetRoles {
                     Roles role = new Roles(Integer.parseInt(result.getString(1)), result.getString(2));
                     roles.add(role);
                 }
+                result.getStatement().close();
             } catch (SQLException e) {
                 LogManager.shutdown();
                 System.setProperty("logFilename", "fatal.log");

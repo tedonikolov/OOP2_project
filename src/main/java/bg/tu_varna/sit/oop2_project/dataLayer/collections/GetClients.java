@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.oop2_project.dataLayer.collections;
 
+import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Client;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Tickets;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +26,7 @@ public class GetClients {
                     }
                 }
             }
+            result.getStatement().close();
         }catch (SQLException e){
             LogManager.shutdown();
             System.setProperty("logFilename", "fatal.log");

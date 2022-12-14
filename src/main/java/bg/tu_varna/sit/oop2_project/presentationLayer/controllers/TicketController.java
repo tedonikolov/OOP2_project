@@ -50,8 +50,6 @@ public class TicketController implements Initializable{
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"organiser.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     public void addDistributor() throws SQLException {
@@ -89,7 +87,7 @@ public class TicketController implements Initializable{
                     }
                 }
             }
-            Database.close();
+            statement.close();
             complete.setVisible(true);
             complete.setTextFill(GREEN);
             complete.setText("Успешно назначихте разпространителя");
@@ -101,7 +99,6 @@ public class TicketController implements Initializable{
     }
 
     public void show() throws SQLException {
-        Database.connection();
         if(this.distributor.getValue()!=null) {
             String string = this.distributor.getValue().toString();
             String[] name = string.split(" ");
@@ -114,12 +111,10 @@ public class TicketController implements Initializable{
                     break;
                 }
             }
-            Database.close();
         }
     }
 
     public void distributors() throws SQLException {
-        Database.connection();
         distributor.getItems().clear();
         List<String> distributors=new ArrayList<>();
         for(Distributor distributor: this.distributors){
@@ -139,7 +134,6 @@ public class TicketController implements Initializable{
         number.setVisible(false);
         salary1.setVisible(false);
         complete.setVisible(false);
-        Database.close();
     }
 
     @Override

@@ -61,8 +61,6 @@ public class QueriesOrganiserController implements Initializable {
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"organiser.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     public void back2(){
@@ -117,7 +115,8 @@ public class QueriesOrganiserController implements Initializable {
         }
         event.setVisible(true);
         back.setVisible(true);
-        Database.close();
+        result.getStatement().close();
+        result.close();
     }
 
 
@@ -190,8 +189,8 @@ public class QueriesOrganiserController implements Initializable {
             distributor.getItems().add(distributorDTO);
         }
         distributor.setVisible(true);
-        back.setVisible(true);
-        Database.close();
+        result.getStatement().close();
+        result.close();
     }
 
     @Override

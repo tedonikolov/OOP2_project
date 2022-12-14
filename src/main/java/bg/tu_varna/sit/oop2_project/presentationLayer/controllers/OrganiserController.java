@@ -1,6 +1,5 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
 import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetTickets;
@@ -58,8 +57,6 @@ public class OrganiserController implements Initializable {
 
     public void login(ActionEvent event){
         SceneChanger.change(event,"login.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     public void notification() throws IOException {
@@ -119,7 +116,7 @@ public class OrganiserController implements Initializable {
         notify.setVisible(false);
         close1.setVisible(true);
         LogManager.shutdown();
-        //file.delete();
+        file.delete();
     }
 
     public void close(){

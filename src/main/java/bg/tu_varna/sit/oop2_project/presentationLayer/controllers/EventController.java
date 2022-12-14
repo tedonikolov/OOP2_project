@@ -62,6 +62,8 @@ public class EventController {
 
                 String sql = "INSERT INTO EVENT(ID_EVENT,NAME,ADDRESS,DATETIME,DESCRIPTION,ORGANISER_ID) VALUES ("+event.getIdEvent()+",'" + event.getName() + "','" + event.getAddress() + "',to_date('" + event.getDateTime() + "','YYYY-MM-DD\"T\"HH24:MI:SS'),'" + event.getDescription() + "'," + event.getOrganiser().getIdProfile() + ")";
                 statement.executeQuery(sql);
+                rs.getStatement().close();
+                rs.close();
                 complete.setVisible(true);
                 complete.setTextFill(GREEN);
                 error.setVisible(false);
@@ -89,7 +91,5 @@ public class EventController {
 
     public void back(ActionEvent event) {
         SceneChanger.change(event,"organiser.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 }

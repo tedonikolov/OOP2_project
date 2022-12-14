@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.oop2_project.dataLayer.collections;
 
+import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Seats;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ public class GetSeats {
                 Seats seat = new Seats(Integer.parseInt(result.getString(1)), result.getString(2), Integer.parseInt(result.getString(3)), Integer.parseInt(result.getString(4)), Double.parseDouble(result.getString(5)), Integer.parseInt(result.getString(6)));
                 seats.add(seat);
             }
+            result.getStatement().close();
         }catch (SQLException e){
             LogManager.shutdown();
             System.setProperty("logFilename", "fatal.log");

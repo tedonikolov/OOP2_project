@@ -40,8 +40,6 @@ public class ProfileOrganiserController implements Initializable {
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"organiser.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     public void changeFirstName() throws SQLException {
@@ -49,7 +47,8 @@ public class ProfileOrganiserController implements Initializable {
         Connection connection = Database.connection();
         PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET FIRSTNAME='"+ organiser.getFirstName() +"' WHERE ID_PROFILE=" + organiser.getIdProfile());
         ResultSet result = statement.executeQuery();
-        Database.close();
+        result.getStatement().close();
+        result.close();
         firstName.promptTextProperty().setValue(organiser.getFirstName());
         firstName.setText("");
         changeFirstName.requestFocus();
@@ -64,7 +63,8 @@ public class ProfileOrganiserController implements Initializable {
         Connection connection = Database.connection();
         PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET LASTNAME='"+ organiser.getLastName() +"' WHERE ID_PROFILE=" + organiser.getIdProfile());
         ResultSet result = statement.executeQuery();
-        Database.close();
+        result.getStatement().close();
+        result.close();
         lastName.promptTextProperty().setValue(organiser.getLastName());
         lastName.setText("");
         changeLastName.requestFocus();
@@ -80,7 +80,8 @@ public class ProfileOrganiserController implements Initializable {
             Connection connection = Database.connection();
             PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET EMAIL='" + organiser.getEmail() + "' WHERE ID_PROFILE=" + organiser.getIdProfile());
             ResultSet result = statement.executeQuery();
-            Database.close();
+            result.getStatement().close();
+            result.close();
             email.promptTextProperty().setValue(organiser.getEmail());
             email.setText("");
             changeEmail.requestFocus();
@@ -97,7 +98,8 @@ public class ProfileOrganiserController implements Initializable {
             Connection connection = Database.connection();
             PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET PHONE='" + organiser.getPhoneNumber() + "' WHERE ID_PROFILE=" + organiser.getIdProfile());
             ResultSet result = statement.executeQuery();
-            Database.close();
+            result.getStatement().close();
+            result.close();
             phone.promptTextProperty().setValue(organiser.getPhoneNumber());
             phone.setText("");
             changePhone.requestFocus();

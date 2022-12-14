@@ -79,7 +79,8 @@ public class SeatsController implements Initializable {
             error.setText("Успешно създаден "+type.getText());
             error.setTextFill(GREEN);
             error.setVisible(true);
-            Database.close();
+            rs.getStatement().close();
+            rs.close();
             clear();
             LogManager.shutdown();
             System.setProperty("logFilename", "info.log");
@@ -95,8 +96,6 @@ public class SeatsController implements Initializable {
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"organiser.fxml");
-        if(Database.connection()!=null)
-            Database.close();
     }
 
     public void clear(){

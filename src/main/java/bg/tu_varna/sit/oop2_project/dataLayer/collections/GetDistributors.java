@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.oop2_project.dataLayer.collections;
 
+import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Distributor;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Profiles;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +26,7 @@ public class GetDistributors {
                     }
                 }
             }
+            result.getStatement().close();
         }catch (SQLException e){
             LogManager.shutdown();
             System.setProperty("logFilename", "fatal.log");
