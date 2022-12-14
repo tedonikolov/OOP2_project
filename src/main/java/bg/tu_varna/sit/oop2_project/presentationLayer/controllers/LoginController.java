@@ -1,18 +1,14 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
-import bg.tu_varna.sit.oop2_project.busnessLayer.PasswordHash;
-import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
-import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Profiles;
+import bg.tu_varna.sit.oop2_project.busnessLayer.services.LoginService;
+import bg.tu_varna.sit.oop2_project.dataLayer.DTO.LoginDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetProfiles;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetRoles;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,43 +20,17 @@ import java.util.*;
 
 public class LoginController implements Initializable {
     @FXML
-    private ChoiceBox box;
+    private TextField username;
     @FXML
     private PasswordField password;
     @FXML
     private Label label;
 
     public void login(ActionEvent event) throws NoSuchAlgorithmException {
-        if(box.getValue()!=null) {
-
-            for (Profiles profiles : GetProfiles.get()) {
-                if (Objects.equals(profiles.getUsername(), box.getValue().toString())) {
-                    String hashedPassword = PasswordHash.hashing(password.getText());
-                    if (Objects.equals(profiles.getPassword(), hashedPassword)) {
-                        if (profiles.getRoles().getIdRole() == GetRoles.get().get(0).getIdRole()) {
-                            SceneChanger.change(event, "admin.fxml");
-                        } else if (profiles.getRoles().getIdRole() == GetRoles.get().get(1).getIdRole()) {
-                            Profile.setProfiles(profiles);
-                            SceneChanger.change(event, "organiser.fxml");
-                        } else {
-                            Profile.setProfiles(profiles);
-                            SceneChanger.change(event, "distributor.fxml");
-                        }
-                        LogManager.shutdown();
-                        System.setProperty("logFilename", "info.log");
-                        Logger logger = LogManager.getLogger();
-                        logger.info(profiles.getUsername() + " logged in! Role:" + profiles.getRoles().getRole());
-                    } else {
-                        label.setText("*Грешна парола!");
-                    }
-                    break;
-                }
-            }
+        if(!LoginService.login(new LoginDTO(username.getText(), password.getText()),event)){
+            label.setText("*Грешна парола или потребител!");
+            label.setVisible(true);
         }
-        else{
-            label.setText("*изберете потребител!");
-        }
-        label.setVisible(true);
     }
 
     public void exit(ActionEvent event){
@@ -78,12 +48,6 @@ public class LoginController implements Initializable {
         System.setProperty("logFilename", "date.log");
         Logger logger = LogManager.getLogger();
         logger.info("");
-
-        List<String> usernames=new ArrayList<>();
-        for(Profiles profiles : GetProfiles.get()){
-            usernames.add(profiles.getUsername());
-        }
-        box.getItems().addAll(usernames);
     }
 
 }
