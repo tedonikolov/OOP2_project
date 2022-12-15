@@ -46,6 +46,7 @@
             <Font name="Symbol" size="14.0" />
          </font>
       </Button>
+      <Label fx:id="error" layoutX="160.0" layoutY="242.0" text="Label" visible="false" />
    </children>
    <opaqueInsets>
       <Insets />

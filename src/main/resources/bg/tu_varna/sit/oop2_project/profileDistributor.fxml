@@ -55,6 +55,7 @@
          </font>
       </Button>
       <Label fx:id="rating" layoutX="147.0" layoutY="193.0" prefHeight="18.0" prefWidth="50.0" text="Label" textFill="#ffb500" />
+      <Label fx:id="error" layoutX="158.0" layoutY="289.0" text="Label" visible="false" />
    </children>
    <opaqueInsets>
       <Insets />

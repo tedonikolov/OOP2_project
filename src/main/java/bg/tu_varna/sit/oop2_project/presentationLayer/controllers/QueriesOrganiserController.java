@@ -4,7 +4,7 @@ import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetEvents;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.EventRepository;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -198,7 +198,7 @@ public class QueriesOrganiserController implements Initializable {
 
         List<String> events=new ArrayList<>();
         events.add(null);
-        for(Event event: GetEvents.get()){
+        for(Event event: EventRepository.get()){
             if(event.getOrganiser().getIdProfile()== Profile.getProfiles().getIdProfile())
                 events.add(event.getName());
         }

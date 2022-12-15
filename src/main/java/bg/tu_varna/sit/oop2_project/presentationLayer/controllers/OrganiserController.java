@@ -2,7 +2,7 @@ package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetTickets;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.TicketsRepository;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Sectors;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Tickets;
@@ -159,7 +159,7 @@ public class OrganiserController implements Initializable {
                 Set<Event> events = new HashSet<>();
                 boolean flag = false;
 
-                for (Tickets tickets : GetTickets.get()) {
+                for (Tickets tickets : TicketsRepository.get()) {
                     if (tickets.getSectors().getEvent().getDateTime().isAfter(now) && tickets.getSectors().getEvent().getDateTime().isBefore(dateTime) && tickets.getSectors().getEvent().getOrganiser().getIdProfile() == Profile.getProfiles().getIdProfile()) {
                         sectors.add(tickets.getSectors());
                         events.add(tickets.getSectors().getEvent());

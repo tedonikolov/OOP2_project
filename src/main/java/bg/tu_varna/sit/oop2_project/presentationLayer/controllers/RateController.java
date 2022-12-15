@@ -1,14 +1,11 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Distributor;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Tickets;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetDistributors;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetEvents;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetTickets;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.DistributorRepository;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.TicketsRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,10 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.*;
@@ -41,22 +34,8 @@ public class RateController implements Initializable{
     @FXML
     private Label label;
 
-    public void rate() throws SQLException, ParseException {
+    public void rate() throws ParseException {
         if (rate.getValue() != null && distributor.getValue()!=null) {
-            Connection connection = Database.connection();
-            Statement statement = connection.createStatement();
-            Map<Integer, Double> distributors = new HashMap<>();
-
-            for (Event event : GetEvents.get()) {
-                if (event.getOrganiser().getIdProfile() == Profile.getProfiles().getIdProfile()) {
-                    String sql = "SELECT DISTRIBUTOR_ID, RATE FROM TICKETS JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID WHERE EVENT_ID=" + event.getIdEvent();
-                    ResultSet rs = statement.executeQuery(sql);
-                    while (rs.next()) {
-                        distributors.put(Integer.parseInt(rs.getString(1)), Double.parseDouble(rs.getString(2)));
-                    }
-                }
-            }
-            statement.close();
 
             String string = this.distributor.getValue().toString();
             String[] name = string.split(" ");
@@ -78,14 +57,13 @@ public class RateController implements Initializable{
                                     rating = (Double) df.parse(df.format(rating));
                                 }
 
-                                String sql = " UPDATE TICKETS SET RATE=" + curr + " WHERE DISTRIBUTOR_ID=" + distributor.getIdProfile();
-                                statement.executeQuery(sql);
-                                sql = " UPDATE DISTRIBUTOR SET RATING=" + rating + " WHERE ID_PROFILE=" + distributor.getIdProfile();
-                                statement.executeQuery(sql);
+                                TicketsRepository.updateRate(String.valueOf(curr),distributor.getIdProfile());
+
+                                DistributorRepository.updateRating(String.valueOf(rating),distributor.getIdProfile());
+
                                 label.setText("Успешно оценихте " + tickets.getDistributor().getFirstName());
                                 label.setVisible(true);
 
-                                statement.close();
                                 LogManager.shutdown();
                                 System.setProperty("logFilename", "info.log");
                                 Logger logger = LogManager.getLogger();
@@ -130,8 +108,8 @@ public class RateController implements Initializable{
         rate.getItems().addAll(rates);
 
         Set<String> distributors=new HashSet<>();
-        tickets=GetTickets.get();
-        this.distributors=GetDistributors.get();
+        tickets= TicketsRepository.get();
+        this.distributors= DistributorRepository.get();
         for(Tickets ticket : tickets) {
             for (Distributor distributor : this.distributors) {
                 if (ticket.getSectors().getEvent().getOrganiser().getIdProfile() == Profile.getProfiles().getIdProfile() && ticket.getDistributor().getIdProfile() == distributor.getIdProfile()) {

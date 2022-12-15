@@ -3,7 +3,7 @@ package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetTickets;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.TicketsRepository;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Tickets;
 import bg.tu_varna.sit.oop2_project.dataLayer.DTO.EventDTO;
 import javafx.beans.value.ChangeListener;
@@ -108,7 +108,7 @@ public class QueriesDistributorController implements Initializable {
 
         Set<String> events=new HashSet<>();
         events.add(null);
-        for(Tickets tickets: GetTickets.get()){
+        for(Tickets tickets: TicketsRepository.get()){
             if(tickets.getDistributor().getIdProfile()== Profile.getProfiles().getIdProfile())
                 events.add(tickets.getSectors().getEvent().getName());
         }

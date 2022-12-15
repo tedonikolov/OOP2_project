@@ -1,9 +1,8 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.*;
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Distributor;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetDistributors;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.DistributorRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,11 +13,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static eu.hansolo.tilesfx.Tile.RED;
 
 public class ProfileDistributorController implements Initializable {
     private Distributor distributor;
@@ -44,18 +41,17 @@ public class ProfileDistributorController implements Initializable {
     private Button changePhone;
     @FXML
     private Button changeSalary;
+    @FXML
+    private Label error;
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"distributor.fxml");
     }
 
-    public void changeFirstName() throws SQLException {
+    public void changeFirstName() {
+        error.setVisible(false);
         distributor.setFirstName(firstName.getText());
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET FIRSTNAME='"+ distributor.getFirstName() +"' WHERE ID_PROFILE=" + distributor.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        result.getStatement().close();
-        result.close();
+        DistributorRepository.updateFirstName(distributor.getFirstName(), distributor.getIdProfile());
         firstName.promptTextProperty().setValue(distributor.getFirstName());
         firstName.setText("");
         changeFirstName.requestFocus();
@@ -65,13 +61,10 @@ public class ProfileDistributorController implements Initializable {
         logger.info("First name changed successful! distributor ID:"+distributor.getIdProfile());
     }
 
-    public void changeLastName() throws SQLException {
+    public void changeLastName() {
+        error.setVisible(false);
         distributor.setLastName(lastName.getText());
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET LASTNAME='"+ distributor.getLastName() +"' WHERE ID_PROFILE=" + distributor.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        result.getStatement().close();
-        result.close();
+        DistributorRepository.updateLastName(distributor.getLastName(), distributor.getIdProfile());
         lastName.promptTextProperty().setValue(distributor.getLastName());
         lastName.setText("");
         changeLastName.requestFocus();
@@ -81,14 +74,11 @@ public class ProfileDistributorController implements Initializable {
         logger.info("Last name changed successful! distributor ID:"+distributor.getIdProfile());
     }
 
-    public void changeEmail() throws SQLException {
+    public void changeEmail() {
         if(EmailValidator.validate(email.getText())) {
+            error.setVisible(false);
             distributor.setEmail(email.getText());
-            Connection connection = Database.connection();
-            PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET EMAIL='" + distributor.getEmail() + "' WHERE ID_PROFILE=" + distributor.getIdProfile());
-            ResultSet result = statement.executeQuery();
-            result.getStatement().close();
-            result.close();
+            DistributorRepository.updateEmail(distributor.getEmail(), distributor.getIdProfile());
             email.promptTextProperty().setValue(distributor.getEmail());
             email.setText("");
             changeEmail.requestFocus();
@@ -96,17 +86,18 @@ public class ProfileDistributorController implements Initializable {
             System.setProperty("logFilename", "info.log");
             Logger logger = LogManager.getLogger();
             logger.info("Email changed successful! distributor ID:" + distributor.getIdProfile());
+        }else{
+            error.setTextFill(RED);
+            error.setText("Невалиден имейл");
+            error.setVisible(true);
         }
     }
 
-    public void changePhone() throws SQLException {
+    public void changePhone() {
         if(PhoneValidator.validate(phone.getText())) {
+            error.setVisible(false);
             distributor.setPhoneNumber(phone.getText());
-            Connection connection = Database.connection();
-            PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET PHONE='" + distributor.getPhoneNumber() + "' WHERE ID_PROFILE=" + distributor.getIdProfile());
-            ResultSet result = statement.executeQuery();
-            result.getStatement().close();
-            result.close();
+            DistributorRepository.updatePhone(distributor.getPhoneNumber(), distributor.getIdProfile());
             phone.promptTextProperty().setValue(distributor.getPhoneNumber());
             phone.setText("");
             changePhone.requestFocus();
@@ -114,16 +105,17 @@ public class ProfileDistributorController implements Initializable {
             System.setProperty("logFilename", "info.log");
             Logger logger = LogManager.getLogger();
             logger.info("Phone changed successful! distributor ID:" + distributor.getIdProfile());
+        }else{
+            error.setTextFill(RED);
+            error.setText("Невалиден телефонен номер");
+            error.setVisible(true);
         }
     }
 
-    public void changeSalary() throws SQLException {
+    public void changeSalary() {
+        error.setVisible(false);
         distributor.setSalary(Integer.parseInt(salary.getText()));
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE DISTRIBUTOR SET SALARY="+ distributor.getSalary() +" WHERE ID_PROFILE=" + distributor.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        result.getStatement().close();
-        result.close();
+        DistributorRepository.updateSalary(String.valueOf(distributor.getSalary()),distributor.getIdProfile());
         salary.promptTextProperty().setValue(String.valueOf(distributor.getSalary()));
         salary.setText("");
         changeSalary.requestFocus();
@@ -135,7 +127,7 @@ public class ProfileDistributorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for (Distributor distributor: GetDistributors.get()){
+        for (Distributor distributor: DistributorRepository.get()){
             if(distributor.getIdProfile()== Profile.getProfiles().getIdProfile()){
                 this.distributor =distributor;
                 firstName.promptTextProperty().setValue(distributor.getFirstName());

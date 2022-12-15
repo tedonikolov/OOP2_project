@@ -1,23 +1,21 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.*;
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Organiser;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetOrganisers;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.OrganiserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static eu.hansolo.tilesfx.Tile.RED;
 
 public class ProfileOrganiserController implements Initializable {
     private Organiser organiser;
@@ -37,82 +35,80 @@ public class ProfileOrganiserController implements Initializable {
     private Button changeEmail;
     @FXML
     private Button changePhone;
+    @FXML
+    private Label error;
 
     public void back(ActionEvent event){
         SceneChanger.change(event,"organiser.fxml");
     }
 
-    public void changeFirstName() throws SQLException {
+    public void changeFirstName() {
+        error.setVisible(false);
         organiser.setFirstName(firstName.getText());
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET FIRSTNAME='"+ organiser.getFirstName() +"' WHERE ID_PROFILE=" + organiser.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        result.getStatement().close();
-        result.close();
+        OrganiserRepository.updateFirstName(organiser.getFirstName(), organiser.getIdProfile());
         firstName.promptTextProperty().setValue(organiser.getFirstName());
         firstName.setText("");
         changeFirstName.requestFocus();
         LogManager.shutdown();
         System.setProperty("logFilename", "info.log");
         Logger logger = LogManager.getLogger();
-        logger.info("First name changed successful! distributor ID:"+organiser.getIdProfile());
+        logger.info("First name changed successful! organiser ID:"+organiser.getIdProfile());
     }
 
-    public void changeLastName() throws SQLException {
+    public void changeLastName() {
+        error.setVisible(false);
         organiser.setLastName(lastName.getText());
-        Connection connection = Database.connection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET LASTNAME='"+ organiser.getLastName() +"' WHERE ID_PROFILE=" + organiser.getIdProfile());
-        ResultSet result = statement.executeQuery();
-        result.getStatement().close();
-        result.close();
+        OrganiserRepository.updateLastName(organiser.getLastName(), organiser.getIdProfile());
         lastName.promptTextProperty().setValue(organiser.getLastName());
         lastName.setText("");
         changeLastName.requestFocus();
         LogManager.shutdown();
         System.setProperty("logFilename", "info.log");
         Logger logger = LogManager.getLogger();
-        logger.info("Last name changed successful! distributor ID:"+organiser.getIdProfile());
+        logger.info("Last name changed successful! organiser ID:"+organiser.getIdProfile());
     }
 
-    public void changeEmail() throws SQLException {
+    public void changeEmail() {
         if (EmailValidator.validate(email.getText())) {
+            error.setVisible(false);
             organiser.setEmail(email.getText());
-            Connection connection = Database.connection();
-            PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET EMAIL='" + organiser.getEmail() + "' WHERE ID_PROFILE=" + organiser.getIdProfile());
-            ResultSet result = statement.executeQuery();
-            result.getStatement().close();
-            result.close();
+            OrganiserRepository.updateEmail(organiser.getEmail(), organiser.getIdProfile());
             email.promptTextProperty().setValue(organiser.getEmail());
             email.setText("");
             changeEmail.requestFocus();
             LogManager.shutdown();
             System.setProperty("logFilename", "info.log");
             Logger logger = LogManager.getLogger();
-            logger.info("Email changed successful! distributor ID:" + organiser.getIdProfile());
+            logger.info("Email changed successful! organiser ID:" + organiser.getIdProfile());
+        }else{
+            error.setTextFill(RED);
+            error.setText("Невалиден имейл");
+            error.setVisible(true);
         }
     }
 
-    public void changePhone() throws SQLException {
+    public void changePhone() {
         if(PhoneValidator.validate(phone.getText())) {
+            error.setVisible(false);
             organiser.setPhoneNumber(phone.getText());
-            Connection connection = Database.connection();
-            PreparedStatement statement = connection.prepareStatement("UPDATE ORGANISER SET PHONE='" + organiser.getPhoneNumber() + "' WHERE ID_PROFILE=" + organiser.getIdProfile());
-            ResultSet result = statement.executeQuery();
-            result.getStatement().close();
-            result.close();
+            OrganiserRepository.updatePhone(organiser.getPhoneNumber(), organiser.getIdProfile());
             phone.promptTextProperty().setValue(organiser.getPhoneNumber());
             phone.setText("");
             changePhone.requestFocus();
             LogManager.shutdown();
             System.setProperty("logFilename", "info.log");
             Logger logger = LogManager.getLogger();
-            logger.info("Phone changed successful! distributor ID:" + organiser.getIdProfile());
+            logger.info("Phone changed successful! organiser ID:" + organiser.getIdProfile());
+        }else{
+            error.setTextFill(RED);
+            error.setText("Невалиден телефонен номер");
+            error.setVisible(true);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for (Organiser organiser: GetOrganisers.get()){
+        for (Organiser organiser: OrganiserRepository.get()){
             if(organiser.getIdProfile()== Profile.getProfiles().getIdProfile()){
                 this.organiser=organiser;
                 firstName.promptTextProperty().setValue(organiser.getFirstName());

@@ -2,10 +2,9 @@ package bg.tu_varna.sit.oop2_project.busnessLayer.services;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.PasswordHash;
 import bg.tu_varna.sit.oop2_project.dataLayer.DTO.ProfilesDTO;
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetDistributors;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetOrganisers;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetProfiles;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.DistributorRepository;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.OrganiserRepository;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.ProfilesRepository;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Distributor;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Organiser;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Profiles;
@@ -17,9 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
@@ -40,7 +36,7 @@ public class AdminService {
 
         table.getColumns().setAll(idProfile,username,role);
 
-        for(Profiles profile: GetProfiles.get()){
+        for(Profiles profile: ProfilesRepository.get()){
             if(profile.getIdProfile()==1)
                 continue;
             table.getItems().add(new ProfilesDTO(profile.getIdProfile(), profile.getUsername(), profile.getRoles().getRole()));
@@ -49,34 +45,27 @@ public class AdminService {
 
     public static void delete(int id, Label exception){
         try {
-            Connection connection= Database.connection();
             boolean flag=false;
 
-            for(Organiser organiser: GetOrganisers.get()){
+            for(Organiser organiser: OrganiserRepository.get()){
                 if(organiser.getIdProfile()==id){
-                    PreparedStatement statement = connection.prepareStatement("DELETE FROM ORGANISER WHERE ID_PROFILE="+id);
-                    ResultSet result = statement.executeQuery();
-                    statement.close();
+                    OrganiserRepository.remove(id);
                     flag = true;
                     break;
                 }
             }
 
             if(!flag){
-                for(Distributor distributor: GetDistributors.get()){
+                for(Distributor distributor: DistributorRepository.get()){
                     if(distributor.getIdProfile()==id){
-                        PreparedStatement statement = connection.prepareStatement("DELETE FROM DISTRIBUTOR WHERE ID_PROFILE="+id);
-                        ResultSet result = statement.executeQuery();
-                        statement.close();
+                        DistributorRepository.remove(id);
                         flag = true;
                         break;
                     }
                 }
             }
             if(flag) {
-                PreparedStatement statement = connection.prepareStatement("DELETE FROM PROFILES WHERE ID_PROFILE=" + id);
-                ResultSet result = statement.executeQuery();
-                statement.close();
+                ProfilesRepository.remove(id);
 
                 exception.setTextFill(GREEN);
                 exception.setText("Потребителят е изтрит успешно");
@@ -103,8 +92,8 @@ public class AdminService {
         }
     }
 
-    public static boolean changePass(int id, String oldPass, String newPass, String newPass2, Label error) throws SQLException, NoSuchAlgorithmException {
-        for(Profiles profiles: GetProfiles.get()){
+    public static boolean changePass(int id, String oldPass, String newPass, String newPass2, Label error) throws NoSuchAlgorithmException {
+        for(Profiles profiles: ProfilesRepository.get()){
             if(id==profiles.getIdProfile()){
                 String old= PasswordHash.hashing(oldPass);
                 if(old.equals(profiles.getPassword())){
@@ -114,11 +103,7 @@ public class AdminService {
                     }
                     else {
                         String pass=PasswordHash.hashing(newPass);
-                        Connection connection = Database.connection();
-                        PreparedStatement statement = connection.prepareStatement("UPDATE PROFILES SET PASSWORD='"+pass+"' WHERE ID_PROFILE=" + id);
-                        ResultSet result = statement.executeQuery();
-                        result.getStatement().close();
-                        result.close();
+                        ProfilesRepository.updatePassword(pass,id);
                         error.setTextFill(GREEN);
                         error.setText("Успешно променихте паролата");
 

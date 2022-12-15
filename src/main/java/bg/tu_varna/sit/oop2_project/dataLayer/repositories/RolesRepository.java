@@ -1,6 +1,5 @@
-package bg.tu_varna.sit.oop2_project.dataLayer.collections;
+package bg.tu_varna.sit.oop2_project.dataLayer.repositories;
 
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Roles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,14 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetRoles {
+public class RolesRepository {
 
     private static List<Roles> roles=null;
     public static List<Roles> get(){
         if(roles==null) {
             roles = new ArrayList<>();
             try {
-                ResultSet result = SelectAll.selectAll("ROLES");
+                ResultSet result = Repository.selectAll("ROLES");
                 while (result.next()) {
                     Roles role = new Roles(Integer.parseInt(result.getString(1)), result.getString(2));
                     roles.add(role);

@@ -1,12 +1,11 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetDistributors;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetEvents;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetSectors;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetTickets;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.DistributorRepository;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.EventRepository;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.SectorsRepository;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.TicketsRepository;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Distributor;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Sectors;
@@ -22,10 +21,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -52,12 +47,10 @@ public class TicketController implements Initializable{
         SceneChanger.change(event,"organiser.fxml");
     }
 
-    public void addDistributor() throws SQLException {
+    public void addDistributor(){
         if (event.getValue() != null && distributor.getValue()!=null) {
-            Connection connection = Database.connection();
-            Statement statement = connection.createStatement();
 
-            List<Sectors> sectorsList = GetSectors.get();
+            List<Sectors> sectorsList = SectorsRepository.get();
 
             for (Distributor distributor : distributors) {
                 String string = this.distributor.getValue().toString();
@@ -65,15 +58,11 @@ public class TicketController implements Initializable{
                 if (Objects.equals(distributor.getFirstName(), name[0]) && Objects.equals(distributor.getFirstName(), name[0])) {
                     for (Sectors sectors : sectorsList) {
                         if (Objects.equals(sectors.getEvent().getName(), this.event.getValue().toString())) {
-                            String getId = "SELECT TICKETS_SEQUENCE.nextVal from DUAL";
-                            ResultSet rs = statement.executeQuery(getId);
-                            int id = 0;
-                            if (rs.next())
-                                id = rs.getInt(1);
 
+                            int id = TicketsRepository.autonumber();
                             Tickets ticket = new Tickets(id, sectors, 0, distributor, 0);
-                            String sql = "INSERT INTO TICKETS(ID_TICKET, SECTORS_ID, TICKETSOLD, DISTRIBUTOR_ID, RATE) VALUES (" + ticket.getIdTicket() + "," + ticket.getSectors().getIdSectors() + "," + ticket.getTicketsSold() + "," + ticket.getDistributor().getIdProfile() + "," + ticket.getRate() + ")";
-                            statement.executeQuery(sql);
+                            TicketsRepository.add(ticket);
+
                             LogManager.shutdown();
                             System.setProperty("logFilename", "info.log");
                             Logger logger = LogManager.getLogger();
@@ -87,7 +76,6 @@ public class TicketController implements Initializable{
                     }
                 }
             }
-            statement.close();
             complete.setVisible(true);
             complete.setTextFill(GREEN);
             complete.setText("Успешно назначихте разпространителя");
@@ -98,7 +86,7 @@ public class TicketController implements Initializable{
         }
     }
 
-    public void show() throws SQLException {
+    public void show() {
         if(this.distributor.getValue()!=null) {
             String string = this.distributor.getValue().toString();
             String[] name = string.split(" ");
@@ -114,7 +102,7 @@ public class TicketController implements Initializable{
         }
     }
 
-    public void distributors() throws SQLException {
+    public void distributors() {
         distributor.getItems().clear();
         List<String> distributors=new ArrayList<>();
         for(Distributor distributor: this.distributors){
@@ -139,23 +127,19 @@ public class TicketController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> events = new ArrayList<>();
-        for (Event event : GetEvents.get()) {
+        for (Event event : EventRepository.get()) {
             if (event.getOrganiser().getIdProfile() == Profile.getProfiles().getIdProfile())
                 events.add(event.getName());
         }
         event.getItems().addAll(events);
-        distributors = GetDistributors.get();
+        distributors = DistributorRepository.get();
 
         event.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
-                try {
-                    if (event.getValue() != null) {
-                        tickets = GetTickets.get();
-                        distributors();
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                if (event.getValue() != null) {
+                    tickets = TicketsRepository.get();
+                    distributors();
                 }
             }
         });
@@ -163,12 +147,8 @@ public class TicketController implements Initializable{
         distributor.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
-                try {
-                    if (event.getValue() != null) {
-                        show();
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                if (event.getValue() != null) {
+                    show();
                 }
             }
         });

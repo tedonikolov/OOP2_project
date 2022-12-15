@@ -1,11 +1,7 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.*;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetClients;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetEvents;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetSectors;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetTickets;
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
+import bg.tu_varna.sit.oop2_project.dataLayer.repositories.*;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,10 +15,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
 public class PurchaseController implements Initializable {
@@ -79,9 +71,9 @@ public class PurchaseController implements Initializable {
             seatsBox.setVisible(true);
             next2.setVisible(true);
 
-            sectorsList = GetSectors.get();
+            sectorsList = SectorsRepository.get();
             List<String> list = new ArrayList<>();
-            for (Event event : GetEvents.get()) {
+            for (Event event : EventRepository.get()) {
                 if (Objects.equals(event.getName(), eventBox.getValue().toString())) {
                     for (Sectors sectors : sectorsList) {
                         if (sectors.getEvent().getIdEvent() == event.getIdEvent())
@@ -145,60 +137,62 @@ public class PurchaseController implements Initializable {
         }
     }
 
-    public void buy() throws SQLException {
-
+    public void buy() {
         if(!Objects.equals(name1.getText(), "") && !Objects.equals(lastname1.getText(), "") && !Objects.equals(email1.getText(), "") && !Objects.equals(phone1.getText(), "") && !Objects.equals(amount1.getText(), "")) {
             if(PhoneValidator.validate(phone1.getText())) {
                 if(EmailValidator.validate(email1.getText())) {
-                    List<Client> clients = GetClients.get();
-                    boolean flag = true;
-                    for (Client client : clients) {
-                        if (Objects.equals(client.getEmail(), email1.getText()) && sectors.getIdSectors() == client.getTicket().getSectors().getIdSectors()) {
-                            if ((client.getQuantity() + Integer.parseInt(amount1.getText())) > seats.getTicketPerClient()) {
+                    if(seats.getAmount()>Integer.parseInt(amount1.getText())) {
+                        List<Client> clients = ClientRepository.get();
+                        boolean flag = true;
+                        for (Client client : clients) {
+                            if (Objects.equals(client.getEmail(), email1.getText()) && sectors.getIdSectors() == client.getTicket().getSectors().getIdSectors()) {
+                                if ((client.getQuantity() + Integer.parseInt(amount1.getText())) > seats.getTicketPerClient()) {
+                                    error.setVisible(true);
+                                    error.setText("Надвишавате лимита за купуване на билети");
+                                    left.setText("За момента имате " + client.getQuantity() + " броя купени билети. Може да купите още " + (seats.getTicketPerClient() - client.getQuantity()));
+                                    left.setVisible(true);
+                                } else {
+                                    ClientRepository.update(String.valueOf((client.getQuantity() + Integer.parseInt(amount1.getText()))), client.getIdClient());
+
+                                    seats.setAmount(seats.getAmount() - Integer.parseInt(amount1.getText()));
+                                    SeatsRepository.updateAmount(String.valueOf(seats.getAmount()), seats.getIdSeats());
+
+                                    seats.setSold(seats.getSold() + Integer.parseInt(amount1.getText()));
+                                    SeatsRepository.updateSold(String.valueOf(seats.getSold()), seats.getIdSeats());
+
+                                    tickets.setTicketsSold(tickets.getTicketsSold() + Integer.parseInt(amount1.getText()));
+                                    TicketsRepository.updateTicketSold(String.valueOf(tickets.getTicketsSold()), tickets.getIdTicket());
+
+                                    left.setText("Покупката е успешна");
+                                    left.setVisible(true);
+                                    error.setVisible(false);
+
+                                    LogManager.shutdown();
+                                    System.setProperty("logFilename", "info.log");
+                                    Logger logger = LogManager.getLogger();
+                                    logger.info("Client added successful! client ID:" + client.getIdClient());
+
+                                    LogManager.shutdown();
+                                    System.setProperty("logFilename", "organiser_id_" + tickets.getSectors().getEvent().getOrganiser().getIdProfile() + ".log");
+                                    logger = LogManager.getLogger();
+                                    logger.info(sectors.getEvent().getName() + "," + seats.getType() + "," + Integer.parseInt(amount1.getText()));
+                                }
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (flag) {
+                            if (Integer.parseInt(amount1.getText()) > seats.getTicketPerClient()) {
                                 error.setVisible(true);
                                 error.setText("Надвишавате лимита за купуване на билети");
-                                left.setText("За момента имате " + client.getQuantity() + " броя купени билети. Може да купите още " + (seats.getTicketPerClient() - client.getQuantity()));
+                                left.setText("Може да купите максимум " + seats.getTicketPerClient() + " билета");
                                 left.setVisible(true);
-                            } else {
-                                Connection connection = Database.connection();
-                                Statement statement = connection.createStatement();
-                                String sql = " UPDATE CLIENT SET QUANTITY=" + (client.getQuantity() + Integer.parseInt(amount1.getText())) + " WHERE EMAIL='" + client.getEmail() + "'";
-                                statement.executeQuery(sql);
-                                seats.setAmount(seats.getAmount() - Integer.parseInt(amount1.getText()));
-                                sql = "UPDATE SEATS SET amount = " + seats.getAmount() + " WHERE id_seats=" + seats.getIdSeats();
-                                statement.executeQuery(sql);
-                                seats.setSold(seats.getSold() + Integer.parseInt(amount1.getText()));
-                                sql = "UPDATE SEATS SET SOLD = " + seats.getSold() + " WHERE id_seats=" + seats.getIdSeats();
-                                statement.executeQuery(sql);
-                                tickets.setTicketsSold(tickets.getTicketsSold() + Integer.parseInt(amount1.getText()));
-                                sql = "UPDATE TICKETS SET TICKETSOLD = " + tickets.getTicketsSold() + " WHERE ID_TICKET=" + tickets.getIdTicket();
-                                statement.executeQuery(sql);
-                                left.setText("Покупката е успешна");
-                                left.setVisible(true);
-                                error.setVisible(false);
-                                statement.close();
-                                LogManager.shutdown();
-                                System.setProperty("logFilename", "info.log");
-                                Logger logger = LogManager.getLogger();
-                                logger.info("Client added successful! client ID:" + client.getIdClient());
-
-                                LogManager.shutdown();
-                                System.setProperty("logFilename", "organiser_id_" + tickets.getSectors().getEvent().getOrganiser().getIdProfile() + ".log");
-                                logger = LogManager.getLogger();
-                                logger.info(sectors.getEvent().getName() + "," + seats.getType() + "," + Integer.parseInt(amount1.getText()));
-                            }
-                            flag = false;
-                            break;
+                            } else
+                                insert();
                         }
-                    }
-                    if (flag) {
-                        if (Integer.parseInt(amount1.getText()) > seats.getTicketPerClient()) {
-                            error.setVisible(true);
-                            error.setText("Надвишавате лимита за купуване на билети");
-                            left.setText("Може да купите максимум " + seats.getTicketPerClient() + " билета");
-                            left.setVisible(true);
-                        } else
-                            insert();
+                    }else {
+                        error.setVisible(true);
+                        error.setText("Няма достатъчно билети!");
                     }
                 }else {
                     error.setVisible(true);
@@ -214,33 +208,23 @@ public class PurchaseController implements Initializable {
         }
     }
 
-    public void insert() throws SQLException {
-        Connection connection= Database.connection();
-        Statement statement=connection.createStatement();
-
-        String getId = "SELECT CLIENT_SEQUENCE.nextVal from DUAL";
-        ResultSet rs = statement.executeQuery(getId);
-        int id=0;
-        if(rs.next())
-            id = rs.getInt(1);
+    public void insert(){
+        int id=ClientRepository.autonumber();
 
         Client client=new Client(id,name1.getText(),lastname1.getText(),email1.getText(),phone1.getText(),tickets,Integer.parseInt(amount1.getText()));
-        String sql="INSERT INTO CLIENT(ID_CLIENT,FIRSTNAME, LASTNAME, EMAIL, PHONE, TICKET_ID, QUANTITY) VALUES ("+client.getIdClient()+",'"+client.getFirstName()+"','"+client.getLastName()+"','"+client.getEmail()+"','"+client.getPhoneNumber()+"',"+client.getTicket().getIdTicket()+","+client.getQuantity()+")";
-        statement.executeQuery(sql);
-        seats.setAmount(seats.getAmount()-client.getQuantity());
-        sql="UPDATE SEATS SET amount = "+seats.getAmount()+" WHERE id_seats="+seats.getIdSeats();
-        statement.executeQuery(sql);
-        seats.setSold(seats.getSold()+client.getQuantity());
-        sql="UPDATE SEATS SET SOLD = "+seats.getSold()+" WHERE id_seats="+seats.getIdSeats();
-        statement.executeQuery(sql);
-        tickets.setTicketsSold(tickets.getTicketsSold()+ client.getQuantity());
-        sql="UPDATE TICKETS SET TICKETSOLD = "+tickets.getTicketsSold()+" WHERE ID_TICKET="+tickets.getIdTicket();
-        statement.executeQuery(sql);
+        ClientRepository.add(client);
+
+        seats.setAmount(seats.getAmount() - Integer.parseInt(amount1.getText()));
+        SeatsRepository.updateAmount(String.valueOf(seats.getAmount()), seats.getIdSeats());
+
+        seats.setSold(seats.getSold() + Integer.parseInt(amount1.getText()));
+        SeatsRepository.updateSold(String.valueOf(seats.getSold()), seats.getIdSeats());
+
+        tickets.setTicketsSold(tickets.getTicketsSold() + Integer.parseInt(amount1.getText()));
+        TicketsRepository.updateTicketSold(String.valueOf(tickets.getTicketsSold()),tickets.getIdTicket());
         left.setText("Покупката е успешна");
         left.setVisible(true);
         error.setVisible(false);
-        rs.getStatement().close();
-        rs.close();
 
         LogManager.shutdown();
         System.setProperty("logFilename", "info.log");
@@ -257,7 +241,7 @@ public class PurchaseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Set<String> events=new HashSet<>();
-        ticketsList = GetTickets.get();
+        ticketsList = TicketsRepository.get();
         for(Tickets tickets: ticketsList) {
             if (tickets.getDistributor().getIdProfile() == Profile.getProfiles().getIdProfile())
                 events.add(tickets.getSectors().getEvent().getName());
