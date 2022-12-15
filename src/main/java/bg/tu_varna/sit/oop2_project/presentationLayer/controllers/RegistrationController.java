@@ -1,12 +1,8 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.*;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetProfiles;
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Distributor;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Organiser;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Profiles;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Roles;
+import bg.tu_varna.sit.oop2_project.busnessLayer.services.RegistrationService;
+import bg.tu_varna.sit.oop2_project.dataLayer.DTO.RegistrationDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,15 +10,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetRoles;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -30,7 +21,6 @@ import static eu.hansolo.tilesfx.Tile.GREEN;
 import static eu.hansolo.tilesfx.Tile.RED;
 
 public class RegistrationController implements Initializable {
-    private List<Profiles> profiles;
     @FXML
     private TextField username;
     @FXML
@@ -58,53 +48,22 @@ public class RegistrationController implements Initializable {
                         label.setText("*Паролите не съвпадат");
                         label.setTextFill(RED);
                     } else {
-                        boolean flag = true;
-                        for (Profiles profiles : this.profiles) {
-                            if (Objects.equals(profiles.getUsername(), username.getText())) {
-                                flag = false;
-                                break;
-                            }
-                        }
-                        String hashedPassword = PasswordHash.hashing(pass2.getText());
-                        if (flag) {
-                            for (Roles roles : GetRoles.get()) {
-                                if (Objects.equals(box.getValue().toString(), roles.getRole())) {
-                                    Connection connection = Database.connection();
-                                    Statement statement = connection.createStatement();
-
-                                    String getId = "SELECT PROFILES_SEQUENCE.nextVal from DUAL";
-                                    ResultSet rs = statement.executeQuery(getId);
-                                    int id = 0;
-                                    if (rs.next())
-                                        id = rs.getInt(1);
-
-                                    Profiles profiles = new Profiles(id, username.getText(), hashedPassword, roles);
-                                    String sql = "INSERT INTO PROFILES(ID_PROFILE,USERNAME,PASSWORD,ROLE_ID) VALUES (" + profiles.getIdProfile() + ",'" + profiles.getUsername() + "','" + profiles.getPassword() + "'," + profiles.getRoles().getIdRole() + ")";
-                                    statement.executeQuery(sql);
-
-                                    if (Objects.equals(roles.getRole(), "организатор")) {
-                                        Organiser organiser = new Organiser(profiles, firstName.getText(), lastName.getText(), email.getText(), phone.getText());
-                                        sql = "INSERT INTO ORGANISER(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE) VALUES (" + organiser.getIdProfile() + ",'" + organiser.getFirstName() + "','" + organiser.getLastName() + "','" + organiser.getEmail() + "','" + organiser.getPhoneNumber() + "')";
-                                        statement.executeQuery(sql);
-                                    } else {
-                                        Distributor distributor = new Distributor(profiles, firstName.getText(), lastName.getText(), email.getText(), phone.getText(), 0, 0);
-                                        sql = "INSERT INTO DISTRIBUTOR(ID_PROFILE,FIRSTNAME,LASTNAME,EMAIL,PHONE,RATING,SALARY) VALUES (" + distributor.getIdProfile() + ",'" + distributor.getFirstName() + "','" + distributor.getLastName() + "','" + distributor.getEmail() + "','" + distributor.getPhoneNumber() + "'," + distributor.getRating() + "," + distributor.getSalary() + ")";
-                                        statement.executeQuery(sql);
-                                    }
-                                    rs.getStatement().close();
-                                    rs.close();
-                                    LogManager.shutdown();
-                                    System.setProperty("logFilename", "info.log");
-                                    Logger logger = LogManager.getLogger();
-                                    logger.info("Profile crated successful: " + profiles.getIdProfile() + "," + profiles.getUsername() + "," + profiles.getRoles().getRole());
-                                    label.setText("*Профилът е създаден успешно");
-                                    label.setTextFill(GREEN);
-                                }
-                            }
+                        RegistrationDTO registrationDTO=new RegistrationDTO(username.getText(),firstName.getText(),lastName.getText(),email.getText(),phone.getText(),pass.getText(),pass2.getText(),box.getValue().toString());
+                        if(RegistrationService.register(registrationDTO)){
+                            label.setText("*Профилът е създаден успешно");
+                            label.setTextFill(GREEN);
                         } else {
                             label.setText("*Съществува такъв профил");
                             label.setTextFill(RED);
                         }
+                        username.clear();
+                        firstName.clear();
+                        lastName.clear();
+                        email.clear();
+                        phone.clear();
+                        pass.clear();
+                        pass2.clear();
+                        box.setValue("");
                     }
                 }else {
                     label.setText("*Невалиден имейл");
@@ -127,12 +86,6 @@ public class RegistrationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        profiles= GetProfiles.get();
-        List<String> roles=new ArrayList<>();
-        for(Roles role: GetRoles.get()){
-            roles.add(role.getRole());
-        }
-        box.getItems().add(roles.get(1));
-        box.getItems().add(roles.get(2));
+        RegistrationService.init(box);
     }
 }
