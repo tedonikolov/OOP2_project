@@ -1,36 +1,19 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
+import bg.tu_varna.sit.oop2_project.busnessLayer.services.AdminService;
 import bg.tu_varna.sit.oop2_project.dataLayer.DTO.ProfilesDTO;
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.EventOrganizer;
-import bg.tu_varna.sit.oop2_project.busnessLayer.PasswordHash;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetDistributors;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetOrganisers;
-import bg.tu_varna.sit.oop2_project.dataLayer.collections.GetProfiles;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Distributor;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Organiser;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Profiles;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
 
-import static eu.hansolo.tilesfx.Tile.GREEN;
 import static eu.hansolo.tilesfx.Tile.RED;
 
 public class AdminController {
@@ -109,22 +92,7 @@ public class AdminController {
         id1.setVisible(false);
         exception.setVisible(false);
 
-        TableColumn idProfile = new TableColumn<List<String>,String>("№");
-        idProfile.setCellValueFactory(new PropertyValueFactory<ProfilesDTO, Integer>("idProfile"));
-
-        TableColumn username = new TableColumn<ProfilesDTO, String>("Потребител");
-        username.setCellValueFactory(new PropertyValueFactory<Profiles, String >("username"));
-
-        TableColumn role = new TableColumn<ProfilesDTO, String>("Роля");
-        role.setCellValueFactory(new PropertyValueFactory<Profiles, String>("role"));
-
-        table.getColumns().setAll(idProfile,username,role);
-
-        for(Profiles profile: GetProfiles.get()){
-            if(profile.getIdProfile()==1)
-                continue;
-            table.getItems().add(new ProfilesDTO(profile.getIdProfile(), profile.getUsername(), profile.getRoles().getRole()));
-        }
+        AdminService.show(table);
         table.setVisible(true);
     }
 
@@ -148,99 +116,20 @@ public class AdminController {
     }
 
     public void removeProfile(){
-        try {
-            boolean flag=false;
-
-            for(Organiser organiser: GetOrganisers.get()){
-                if(organiser.getIdProfile()==Integer.parseInt(id.getText())){
-                    Connection connection= Database.connection();
-                    PreparedStatement statement = connection.prepareStatement("DELETE FROM ORGANISER WHERE ID_PROFILE="+Integer.parseInt(id.getText()));
-                    ResultSet result = statement.executeQuery();
-                    result.getStatement().close();
-                    result.close();
-                    flag=true;
-                    break;
-                }
-            }
-
-            if(!flag){
-                for(Distributor distributor: GetDistributors.get()){
-                    if(distributor.getIdProfile()==Integer.parseInt(id.getText())){
-                        Connection connection=Database.connection();
-                        PreparedStatement statement = connection.prepareStatement("DELETE FROM DISTRIBUTOR WHERE ID_PROFILE="+Integer.parseInt(id.getText()));
-                        ResultSet result = statement.executeQuery();
-                        result.getStatement().close();
-                        result.close();
-                        break;
-                    }
-                }
-            }
-
-            Connection connection=Database.connection();
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM PROFILES WHERE ID_PROFILE=" + Integer.parseInt(id.getText()));
-            ResultSet result = statement.executeQuery();
-            result.getStatement().close();
-            result.close();
-            exception.setTextFill(GREEN);
-            exception.setText("Потребителят е изтрит успешно");
-            exception.setVisible(true);
-
-            LogManager.shutdown();
-            System.setProperty("logFilename", "info.log");
-            Logger logger = LogManager.getLogger();
-            logger.info("User deleted successful! profile ID:"+id.getText());
-        }
-        catch (SQLException e) {
-            exception.setTextFill(RED);
-            exception.setText("Не можете да изтриете потребителя!");
-            exception.setVisible(true);
-            LogManager.shutdown();
-            System.setProperty("logFilename", "fatal.log");
-            Logger logger = LogManager.getLogger("Can't delete profile");
-            logger.fatal(e);
-            throw new RuntimeException(e);
-        }
+        AdminService.delete(Integer.parseInt(id.getText()),exception);
+        exception.setVisible(true);
+        id.clear();
     }
 
     public void password() throws SQLException, NoSuchAlgorithmException {
-        boolean flag=false;
-
-        for(Profiles profiles: GetProfiles.get()){
-            if(Integer.parseInt(id1.getText())==profiles.getIdProfile()){
-                String old= PasswordHash.hashing(oldPass.getText());
-                if(old.equals(profiles.getPassword())){
-                    if (!Objects.equals(newPass.getText(), newPass2.getText())) {
-                        error.setText("*Паролите не съвпадат");
-                        error.setTextFill(RED);
-                    }
-                    else {
-                        String pass=PasswordHash.hashing(newPass.getText());
-                        Connection connection = Database.connection();
-                        PreparedStatement statement = connection.prepareStatement("UPDATE PROFILES SET PASSWORD='"+pass+"' WHERE ID_PROFILE=" + Integer.parseInt(id1.getText()));
-                        ResultSet result = statement.executeQuery();
-                        result.getStatement().close();
-                        result.close();
-                        error.setTextFill(GREEN);
-                        error.setText("Успешно променихте паролата");
-
-                        LogManager.shutdown();
-                        System.setProperty("logFilename", "info.log");
-                        Logger logger = LogManager.getLogger();
-                        logger.info("Password changed successful! profile ID:"+profiles.getIdProfile());
-                    }
-                }
-                else {
-                    error.setTextFill(RED);
-                    error.setText("Грешна стара парола!");
-                }
-                flag=true;
-                break;
-            }
-        }
-        if(!flag){
+        if(!AdminService.changePass(Integer.parseInt(id1.getText()),oldPass.getText(),newPass.getText(),newPass2.getText(),error)){
             error.setTextFill(RED);
             error.setText("НЕ съществува такъв потребител!");
         }
+        id1.clear();
+        oldPass.clear();
+        newPass.clear();
+        newPass2.clear();
         error.setVisible(true);
     }
 }
