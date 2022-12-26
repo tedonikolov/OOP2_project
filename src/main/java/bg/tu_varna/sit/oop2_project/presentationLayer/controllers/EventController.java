@@ -1,27 +1,19 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
-import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Organiser;
-import bg.tu_varna.sit.oop2_project.dataLayer.repositories.EventRepository;
-import bg.tu_varna.sit.oop2_project.dataLayer.repositories.OrganiserRepository;
+import bg.tu_varna.sit.oop2_project.busnessLayer.services.EventService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
-import java.time.LocalDateTime;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static eu.hansolo.tilesfx.Tile.GREEN;
 
-public class EventController {
-    private Organiser organiser;
+public class EventController implements Initializable {
     @FXML
     private TextField name;
     @FXML
@@ -40,19 +32,7 @@ public class EventController {
     public void create(){
         if(!Objects.equals(name.getText(), "")&& !Objects.equals(address.getText(), "")&& !Objects.equals(time.getText(), "")&& !Objects.equals(description.getText(), "")) {
             if (time.getText().contains(":")) {
-                int id = EventRepository.autonumber();
-
-                String[] arr = time.getText().split(":");
-                int hour = Integer.parseInt(arr[0]);
-                int minute = Integer.parseInt(arr[1]);
-                LocalDateTime dateTime = LocalDateTime.of(date.getValue().getYear(), date.getValue().getMonth(), date.getValue().getDayOfMonth(), hour, minute);
-
-                for (Organiser organiser : OrganiserRepository.get())
-                    if (organiser.getIdProfile() == Profile.getProfiles().getIdProfile())
-                        this.organiser = organiser;
-
-                Event event = new Event(id, name.getText(), address.getText(), dateTime, description.getText(), organiser);
-                EventRepository.add(event);
+                EventService.create(name.getText(),address.getText(),time.getText(),description.getText(),date.getValue().getYear(), date.getValue().getMonth(), date.getValue().getDayOfMonth());
 
                 complete.setVisible(true);
                 complete.setTextFill(GREEN);
@@ -63,16 +43,14 @@ public class EventController {
                 time.setText("");
                 description.setText("");
 
-                LogManager.shutdown();
-                System.setProperty("logFilename", "info.log");
-                Logger logger = LogManager.getLogger();
-                logger.info("Event crated successful: "+event.getIdEvent()+","+event.getName());
             } else {
+                complete.setVisible(false);
                 error.setVisible(true);
                 error.setText("*Грешен формат!");
             }
         }
         else{
+            complete.setVisible(false);
             error.setText("*Попълнете всички полета!");
             error.setVisible(true);
         }
@@ -81,5 +59,10 @@ public class EventController {
 
     public void back(ActionEvent event) {
         SceneChanger.change(event,"organiser.fxml");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        EventService.disableDays(date);
     }
 }
