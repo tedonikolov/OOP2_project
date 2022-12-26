@@ -2,6 +2,7 @@ package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
+import bg.tu_varna.sit.oop2_project.busnessLayer.services.SeatsService;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Seats;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Sectors;
@@ -29,7 +30,6 @@ import static eu.hansolo.tilesfx.Tile.GREEN;
 import static eu.hansolo.tilesfx.Tile.RED;
 
 public class SeatsController implements Initializable {
-    private Event curr;
     @FXML
     private ChoiceBox event;
     @FXML
@@ -46,29 +46,11 @@ public class SeatsController implements Initializable {
     public void create(){
         if (event.getValue() != null && !Objects.equals(type.getText(), "") && !Objects.equals(amount.getText(), "") && !Objects.equals(price.getText(), "") && !Objects.equals(ticketPerClient.getText(), "")) {
 
-            for (Event event: EventRepository.get()){
-                if(event.getOrganiser().getIdProfile()== Profile.getProfiles().getIdProfile()&& Objects.equals(event.getName(), this.event.getValue().toString())){
-                    curr=event;
-                    break;
-                }
-            }
-
-            int id= SeatsRepository.autonumber();
-            Seats seats=new Seats(id,type.getText(),Integer.parseInt(amount.getText()),0,Double.parseDouble(price.getText()),Integer.parseInt(ticketPerClient.getText()));
-            SeatsRepository.add(seats);
-
-            id = SectorsRepository.autonumber();
-            Sectors sectors = new Sectors(id,curr,seats);
-            SectorsRepository.add(sectors);
-
+            SeatsService.create(event.getValue().toString(),type.getText(),Integer.parseInt(amount.getText()),Double.parseDouble(price.getText()),Integer.parseInt(ticketPerClient.getText()));
             error.setText("Успешно създаден "+type.getText());
             error.setTextFill(GREEN);
             error.setVisible(true);
             clear();
-            LogManager.shutdown();
-            System.setProperty("logFilename", "info.log");
-            Logger logger = LogManager.getLogger();
-            logger.info("Seat crated successful: "+seats.getIdSeats()+","+seats.getType());
         }
         else {
             error.setText("Попълнете всички полета!");
@@ -90,12 +72,7 @@ public class SeatsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<String> events=new ArrayList<>();
-        for(Event event: EventRepository.get()){
-            if(event.getOrganiser().getIdProfile()== Profile.getProfiles().getIdProfile())
-                events.add(event.getName());
-        }
-        event.getItems().addAll(events);
+        SeatsService.init(event);
 
         event.valueProperty().addListener(new ChangeListener() {
             @Override
