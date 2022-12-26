@@ -2,6 +2,7 @@ package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
+import bg.tu_varna.sit.oop2_project.busnessLayer.services.TicketService;
 import bg.tu_varna.sit.oop2_project.dataLayer.repositories.DistributorRepository;
 import bg.tu_varna.sit.oop2_project.dataLayer.repositories.EventRepository;
 import bg.tu_varna.sit.oop2_project.dataLayer.repositories.SectorsRepository;
@@ -31,7 +32,6 @@ import static eu.hansolo.tilesfx.Tile.RED;
 
 public class TicketController implements Initializable{
     private List<Tickets> tickets;
-    private List<Distributor> distributors;
     @FXML
     private ChoiceBox distributor;
     @FXML
@@ -49,33 +49,8 @@ public class TicketController implements Initializable{
 
     public void addDistributor(){
         if (event.getValue() != null && distributor.getValue()!=null) {
+            TicketService.addDistributor(this.distributor.getValue().toString(),this.event.getValue().toString());
 
-            List<Sectors> sectorsList = SectorsRepository.get();
-
-            for (Distributor distributor : distributors) {
-                String string = this.distributor.getValue().toString();
-                String[] name = string.split(" ");
-                if (Objects.equals(distributor.getFirstName(), name[0]) && Objects.equals(distributor.getFirstName(), name[0])) {
-                    for (Sectors sectors : sectorsList) {
-                        if (Objects.equals(sectors.getEvent().getName(), this.event.getValue().toString())) {
-
-                            int id = TicketsRepository.autonumber();
-                            Tickets ticket = new Tickets(id, sectors, 0, distributor, 0);
-                            TicketsRepository.add(ticket);
-
-                            LogManager.shutdown();
-                            System.setProperty("logFilename", "info.log");
-                            Logger logger = LogManager.getLogger();
-                            logger.info("Distributor added successful: " + distributor.getIdProfile() + "," + distributor.getFirstName() + "," + distributor.getLastName());
-
-                            LogManager.shutdown();
-                            System.setProperty("logFilename", "distributor_id_" + distributor.getIdProfile() + ".log");
-                            logger = LogManager.getLogger();
-                            logger.info(sectors.getEvent().getName());
-                        }
-                    }
-                }
-            }
             complete.setVisible(true);
             complete.setTextFill(GREEN);
             complete.setText("Успешно назначихте разпространителя");
@@ -90,7 +65,7 @@ public class TicketController implements Initializable{
         if(this.distributor.getValue()!=null) {
             String string = this.distributor.getValue().toString();
             String[] name = string.split(" ");
-            for (Distributor distributor1 : distributors) {
+            for (Distributor distributor1 : DistributorRepository.get()) {
                 if (Objects.equals(distributor1.getFirstName(), name[0]) && Objects.equals(distributor1.getFirstName(), name[0])) {
                     salary1.setText(Double.toString(distributor1.getSalary()));
                     salary1.setVisible(true);
@@ -103,22 +78,7 @@ public class TicketController implements Initializable{
     }
 
     public void distributors() {
-        distributor.getItems().clear();
-        List<String> distributors=new ArrayList<>();
-        for(Distributor distributor: this.distributors){
-            boolean flag=true;
-            for(Tickets tickets : tickets){
-                if(Objects.equals(tickets.getSectors().getEvent().getName(), event.getValue().toString())&&Objects.equals(tickets.getDistributor().getIdProfile(), distributor.getIdProfile())){
-                    flag=false;
-                    break;
-                }
-            }
-            if (flag) {
-                String fullName=distributor.getFirstName()+" "+ distributor.getLastName();
-                distributors.add(fullName);
-            }
-        }
-        distributor.getItems().addAll(distributors);
+        TicketService.distributors(distributor,tickets,event.getValue().toString());
         number.setVisible(false);
         salary1.setVisible(false);
         complete.setVisible(false);
@@ -126,13 +86,7 @@ public class TicketController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<String> events = new ArrayList<>();
-        for (Event event : EventRepository.get()) {
-            if (event.getOrganiser().getIdProfile() == Profile.getProfiles().getIdProfile())
-                events.add(event.getName());
-        }
-        event.getItems().addAll(events);
-        distributors = DistributorRepository.get();
+        TicketService.init(event);
 
         event.valueProperty().addListener(new ChangeListener() {
             @Override
