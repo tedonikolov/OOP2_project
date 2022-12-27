@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: bg.tu_varna.sit.oop2_project.busnessLayer.DatabaseTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.822 s - in bg.tu_varna.sit.oop2_project.busnessLayer.DatabaseTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.57 s - in bg.tu_varna.sit.oop2_project.busnessLayer.DatabaseTest

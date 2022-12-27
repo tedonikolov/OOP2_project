@@ -11,12 +11,7 @@ class DatabaseTest {
     public void testConnection(){
         Database.connection();
         assertNotNull(Database.connection());
-        Database.close();
     }
 
-    @Test
-    public void isClosed(){
-        assertThrows(NullPointerException.class,()->Database.close());
-    }
 }
 
