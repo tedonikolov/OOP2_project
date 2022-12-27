@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
+import bg.tu_varna.sit.oop2_project.busnessLayer.services.QueriesOrganiserService;
 import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
@@ -87,36 +88,10 @@ public class QueriesOrganiserController implements Initializable {
         event.getItems().clear();
         distributor.setVisible(false);
 
-        EventTable.table(event);
-        Connection connection = Database.connection();
-        PreparedStatement statement;
-        if (eventBox.getValue() != null) {
-            statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, SOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID WHERE NAME='" + eventBox.getValue().toString() + "' AND ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-        } else if (from.getValue() != null && to.getValue() != null) {
-            if (Objects.equals(this.address.getText(), "")) {
-                LocalDateTime fromDate = LocalDateTime.of(from.getValue().getYear(), from.getValue().getMonth(), from.getValue().getDayOfMonth(), 0, 0);
-                LocalDateTime toDate = LocalDateTime.of(to.getValue().getYear(), to.getValue().getMonth(), to.getValue().getDayOfMonth(), 0, 0);
-                statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, SOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID WHERE DATETIME BETWEEN to_date('" + fromDate + "','YYYY-MM-DD\"T\"HH24:MI:SS') AND to_date('" + toDate + "','YYYY-MM-DD\"T\"HH24:MI:SS') AND ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-            } else {
-                LocalDateTime fromDate = LocalDateTime.of(from.getValue().getYear(), from.getValue().getMonth(), from.getValue().getDayOfMonth(), 0, 0);
-                LocalDateTime toDate = LocalDateTime.of(to.getValue().getYear(), to.getValue().getMonth(), to.getValue().getDayOfMonth(), 0, 0);
-                statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, SOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID WHERE DATETIME BETWEEN to_date('" + fromDate + "','YYYY-MM-DD\"T\"HH24:MI:SS') AND to_date('" + toDate + "','YYYY-MM-DD\"T\"HH24:MI:SS') AND ADDRESS LIKE '%" + this.address.getText() + "%' AND ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-            }
-        } else if (!Objects.equals(this.address.getText(), "")) {
-            statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, SOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID WHERE ADDRESS LIKE '%" + this.address.getText() + "%' AND ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-        } else
-            statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, SOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID WHERE ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-        ResultSet result = statement.executeQuery();
+        QueriesOrganiserService.showEvents(event,eventBox,from,to,address.getText());
 
-        while (result.next()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            EventDTO eventDTO = new EventDTO(result.getString(1), result.getString(2), LocalDate.parse(result.getString(3), formatter), LocalTime.parse(result.getString(4)), result.getString(5), Integer.parseInt(result.getString(6)), Integer.parseInt(result.getString(7)), Double.parseDouble(result.getString(8)));
-            event.getItems().add(eventDTO);
-        }
         event.setVisible(true);
         back.setVisible(true);
-        result.getStatement().close();
-        result.close();
     }
 
 
@@ -131,77 +106,16 @@ public class QueriesOrganiserController implements Initializable {
         distributor.getItems().clear();
         event.setVisible(false);
 
-        TableColumn name = new TableColumn<DistributorDTO, String>("Разпространител");
-        name.setCellValueFactory(new PropertyValueFactory<DistributorDTO, String>("name"));
+        QueriesOrganiserService.showDistributors(distributor,eventBox1,from2.getText(),to2.getText());
 
-        TableColumn email = new TableColumn<DistributorDTO, String>("Имейл");
-        email.setCellValueFactory(new PropertyValueFactory<DistributorDTO, String>("email"));
-
-        TableColumn phone = new TableColumn<DistributorDTO, String>("Телефон");
-        phone.setCellValueFactory(new PropertyValueFactory<DistributorDTO, String>("phone"));
-
-        TableColumn rating = new TableColumn<DistributorDTO, String>("Рейтинг");
-        rating.setCellValueFactory(new PropertyValueFactory<DistributorDTO, Integer>("rating"));
-
-        TableColumn salary = new TableColumn<DistributorDTO, String>("Заплата");
-        salary.setCellValueFactory(new PropertyValueFactory<DistributorDTO, Integer>("salary"));
-
-        TableColumn event = new TableColumn<DistributorDTO, String>("Евент");
-        event.setCellValueFactory(new PropertyValueFactory<DistributorDTO, Integer>("event"));
-
-        TableColumn seat = new TableColumn<DistributorDTO, String>("Място");
-        seat.setCellValueFactory(new PropertyValueFactory<DistributorDTO, Integer>("seat"));
-
-        TableColumn sold = new TableColumn<DistributorDTO, String>("Продажби");
-        sold.setCellValueFactory(new PropertyValueFactory<DistributorDTO, Integer>("sold"));
-
-        distributor.getColumns().setAll(name,email,phone,rating,salary,event,seat,sold);
-
-        Connection connection = Database.connection();
-        PreparedStatement statement;
-
-        if(eventBox1.getValue()!=null){
-            if(!Objects.equals(from2.getText(), "") && !Objects.equals(to2.getText(), "")){
-                statement=connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, EMAIL, PHONE, RATING, SALARY, NAME, TYPE, TICKETSOLD FROM TICKETS JOIN DISTRIBUTOR D on D.ID_PROFILE = TICKETS.DISTRIBUTOR_ID JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID JOIN EVENT E on E.ID_EVENT = S.EVENT_ID JOIN SEATS S2 on S2.ID_SEATS = S.SEATS_ID WHERE TICKETSOLD BETWEEN "+Integer.parseInt(from2.getText())+" AND "+Integer.parseInt(to2.getText())+" AND NAME='"+eventBox1.getValue().toString()+"' AND ORGANISER_ID="+Profile.getProfiles().getIdProfile());
-            } else if (!Objects.equals(from2.getText(), "")) {
-                statement=connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, EMAIL, PHONE, RATING, SALARY, NAME, TYPE, TICKETSOLD FROM TICKETS JOIN DISTRIBUTOR D on D.ID_PROFILE = TICKETS.DISTRIBUTOR_ID JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID JOIN EVENT E on E.ID_EVENT = S.EVENT_ID JOIN SEATS S2 on S2.ID_SEATS = S.SEATS_ID WHERE TICKETSOLD>="+Integer.parseInt(from2.getText())+" AND NAME='"+eventBox1.getValue().toString()+"' AND ORGANISER_ID="+Profile.getProfiles().getIdProfile());
-            } else if (!Objects.equals(to2.getText(), "")) {
-                statement=connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, EMAIL, PHONE, RATING, SALARY, NAME, TYPE, TICKETSOLD FROM TICKETS JOIN DISTRIBUTOR D on D.ID_PROFILE = TICKETS.DISTRIBUTOR_ID JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID JOIN EVENT E on E.ID_EVENT = S.EVENT_ID JOIN SEATS S2 on S2.ID_SEATS = S.SEATS_ID WHERE TICKETSOLD<="+Integer.parseInt(to2.getText())+" AND NAME='"+eventBox1.getValue().toString()+"' AND ORGANISER_ID="+Profile.getProfiles().getIdProfile());
-            }
-            else {
-                statement=connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, EMAIL, PHONE, RATING, SALARY, NAME, TYPE, TICKETSOLD FROM TICKETS JOIN DISTRIBUTOR D on D.ID_PROFILE = TICKETS.DISTRIBUTOR_ID JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID JOIN EVENT E on E.ID_EVENT = S.EVENT_ID JOIN SEATS S2 on S2.ID_SEATS = S.SEATS_ID WHERE NAME='"+eventBox1.getValue().toString()+"' AND ORGANISER_ID="+Profile.getProfiles().getIdProfile());
-            }
-        }
-        else {
-            if (!Objects.equals(from2.getText(), "") && !Objects.equals(to2.getText(), "")) {
-                statement = connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, EMAIL, PHONE, RATING, SALARY, NAME, TYPE, TICKETSOLD FROM TICKETS JOIN DISTRIBUTOR D on D.ID_PROFILE = TICKETS.DISTRIBUTOR_ID JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID JOIN EVENT E on E.ID_EVENT = S.EVENT_ID JOIN SEATS S2 on S2.ID_SEATS = S.SEATS_ID WHERE TICKETSOLD BETWEEN " + Integer.parseInt(from2.getText()) + " AND " + Integer.parseInt(to2.getText()) + " AND ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-            } else if (!Objects.equals(from2.getText(), "")) {
-                statement = connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, EMAIL, PHONE, RATING, SALARY, NAME, TYPE, TICKETSOLD FROM TICKETS JOIN DISTRIBUTOR D on D.ID_PROFILE = TICKETS.DISTRIBUTOR_ID JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID JOIN EVENT E on E.ID_EVENT = S.EVENT_ID JOIN SEATS S2 on S2.ID_SEATS = S.SEATS_ID WHERE TICKETSOLD>=" + Integer.parseInt(from2.getText()) + " AND ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-            } else if (!Objects.equals(to2.getText(), "")) {
-                statement = connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, EMAIL, PHONE, RATING, SALARY, NAME, TYPE, TICKETSOLD FROM TICKETS JOIN DISTRIBUTOR D on D.ID_PROFILE = TICKETS.DISTRIBUTOR_ID JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID JOIN EVENT E on E.ID_EVENT = S.EVENT_ID JOIN SEATS S2 on S2.ID_SEATS = S.SEATS_ID WHERE TICKETSOLD<=" + Integer.parseInt(to2.getText()) + " AND ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-            } else {
-                statement = connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, EMAIL, PHONE, RATING, SALARY, NAME, TYPE, TICKETSOLD FROM TICKETS JOIN DISTRIBUTOR D on D.ID_PROFILE = TICKETS.DISTRIBUTOR_ID JOIN SECTORS S on S.ID_SECTORS = TICKETS.SECTORS_ID JOIN EVENT E on E.ID_EVENT = S.EVENT_ID JOIN SEATS S2 on S2.ID_SEATS = S.SEATS_ID WHERE ORGANISER_ID=" + Profile.getProfiles().getIdProfile());
-            }
-        }
-        ResultSet result = statement.executeQuery();
-        while (result.next()){
-            DistributorDTO distributorDTO =new DistributorDTO(result.getString(1)+" "+result.getString(2),result.getString(3),result.getString(4),Double.parseDouble(result.getString(5)),Double.parseDouble(result.getString(6)),result.getString(7),result.getString(8),Integer.parseInt(result.getString(9)));
-            distributor.getItems().add(distributorDTO);
-        }
         distributor.setVisible(true);
-        result.getStatement().close();
-        result.close();
+        back.setVisible(true);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        List<String> events=new ArrayList<>();
-        events.add(null);
-        for(Event event: EventRepository.get()){
-            if(event.getOrganiser().getIdProfile()== Profile.getProfiles().getIdProfile())
-                events.add(event.getName());
-        }
+        QueriesOrganiserService.init(eventBox,eventBox1);
         eventBox.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
@@ -220,7 +134,5 @@ public class QueriesOrganiserController implements Initializable {
                 }
             }
         });
-        eventBox.getItems().addAll(events);
-        eventBox1.getItems().addAll(events);
     }
 }
