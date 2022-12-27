@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
+import bg.tu_varna.sit.oop2_project.busnessLayer.services.QueriesDistributorService;
 import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
@@ -71,47 +72,16 @@ public class QueriesDistributorController implements Initializable {
 
         event.getItems().clear();
 
-        Connection connection=Database.connection();
-        PreparedStatement statement;
-        EventTable.table(event);
-        if (eventBox.getValue() != null) {
-            statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, TICKETSOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID JOIN TICKETS T on SECTORS.ID_SECTORS = T.SECTORS_ID WHERE NAME='" + eventBox.getValue().toString() + "' AND DISTRIBUTOR_ID=" + Profile.getProfiles().getIdProfile());
-        } else if (from.getValue() != null && to.getValue() != null) {
-            if (Objects.equals(this.address.getText(), "")) {
-                LocalDateTime fromDate = LocalDateTime.of(from.getValue().getYear(), from.getValue().getMonth(), from.getValue().getDayOfMonth(), 0, 0);
-                LocalDateTime toDate = LocalDateTime.of(to.getValue().getYear(), to.getValue().getMonth(), to.getValue().getDayOfMonth(), 0, 0);
-                statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, TICKETSOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID JOIN TICKETS T on SECTORS.ID_SECTORS = T.SECTORS_ID WHERE DATETIME BETWEEN to_date('" + fromDate + "','YYYY-MM-DD\"T\"HH24:MI:SS') AND to_date('" + toDate + "','YYYY-MM-DD\"T\"HH24:MI:SS') AND DISTRIBUTOR_ID=" + Profile.getProfiles().getIdProfile());
-            } else {
-                LocalDateTime fromDate = LocalDateTime.of(from.getValue().getYear(), from.getValue().getMonth(), from.getValue().getDayOfMonth(), 0, 0);
-                LocalDateTime toDate = LocalDateTime.of(to.getValue().getYear(), to.getValue().getMonth(), to.getValue().getDayOfMonth(), 0, 0);
-                statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, TICKETSOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID JOIN TICKETS T on SECTORS.ID_SECTORS = T.SECTORS_ID WHERE DATETIME BETWEEN to_date('" + fromDate + "','YYYY-MM-DD\"T\"HH24:MI:SS') AND to_date('" + toDate + "','YYYY-MM-DD\"T\"HH24:MI:SS') AND ADDRESS LIKE '%" + this.address.getText() + "%' AND DISTRIBUTOR_ID=" + Profile.getProfiles().getIdProfile());
-            }
-        } else if (!Objects.equals(this.address.getText(), "")) {
-            statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, TICKETSOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID JOIN TICKETS T on SECTORS.ID_SECTORS = T.SECTORS_ID WHERE ADDRESS LIKE '%" + this.address.getText() + "%' AND DISTRIBUTOR_ID=" + Profile.getProfiles().getIdProfile());
-        } else
-            statement = connection.prepareStatement("SELECT NAME, ADDRESS, to_char(DATETIME, 'yyyy-mm-dd') datepart, to_char(DATETIME, 'hh24:mi:ss') timepart, TYPE, AMOUNT, TICKETSOLD, PRICE  FROM SECTORS JOIN SEATS S on SECTORS.SEATS_ID = S.ID_SEATS JOIN EVENT E on E.ID_EVENT = SECTORS.EVENT_ID JOIN TICKETS T on SECTORS.ID_SECTORS = T.SECTORS_ID WHERE DISTRIBUTOR_ID=" + Profile.getProfiles().getIdProfile());
-        ResultSet result = statement.executeQuery();
+        QueriesDistributorService.showEvents(event,eventBox,from,to,address.getText());
 
-        while (result.next()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            EventDTO eventDTO = new EventDTO(result.getString(1), result.getString(2), LocalDate.parse(result.getString(3), formatter), LocalTime.parse(result.getString(4)), result.getString(5), Integer.parseInt(result.getString(6)), Integer.parseInt(result.getString(7)), Double.parseDouble(result.getString(8)));
-            event.getItems().add(eventDTO);
-        }
         event.setVisible(true);
         back.setVisible(true);
-        result.getStatement().close();
-        result.close();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Set<String> events=new HashSet<>();
-        events.add(null);
-        for(Tickets tickets: TicketsRepository.get()){
-            if(tickets.getDistributor().getIdProfile()== Profile.getProfiles().getIdProfile())
-                events.add(tickets.getSectors().getEvent().getName());
-        }
+        QueriesDistributorService.init(eventBox);
         eventBox.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
@@ -130,6 +100,5 @@ public class QueriesDistributorController implements Initializable {
                 }
             }
         });
-        eventBox.getItems().addAll(events);
     }
 }
