@@ -1,11 +1,8 @@
 package bg.tu_varna.sit.oop2_project.presentationLayer.controllers;
 
 import bg.tu_varna.sit.oop2_project.busnessLayer.services.QueriesOrganiserService;
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
-import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.busnessLayer.SceneChanger;
-import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
-import bg.tu_varna.sit.oop2_project.dataLayer.repositories.EventRepository;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,24 +10,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import bg.tu_varna.sit.oop2_project.dataLayer.DTO.DistributorDTO;
 import bg.tu_varna.sit.oop2_project.dataLayer.DTO.EventDTO;
-import bg.tu_varna.sit.oop2_project.busnessLayer.EventTable;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class QueriesOrganiserController implements Initializable {

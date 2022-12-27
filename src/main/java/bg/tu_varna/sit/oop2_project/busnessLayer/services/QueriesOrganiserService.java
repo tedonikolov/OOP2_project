@@ -4,7 +4,6 @@ import bg.tu_varna.sit.oop2_project.busnessLayer.EventTable;
 import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.dataLayer.DTO.DistributorDTO;
 import bg.tu_varna.sit.oop2_project.dataLayer.DTO.EventDTO;
-import bg.tu_varna.sit.oop2_project.dataLayer.Database;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Event;
 import bg.tu_varna.sit.oop2_project.dataLayer.repositories.EventRepository;
 import bg.tu_varna.sit.oop2_project.dataLayer.repositories.QueriesRepository;
@@ -14,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

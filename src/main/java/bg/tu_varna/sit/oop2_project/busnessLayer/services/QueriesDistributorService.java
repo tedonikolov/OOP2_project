@@ -5,7 +5,6 @@ import bg.tu_varna.sit.oop2_project.busnessLayer.Profile;
 import bg.tu_varna.sit.oop2_project.dataLayer.DTO.EventDTO;
 import bg.tu_varna.sit.oop2_project.dataLayer.entities.Tickets;
 import bg.tu_varna.sit.oop2_project.dataLayer.repositories.QueriesRepository;
-import bg.tu_varna.sit.oop2_project.dataLayer.repositories.SectorsRepository;
 import bg.tu_varna.sit.oop2_project.dataLayer.repositories.TicketsRepository;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -39,7 +38,7 @@ public class QueriesDistributorService {
         } else if (!Objects.equals(address, "")) {
             statement = QueriesRepository.selectByAddressAndDistributor(address,Profile.getProfiles().getIdProfile());
         } else
-            statement = QueriesRepository.selectAllAndDistributor(Profile.getProfiles().getIdProfile());
+            statement = QueriesRepository.selectAllByDistributor(Profile.getProfiles().getIdProfile());
 
         try {
             ResultSet result = statement.executeQuery();
