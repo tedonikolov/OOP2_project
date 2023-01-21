@@ -14,6 +14,7 @@
 As the system supports two types of users: administrator and clients (organizer, distributor) with different roles to access the functionalities in the system. 
 For this purpose, an initial login screen is used, and depending on the role of the account stored in the database, one of the three interfaces is activated: 
 admin, organizer or distributor.</p>
+<br><a href="https://github.com/tedonikolov/OOP2_project#documentation-structure">At top</a>
 
 # Functional requirements
 <ol>
@@ -37,6 +38,7 @@ admin, organizer or distributor.</p>
 </ol>
 
 ![image](https://user-images.githubusercontent.com/100678443/213858770-b921abd1-5fab-4ef1-9282-254c0bf7b1e2.png)
+<br><br><a href="https://github.com/tedonikolov/OOP2_project#documentation-structure">At top</a>
 
 # Project structure
 <p>A multi-layer (three-layer) architecture was used for the implementation of the system. Because in this way the interface, 
@@ -46,6 +48,7 @@ Business logic controls the functionality of the application by performing vario
 The data layer consists of a database server, this is where the information from the database is processed.</p>
 
 ![image](https://user-images.githubusercontent.com/100678443/213859325-43e80023-5a3c-48fc-adf9-03820aa4c446.png)
+<br><br><a href="https://github.com/tedonikolov/OOP2_project#documentation-structure">At top</a>
 
 # Technologies and tools used:
 <ul>
@@ -57,10 +60,12 @@ The data layer consists of a database server, this is where the information from
 <li>Log4J</li>
 <li>JUnit</li>
 </ul>
+<br><a href="https://github.com/tedonikolov/OOP2_project#documentation-structure">At top</a>
 
 # Database: Relational model
 
 ![image](https://user-images.githubusercontent.com/100678443/213859870-4f553bc7-d93f-4b65-8499-577458e91a8a.png)
+<br><br><a href="https://github.com/tedonikolov/OOP2_project#documentation-structure">At top</a>
 
 # JavaFX interface resources
 
@@ -96,6 +101,7 @@ The data layer consists of a database server, this is where the information from
 <h3> Tickets form </h3>
 
 ![image](https://user-images.githubusercontent.com/100678443/213860262-e31044be-4f17-4b9c-98d3-d2931ba8132b.png)
+<br><br><a href="https://github.com/tedonikolov/OOP2_project#documentation-structure">At top</a>
 
 # Implementation of event registration module in the system
 The module is implemented using Log4J2. log4j2 configuration file:
@@ -105,6 +111,7 @@ The module is implemented using Log4J2. log4j2 configuration file:
 <p>In the program, logs are used in critical sections to catch fatal errors, especially when working with the database. 
 They are also used to store information during program operation. The logs are the basis of working with notifications in the system, 
 and for this purpose, specific information is saved in a specific file with the id of the counter organizer or distributor.</p>
+<br><a href="https://github.com/tedonikolov/OOP2_project#documentation-structure">At top</a>
 
 # Usage configuration 
 <ol>
@@ -129,3 +136,5 @@ and for this purpose, specific information is saved in a specific file with the 
 <br> The admin profile Username: <b><i>admin</i></b> Password: <b><i>exit</i></b>
 </li>
 </ol>
+
+<br><a href="https://github.com/tedonikolov/OOP2_project#documentation-structure">At top</a>
