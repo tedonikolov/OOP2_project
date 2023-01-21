@@ -107,5 +107,14 @@ and for this purpose, specific information is saved in a specific file with the 
 <br> <b>Username: <i> ADMIN</i>
 <br> Password: <i> exit </i></b>
 <br> Can use the following guide: https://www.youtube.com/watch?v=58V-w3buWm4&ab_channel=ChituOkoli
+<br> Once the connection is set up correctly the <b><i>Oracle_Database_SQL.ddl</i></b> file should be run in sql window in SQL developer to create the Database of the program. In order to create everything the SQL commands should be run one by one!
 </p> </li>
+<li>Before runing the program:
+<p><br>You might need to download JRE: https://www.java.com/en/download/manual.jsp
+<br> Also Oracle JDBC drivers: https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html
+</p>
+</li>
+<li> Login information:
+<br> The admin profile Username: <b><i>admin</i></b> Password: <b><i>exit</i></b>
+</li>
 </ol>
