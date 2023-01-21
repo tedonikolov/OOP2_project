@@ -1,3 +1,14 @@
+# Documentation structure
+<ol>
+  <li><a href="https://github.com/tedonikolov/OOP2_project#functional-requirements">Functional requirements</a></li>
+  <li><a href="https://github.com/tedonikolov/OOP2_project#project-structure">Project structure</a></li>
+  <li><a href="https://github.com/tedonikolov/OOP2_project#technologies-and-tools-used">Technologies and tools used</a></li>
+  <li><a href="https://github.com/tedonikolov/OOP2_project#database-relational-model">Database</a></li>
+  <li><a href="https://github.com/tedonikolov/OOP2_project#javafx-interface-resources">JavaFX interface resources</a></li>
+  <li><a href="https://github.com/tedonikolov/OOP2_project#implementation-of-event-registration-module-in-the-system">Event registration module</a></li>
+  <li><a href="https://github.com/tedonikolov/OOP2_project#usage-configuration">Usage configuration</a></li>
+</ol>
+
 # Problem analysis
 <p>Information system provides ticket center service. The program stores and processes ticket distribution data. 
 As the system supports two types of users: administrator and clients (organizer, distributor) with different roles to access the functionalities in the system. 
@@ -54,26 +65,26 @@ The data layer consists of a database server, this is where the information from
 # JavaFX interface resources
 
 ![image](https://user-images.githubusercontent.com/100678443/213859908-c92aafc3-cef7-4899-b70a-f8e33e0117cd.png)
-<h3> Login screen 
+<h3> Login screen </h3>
 
 ![image](https://user-images.githubusercontent.com/100678443/213860009-a2ff9bdf-03c8-4afb-9565-8c55834010fe.png)
-<h3> Admin profile
+<h3> Admin profile </h3>
 <p>
 
 ![image](https://user-images.githubusercontent.com/100678443/213860013-0d9794e2-b2e0-48a6-9544-798123b0174c.png)
 ![image](https://user-images.githubusercontent.com/100678443/213860018-a27d2d25-5b5f-477a-82bb-157f655a59ce.png)
 
-<h3> Creation of new profile
+<h3> Creation of new profile </h3>
 
 ![image](https://user-images.githubusercontent.com/100678443/213860022-04112d34-90ed-4f30-8144-1191788da267.png)
 </p>
 
-<h3> Notification system
+<h3> Notification system </h3>
 
 ![image](https://user-images.githubusercontent.com/100678443/213860030-28968b89-daa2-4d10-9276-90736950ba58.png)
-<h3> Organizer profile
+<h3> Organizer profile </h3>
 <p>
-
+  
 ![image](https://user-images.githubusercontent.com/100678443/213860190-14371f2b-f5d8-4e0f-845b-42520441b181.png)
 ![image](https://user-images.githubusercontent.com/100678443/213860213-1c810ac6-1b41-4e05-a987-9522c653a7c1.png)
 ![image](https://user-images.githubusercontent.com/100678443/213860246-965e6ee6-19b0-44fa-aa7a-2db0bfce2c1a.png)
@@ -82,7 +93,7 @@ The data layer consists of a database server, this is where the information from
 ![image](https://user-images.githubusercontent.com/100678443/213860257-7bd0d8cd-3736-4076-9eea-b7a4bfb4f678.png)
 ![image](https://user-images.githubusercontent.com/100678443/213860259-e454b2aa-9eb5-483c-a233-bcb1af179686.png)
 </p>
-<h3> Tickets form
+<h3> Tickets form </h3>
 
 ![image](https://user-images.githubusercontent.com/100678443/213860262-e31044be-4f17-4b9c-98d3-d2931ba8132b.png)
 
@@ -110,7 +121,7 @@ and for this purpose, specific information is saved in a specific file with the 
 <br> Once the connection is set up correctly the <b><i>Oracle_Database_SQL.ddl</i></b> file should be run in sql window in SQL developer to create the Database of the program. In order to create everything the SQL commands should be run one by one!
 </p> </li>
 <li>Before runing the program:
-<p><br>You might need to download JRE: https://www.java.com/en/download/manual.jsp
+<br><p>You might need to download JRE: https://www.java.com/en/download/manual.jsp
 <br> Also Oracle JDBC drivers: https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html
 </p>
 </li>
